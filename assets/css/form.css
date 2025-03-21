@@ -1,35 +1,85 @@
-/* Form Area */
 .form-area {
   flex: 1;
-  background: white;
+  background: var(--primary-bg);
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Hide all forms except the active one */
 .form-section {
   display: none;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-.form-section:not(.hidden) {
+/* Show only the active form */
+.form-section.active {
   display: block;
+}
+
+/* Form Styling */
+h2 {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
 }
 
 input,
 textarea {
   width: 100%;
   padding: 10px;
-  margin: 10px 0;
-  border: 1px solid var(--secondary-color);
+  border: 1px solid var(--secondary-bg);
   border-radius: 5px;
+  font-size: 16px;
 }
 
-.next-btn,
-.prev-btn {
-  background-color: var(--primary-color);
-  color: white;
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+/* Navigation Buttons */
+.form-navigation {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  padding: 10px 15px;
   border: none;
-  padding: 10px;
+  border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.prev-btn {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.next-btn {
+  background: var(--primary-color);
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

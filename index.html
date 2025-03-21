@@ -54,35 +54,84 @@
     <!-- Main Content -->
     <div class="content">
       <div class="form-area">
-        <div class="form-container">
-          <form id="resume-form">
-            <div class="form-section" id="contact">
-              <h2>Contact Info</h2>
-              <input type="text" placeholder="Full Name" />
-              <input type="email" placeholder="Email" />
-              <input type="tel" placeholder="Phone Number" />
-            </div>
+        <!-- Contact Information Form -->
+        <div class="form-section active" id="form-contact">
+          <h2>Contact Information</h2>
+          <label for="contact-name">Full Name</label>
+          <input
+            type="text"
+            id="contact-name"
+            placeholder="Enter your full name" />
 
-            <div class="form-section hidden" id="summary">
-              <h2>Professional Summary</h2>
-              <textarea placeholder="Write a brief summary..."></textarea>
-            </div>
+          <label for="contact-phone">Phone Number</label>
+          <input
+            type="tel"
+            id="contact-phone"
+            placeholder="Enter your phone number" />
 
-            <div class="form-section hidden" id="education">
-              <h2>Education</h2>
-              <input type="text" placeholder="Degree" />
-              <input type="text" placeholder="University" />
-            </div>
+          <label for="contact-email">Email Address</label>
+          <input
+            type="email"
+            id="contact-email"
+            placeholder="Enter your email" />
 
-            <!-- Add more form sections here -->
+          <label for="contact-linkedin">LinkedIn Profile</label>
+          <input
+            type="url"
+            id="contact-linkedin"
+            placeholder="LinkedIn profile URL" />
 
-            <div class="form-navigation">
-              <button type="button" id="prev-btn">Previous</button>
-              <button type="button" id="next-btn">Next</button>
-            </div>
-          </form>
+          <label for="contact-portfolio">Portfolio/Website</label>
+          <input
+            type="url"
+            id="contact-portfolio"
+            placeholder="Portfolio or website URL" />
+
+          <label for="contact-location">Location</label>
+          <input
+            type="text"
+            id="contact-location"
+            placeholder="City, Country" />
+
+          <div class="form-navigation">
+            <button class="next-btn" data-next="form-education">Next</button>
+          </div>
+        </div>
+
+        <!-- Education Form -->
+        <div class="form-section" id="form-education">
+          <h2>Education</h2>
+          <label for="edu-degree">Degree Name</label>
+          <input
+            type="text"
+            id="edu-degree"
+            placeholder="Enter your degree name" />
+
+          <label for="edu-university">University/College</label>
+          <input
+            type="text"
+            id="edu-university"
+            placeholder="Enter university name" />
+
+          <label for="edu-year">Graduation Year</label>
+          <input
+            type="number"
+            id="edu-year"
+            placeholder="Enter graduation year" />
+
+          <label for="edu-coursework">Relevant Coursework (Optional)</label>
+          <input
+            type="text"
+            id="edu-coursework"
+            placeholder="Mention relevant subjects" />
+
+          <div class="form-navigation">
+            <button class="prev-btn" data-prev="form-contact">Previous</button>
+            <button class="next-btn" data-next="form-experience">Next</button>
+          </div>
         </div>
       </div>
+
       <div class="preview">
         <h2>Resume Preview</h2>
       </div>
