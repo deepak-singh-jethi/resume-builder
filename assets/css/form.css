@@ -20,6 +20,10 @@
   max-width: 800px;
 }
 
+.form-section > h2 {
+  text-align: center;
+}
+
 /* 📌 Input Wrapper */
 .input-wrapper {
   position: relative;
@@ -80,6 +84,7 @@
   transition: all 0.3s ease-in-out;
   color: #333;
   resize: none;
+  margin-top: 20px;
 }
 
 #summary-text:focus {
