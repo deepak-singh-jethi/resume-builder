@@ -1,0 +1,12 @@
+/* root color file */
+
+:root {
+  --sidebar-bg: #1e1e2f;
+  --sidebar-text: #bfbfcf;
+  --sidebar-hover: #29293d;
+  --sidebar-active: #3a3a55;
+  --primary-text: #ffffff;
+  --form-bg: #ffffff;
+  --button-bg: #007bff;
+  --button-hover: #0056b3;
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="assets/css/colors.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/sidebar.css" />
+    <link rel="stylesheet" href="assets/css/form.css" />
+    <link rel="stylesheet" href="assets/css/preview.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Resume Builder</h2>
+      <ul id="sidebar-menu">
+        <li class="sidebar-item active" data-section="contact">
+          <i class="material-icons">person</i> Contact Info
+        </li>
+        <!-- <li class="sidebar-item" data-section="summary">
+          <i class="material-icons">summary</i> Professional Summary
+        </li> -->
+        <li class="sidebar-item" data-section="education">
+          <i class="material-icons">school</i> Education
+        </li>
+        <li class="sidebar-item" data-section="experience">
+          <i class="material-icons">work</i> Work Experience
+        </li>
+        <li class="sidebar-item" data-section="skills">
+          <i class="material-icons">build</i> Skills
+        </li>
+        <li class="sidebar-item" data-section="certifications">
+          <i class="material-icons">verified</i> Certifications
+        </li>
+        <li class="sidebar-item" data-section="projects">
+          <i class="material-icons">code</i> Projects
+        </li>
+        <li class="sidebar-item" data-section="achievements">
+          <i class="material-icons">emoji_events</i> Achievements
+        </li>
+        <li class="sidebar-item" data-section="languages">
+          <i class="material-icons">translate</i> Languages
+        </li>
+        <li class="sidebar-item" data-section="hobbies">
+          <i class="material-icons">sports_esports</i> Hobbies
+        </li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+      <div class="form-area">
+        <div class="form-container">
+          <form id="resume-form">
+            <div class="form-section" id="contact">
+              <h2>Contact Info</h2>
+              <input type="text" placeholder="Full Name" />
+              <input type="email" placeholder="Email" />
+              <input type="tel" placeholder="Phone Number" />
+            </div>
+
+            <div class="form-section hidden" id="summary">
+              <h2>Professional Summary</h2>
+              <textarea placeholder="Write a brief summary..."></textarea>
+            </div>
+
+            <div class="form-section hidden" id="education">
+              <h2>Education</h2>
+              <input type="text" placeholder="Degree" />
+              <input type="text" placeholder="University" />
+            </div>
+
+            <!-- Add more form sections here -->
+
+            <div class="form-navigation">
+              <button type="button" id="prev-btn">Previous</button>
+              <button type="button" id="next-btn">Next</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="preview">
+        <h2>Resume Preview</h2>
+      </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>

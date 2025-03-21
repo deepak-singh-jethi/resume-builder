@@ -1,0 +1,35 @@
+/* Form Area */
+.form-area {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+  display: none;
+}
+
+.form-section:not(.hidden) {
+  display: block;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid var(--secondary-color);
+  border-radius: 5px;
+}
+
+.next-btn,
+.prev-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}

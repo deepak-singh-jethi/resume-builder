@@ -1,0 +1,24 @@
+/* Import Colors */
+@import url("colors.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  height: 100vh;
+  background-color: var(--background-color);
+}
+
+/* Content Layout */
+.content {
+  margin-left: 15%; /* Align with sidebar */
+  width: 85%;
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}
