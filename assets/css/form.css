@@ -1,6 +1,6 @@
 @import url("colors.css");
 
-/* Left: Form Area */
+/* 📌 Left: Form Area */
 .form-area {
   width: 70%;
   background: var(--form-bg);
@@ -8,6 +8,7 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
+/* 📌 Form Section */
 .form-section {
   display: flex;
   flex-direction: column;
@@ -33,7 +34,7 @@
 .input-wrapper textarea {
   width: 100%;
   padding: 14px 16px;
-  padding-left: 45px; /* Space for the icon */
+  padding-left: 45px;
   border: 2px solid var(--input-border);
   border-radius: 8px;
   font-size: 16px;
@@ -62,45 +63,30 @@
 
 /* 📝 Textarea Adjustments */
 .input-wrapper textarea {
-  resize: vertical;
+  resize: none;
   min-height: 120px;
   padding-top: 14px;
 }
 
-/* 🔗 Optional Fields */
-.input-wrapper input.optional {
-  border: 2px dashed var(--input-border);
-  color: var(--input-placeholder);
-}
-
-/* 🏷 Optional Labels */
-label.optional {
-  font-size: 14px;
-  color: var(--input-placeholder);
-  font-style: italic;
-}
-
-@import url("colors.css");
-
 /* 📌 Professional Summary Section */
-#summary textarea {
+#summary-text {
   width: 100%;
-  min-height: 150px;
-  padding: 14px;
+  min-height: 120px;
+  padding: 10px;
   border: 2px solid var(--input-border);
   border-radius: 8px;
   font-size: 16px;
   background-color: var(--input-bg);
   transition: all 0.3s ease-in-out;
   color: #333;
-  resize: vertical;
+  resize: none;
 }
 
-/* 🔥 Focus Effect */
-#summary textarea:focus {
+#summary-text:focus {
   border-color: var(--input-focus-border);
   box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
   background-color: #fff;
+  outline: none;
 }
 
 /* 📌 Character Counter */
@@ -108,24 +94,8 @@ label.optional {
   font-size: 14px;
   color: var(--input-placeholder);
   text-align: right;
+  display: block;
   margin-top: 5px;
-}
-
-/* 📌 Summary Suggestion Button */
-.suggestion-btn {
-  background: var(--button-bg);
-  color: var(--primary-text);
-  font-size: 14px;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  margin-top: 10px;
-}
-
-.suggestion-btn:hover {
-  background: var(--button-hover);
 }
 
 /* 🌟 Responsive Adjustments */
@@ -139,5 +109,14 @@ label.optional {
   .input-wrapper textarea {
     font-size: 15px;
     padding: 12px 14px;
+  }
+
+  .form-navigation {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-navigation button {
+    width: 100%;
   }
 }

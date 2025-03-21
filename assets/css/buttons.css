@@ -1,6 +1,4 @@
-@import url("colors.css");
-
-/* 🚀 Form Navigation - Button Container */
+/* 🔘 Navigation Buttons */
 .form-navigation {
   display: flex;
   justify-content: space-between;
@@ -9,7 +7,6 @@
   padding: 15px 0;
 }
 
-/* 🔘 Navigation Buttons */
 .form-navigation button {
   background: var(--button-bg);
   color: var(--primary-text);
@@ -24,7 +21,6 @@
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* 🔥 Hover & Focus Effects */
 .form-navigation button:hover {
   background: var(--button-hover);
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
@@ -42,14 +38,19 @@
   opacity: 0.6;
 }
 
-/* 📏 Adjusting Button Alignment for Small Screens */
-@media (max-width: 768px) {
-  .form-navigation {
-    flex-direction: column;
-    gap: 10px;
-  }
+/* 📌 Suggested Summary Button */
+.suggestion-btn {
+  background: var(--button-bg);
+  color: var(--primary-text);
+  font-size: 14px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-top: 10px;
+}
 
-  .form-navigation button {
-    width: 100%;
-  }
+.suggestion-btn:hover {
+  background: var(--button-hover);
 }

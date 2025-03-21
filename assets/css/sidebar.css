@@ -16,11 +16,13 @@
   font-size: 20px;
   text-align: center;
   margin-bottom: 20px;
+  margin-top: 40px;
 }
 
 .sidebar ul {
   list-style: none;
   padding: 0;
+  margin-top: 40px;
 }
 
 .sidebar ul .sidebar-item {
@@ -47,9 +49,10 @@
 
 .sidebar ul .sidebar-item.active {
   background-color: var(--sidebar-active);
+  color: white !important;
   font-weight: bold;
+  border-radius: 5px;
 }
-
 /* Mobile Sidebar */
 @media screen and (max-width: 768px) {
   .sidebar {
