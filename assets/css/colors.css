@@ -1,6 +1,5 @@
-/* root color file */
-
 :root {
+  --background-color: #f4f4f4;
   --sidebar-bg: #1e1e2f;
   --sidebar-text: #bfbfcf;
   --sidebar-hover: #29293d;
@@ -9,4 +8,5 @@
   --form-bg: #ffffff;
   --button-bg: #007bff;
   --button-hover: #0056b3;
+  --sidebar-width: 15%;
 }

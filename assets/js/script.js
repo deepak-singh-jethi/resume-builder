@@ -1,36 +1,69 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const sidebar = document.querySelector(".sidebar");
+  // Select all sidebar items
   const sidebarItems = document.querySelectorAll(".sidebar-item");
-  const hamburger = document.querySelector(".hamburger");
 
-  // Toggle Sidebar Collapse
-  hamburger.addEventListener("click", function () {
-    sidebar.classList.toggle("collapsed");
+  // Select all form sections
+  const formSections = document.querySelectorAll(".form-section");
+
+  // Get navigation buttons
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
+
+  // Track the currently active section
+  let currentSectionIndex = 0;
+
+  // Create a mapping of section names to their respective DOM elements
+  const sectionMap = {};
+  formSections.forEach((section) => {
+    sectionMap[section.id] = section;
   });
 
-  // Sidebar Item Click Handling
-  sidebarItems.forEach((item) => {
-    item.addEventListener("click", function () {
-      // Remove active class from all items
-      sidebarItems.forEach((i) => i.classList.remove("active"));
+  // Function to update the displayed section
+  function showSectionByIndex(index) {
+    if (index < 0 || index >= sidebarItems.length) return;
 
-      // Add active class to clicked item
-      this.classList.add("active");
+    // Get the corresponding section ID from sidebar
+    const targetSection = sidebarItems[index].getAttribute("data-section");
 
-      // Update Form Section
-      const section = this.getAttribute("data-section");
-      showSection(section);
+    // Show only the matched form section
+    Object.values(sectionMap).forEach((section) => {
+      section.style.display = section.id === targetSection ? "block" : "none";
+    });
+
+    // Highlight the active sidebar item
+    sidebarItems.forEach((item, i) => {
+      item.classList.toggle("active", i === index);
+    });
+
+    // Enable/Disable navigation buttons
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === sidebarItems.length - 1;
+
+    // Update the current section index
+    currentSectionIndex = index;
+  }
+
+  // Handle sidebar item clicks
+  sidebarItems.forEach((item, index) => {
+    item.addEventListener("click", () => {
+      showSectionByIndex(index);
     });
   });
 
-  // Function to Show Selected Form
-  function showSection(section) {
-    const allSections = document.querySelectorAll(".form-section");
-    allSections.forEach((sec) => (sec.style.display = "none"));
-
-    const activeSection = document.getElementById(section);
-    if (activeSection) {
-      activeSection.style.display = "block";
+  // Handle Next button click
+  nextBtn.addEventListener("click", () => {
+    if (currentSectionIndex < sidebarItems.length - 1) {
+      showSectionByIndex(++currentSectionIndex);
     }
-  }
+  });
+
+  // Handle Previous button click
+  prevBtn.addEventListener("click", () => {
+    if (currentSectionIndex > 0) {
+      showSectionByIndex(--currentSectionIndex);
+    }
+  });
+
+  // Show the first section by default
+  showSectionByIndex(0);
 });

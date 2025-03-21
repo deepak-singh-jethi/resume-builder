@@ -1,43 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const sidebarItems = document.querySelectorAll(".sidebar-item");
-  const formSections = document.querySelectorAll(".form-section");
-  const nextButtons = document.querySelectorAll(".next-btn");
-  const prevButtons = document.querySelectorAll(".prev-btn");
+  // Select the form element
+  const form = document.getElementById("resume-form");
 
-  function showForm(sectionId) {
-    formSections.forEach((form) => {
-      form.classList.remove("active");
+  // Listen for any input change in the form
+  form.addEventListener("input", function () {
+    // Get all form data
+    const formData = new FormData(form);
+    const resumeData = {};
+
+    // Convert FormData to an object
+    formData.forEach((value, key) => {
+      resumeData[key] = value;
     });
 
-    document.getElementById(sectionId).classList.add("active");
-
-    // Highlight the correct sidebar item
-    sidebarItems.forEach((item) => {
-      item.classList.remove("active");
-      if (item.dataset.section === sectionId) {
-        item.classList.add("active");
-      }
-    });
-  }
-
-  // Sidebar Click Event
-  sidebarItems.forEach((item) => {
-    item.addEventListener("click", function () {
-      showForm(this.dataset.section);
-    });
-  });
-
-  // Next Button Event
-  nextButtons.forEach((btn) => {
-    btn.addEventListener("click", function () {
-      showForm(this.dataset.next);
-    });
-  });
-
-  // Previous Button Event
-  prevButtons.forEach((btn) => {
-    btn.addEventListener("click", function () {
-      showForm(this.dataset.prev);
-    });
+    // Update the live resume preview
+    updatePreview(resumeData);
   });
 });
