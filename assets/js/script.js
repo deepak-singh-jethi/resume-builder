@@ -22,24 +22,29 @@ document.addEventListener("DOMContentLoaded", function () {
   function showSectionByIndex(index) {
     if (index < 0 || index >= sidebarItems.length) return;
 
-    // Get the corresponding section ID from sidebar
+    // Get target section
     const targetSection = sidebarItems[index].getAttribute("data-section");
 
-    // Show only the matched form section
-    Object.values(sectionMap).forEach((section) => {
-      section.style.display = section.id === targetSection ? "block" : "none";
+    // Hide all sections, then show only the target section
+    formSections.forEach((section) => {
+      section.style.display = "none";
     });
 
-    // Highlight the active sidebar item
-    sidebarItems.forEach((item, i) => {
-      item.classList.toggle("active", i === index);
-    });
+    const activeSection = sectionMap[targetSection];
+    if (activeSection) {
+      activeSection.style.display = "block";
+    }
+
+    // Highlight active sidebar item
+    sidebarItems.forEach((item, i) =>
+      item.classList.toggle("active", i === index)
+    );
 
     // Enable/Disable navigation buttons
     prevBtn.disabled = index === 0;
     nextBtn.disabled = index === sidebarItems.length - 1;
 
-    // Update the current section index
+    // Update index
     currentSectionIndex = index;
   }
 
@@ -50,18 +55,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Handle Next button click
-  nextBtn.addEventListener("click", () => {
-    if (currentSectionIndex < sidebarItems.length - 1) {
-      showSectionByIndex(++currentSectionIndex);
-    }
-  });
-
-  // Handle Previous button click
-  prevBtn.addEventListener("click", () => {
-    if (currentSectionIndex > 0) {
-      showSectionByIndex(--currentSectionIndex);
-    }
+  // Handle Next and prev button click
+  [prevBtn, nextBtn].forEach((btn, direction) => {
+    btn.addEventListener("click", () => {
+      const newIndex = currentSectionIndex + (direction ? 1 : -1);
+      if (newIndex >= 0 && newIndex < sidebarItems.length) {
+        showSectionByIndex(newIndex);
+      }
+    });
   });
 
   // Show the first section by default
