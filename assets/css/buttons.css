@@ -1,0 +1,53 @@
+/* 🚀 Form Navigation - Button Container */
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 30px;
+  padding: 15px 0;
+}
+
+/* 🔘 Navigation Buttons */
+.form-navigation button {
+  background: #4caf50; /* Green theme */
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔥 Hover & Focus Effects */
+.form-navigation button:hover {
+  background: #45a049;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.form-navigation button:focus {
+  outline: 2px solid rgba(76, 175, 80, 0.6);
+}
+
+/* ❌ Disabled Button Styling */
+.form-navigation button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+/* 📏 Adjusting Button Alignment for Small Screens */
+@media (max-width: 768px) {
+  .form-navigation {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-navigation button {
+    width: 100%;
+  }
+}

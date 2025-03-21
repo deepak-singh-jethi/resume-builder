@@ -1,22 +1,21 @@
+/* Left: Form Area */
 .form-area {
   width: 70%;
   background: white;
-  padding: 10px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
-/* 🌟 Modern Form Design */
+
 .form-section {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 30px;
+  padding: 20px 30px;
   background: white;
   border-radius: 10px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 600px;
-  margin: 10px auto;
+  max-width: 800px;
 }
 
 /* 🏷️ Form Title */
@@ -28,7 +27,7 @@
   font-weight: 600;
 }
 
-/* 📌 Input Container */
+/* 📌 Input Wrapper */
 .input-wrapper {
   position: relative;
   width: 100%;
@@ -61,16 +60,6 @@
   background-color: #fff;
 }
 
-/* 🏷 Standard Labels (Above the Input) */
-.input-wrapper label {
-  position: absolute;
-  top: -18px;
-  left: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #555;
-}
-
 /* 🌍 Icons Inside Inputs */
 .input-wrapper i {
   position: absolute;
@@ -86,9 +75,23 @@
   padding-top: 14px;
 }
 
-/* 🔗 URL Inputs Special Styling */
-.input-wrapper input[type="url"] {
-  color: #007bff;
+/* 🔗 Optional Fields - Subtle Style When Empty */
+.input-wrapper input.optional {
+  border: 2px dashed #bbb; /* Dashed border for optional fields */
+  color: #999; /* Light gray text when empty */
+}
+
+/* 🔵 Optional Fields - Becomes Normal on Focus */
+.input-wrapper input.optional:focus {
+  border: 2px solid #007bff;
+  color: #333;
+}
+
+/* 🏷 Optional Labels */
+label.optional {
+  font-size: 14px;
+  color: #777;
+  font-style: italic;
 }
 
 /* 🌟 Responsive Adjustments */

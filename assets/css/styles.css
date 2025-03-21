@@ -68,7 +68,7 @@ body {
   align-items: center;
   /* padding: 0px 0; */
   border-bottom: 2px solid #ddd; /* Subtle separator */
-  margin-bottom: 20px;
+  margin: 10px;
 }
 
 /* Content Area (Form & Resume Preview) */
@@ -77,15 +77,6 @@ body {
   justify-content: space-between;
   gap: 20px;
   height: calc(100vh - 50px);
-}
-
-/* Left: Form Area */
-.form-area {
-  width: 50%;
-  background: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Right: Resume Preview */
