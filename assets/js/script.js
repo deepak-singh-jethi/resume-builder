@@ -46,6 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Update index
     currentSectionIndex = index;
+
+    // Update Progress Bar
+    updateProgress(index + 1);
   }
 
   // Handle sidebar item clicks
@@ -55,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Handle Next and prev button click
+  // Handle Next and Previous button clicks
   [prevBtn, nextBtn].forEach((btn, direction) => {
     btn.addEventListener("click", () => {
       const newIndex = currentSectionIndex + (direction ? 1 : -1);
@@ -68,3 +71,37 @@ document.addEventListener("DOMContentLoaded", function () {
   // Show the first section by default
   showSectionByIndex(0);
 });
+
+/* -------------------------------- */
+/* 🚀 Progress BAR 🚀 */
+/* -------------------------------- */
+
+// !Change this based on the total number of sections
+
+const totalSteps = 10;
+
+function updateProgress(currentStep) {
+  const progressBar = document.getElementById("progressBar");
+  const progressStep = document.getElementById("progressStep");
+
+  progressBar.style.width = (currentStep / totalSteps) * 100 + "%";
+  progressStep.innerText = currentStep + "/" + totalSteps;
+}
+
+/* -------------------------------- */
+/* 🚀 Preview Area 🚀 */
+/* -------------------------------- */
+
+// 4️⃣ **Quick Actions Panel**
+function saveResume() {
+  alert("Resume saved successfully!");
+}
+
+function downloadPDF() {
+  alert("Downloading resume as PDF...");
+}
+
+function clearForm() {
+  document.getElementById("resume-form").reset();
+  alert("Form cleared!");
+}

@@ -20,9 +20,9 @@
         <li class="sidebar-item active" data-section="contact">
           <i class="material-icons">person</i> Contact Info
         </li>
-        <!-- <li class="sidebar-item" data-section="summary">
-          <i class="material-icons">summary</i> Professional Summary
-        </li> -->
+        <li class="sidebar-item" data-section="summary">
+          <i class="material-icons">summarize</i> Professional Summary
+        </li>
         <li class="sidebar-item" data-section="education">
           <i class="material-icons">school</i> Education
         </li>
@@ -51,39 +51,116 @@
     </div>
 
     <!-- Main Content -->
-    <div class="content">
-      <div class="form-area">
-        <div class="form-container">
-          <form id="resume-form">
-            <div class="form-section" id="contact">
-              <h2>Contact Info</h2>
-              <input type="text" placeholder="Full Name" />
-              <input type="email" placeholder="Email" />
-              <input type="tel" placeholder="Phone Number" />
-            </div>
+    <div class="main-content">
+      <!-- Progress Tracker -->
 
-            <div class="form-section hidden" id="summary">
-              <h2>Professional Summary</h2>
-              <textarea placeholder="Write a brief summary..."></textarea>
-            </div>
-
-            <div class="form-section hidden" id="education">
-              <h2>Education</h2>
-              <input type="text" placeholder="Degree" />
-              <input type="text" placeholder="University" />
-            </div>
-
-            <!-- Add more form sections here -->
-
-            <div class="form-navigation">
-              <button type="button" id="prev-btn">Previous</button>
-              <button type="button" id="next-btn">Next</button>
-            </div>
-          </form>
+      <!-- Progress Bar Section (Separated from Form & Preview) -->
+      <div class="progress-wrapper">
+        <div class="progress-container">
+          <span class="progress-step" id="progressStep">1/5</span>
+          <div class="progress-bar" id="progressBar"></div>
         </div>
       </div>
-      <div class="preview">
-        <h2>Resume Preview</h2>
+
+      <!-- Form & Preview Container -->
+      <div class="content-area">
+        <!-- Left Section: Form Input Area -->
+        <div class="form-area">
+          <div class="form-container">
+            <form id="resume-form">
+              <!-- 🌟 Contact Information Form -->
+              <div class="form-section" id="contact">
+                <h2>Contact Information</h2>
+
+                <!-- 🏷 Full Name -->
+                <div class="input-wrapper">
+                  <i class="material-icons">person</i>
+                  <input
+                    type="text"
+                    id="full-name"
+                    placeholder="Enter your full name"
+                    required />
+                </div>
+
+                <!-- 📧 Email -->
+                <div class="input-wrapper">
+                  <i class="material-icons">email</i>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="example@email.com"
+                    required />
+                </div>
+
+                <!-- 📞 Phone -->
+                <div class="input-wrapper">
+                  <i class="material-icons">phone</i>
+                  <input
+                    type="tel"
+                    id="phone"
+                    placeholder="+1 234 567 8900"
+                    required />
+                </div>
+
+                <!-- 📍 Address -->
+                <div class="input-wrapper">
+                  <i class="material-icons">location_on</i>
+                  <textarea
+                    id="address"
+                    placeholder="Enter your address"></textarea>
+                </div>
+
+                <!-- 🔗 LinkedIn -->
+                <div class="input-wrapper">
+                  <i class="material-icons">public</i>
+                  <input
+                    type="url"
+                    id="linkedin"
+                    placeholder="https://linkedin.com/in/your-profile" />
+                </div>
+
+                <!-- 🔗 GitHub -->
+                <div class="input-wrapper">
+                  <i class="material-icons">code</i>
+                  <input
+                    type="url"
+                    id="github"
+                    placeholder="https://github.com/your-profile" />
+                </div>
+
+                <!-- 🔗 Portfolio/Website -->
+                <div class="input-wrapper">
+                  <i class="material-icons">web</i>
+                  <input
+                    type="url"
+                    id="website"
+                    placeholder="https://yourwebsite.com" />
+                </div>
+              </div>
+
+              <div class="form-section hidden" id="education">
+                <h2>Education</h2>
+                <input type="text" placeholder="Degree" />
+                <input type="text" placeholder="University" />
+              </div>
+
+              <div class="form-navigation">
+                <button type="button" id="prev-btn">Previous</button>
+                <button type="button" id="next-btn">Next</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Right Section: Resume Preview -->
+        <div class="preview">
+          <h2>Resume Preview</h2>
+          <div class="quick-actions">
+            <button onclick="saveResume()">💾 Save</button>
+            <button onclick="downloadPDF()">📥 Download PDF</button>
+            <button onclick="clearForm()">🗑️ Clear</button>
+          </div>
+        </div>
       </div>
     </div>
 
