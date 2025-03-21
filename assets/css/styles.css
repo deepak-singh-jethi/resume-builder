@@ -1,4 +1,3 @@
-/* Import Colors */
 @import url("colors.css");
 
 * {
@@ -16,19 +15,19 @@ body {
 
 /* Main Content (85%) */
 .main-content {
-  margin-left: 15%;
-  width: 85%;
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
   padding: 0px 20px;
   display: flex;
   flex-direction: column;
 }
 
-/* Progress Tracker  */
+/* Progress Tracker */
 .progress-container {
   width: 100%;
   max-width: 600px;
   height: 20px;
-  background: #c1bfbf;
+  background: var(--progress-bg);
   border-radius: 20px;
   overflow: hidden;
   position: relative;
@@ -36,20 +35,16 @@ body {
   margin: 10px auto;
 }
 
-/* Progress Bar - Smooth Animated Fill */
+/* Progress Bar */
 .progress-bar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(
-    90deg,
-    #4caf50,
-    #2e8b57
-  ); /* Gradient for modern feel */
+  background: var(--progress-fill);
   border-radius: 20px;
-  transition: width 0.5s ease-in-out; /* Smooth animation */
+  transition: width 0.5s ease-in-out;
 }
 
-/* Step Indicator - Better Positioning */
+/* Step Indicator */
 .progress-step {
   position: absolute;
   top: 50%;
@@ -61,17 +56,7 @@ body {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-/* Ensure Progress Bar is Clearly Separated */
-.progress-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* padding: 0px 0; */
-  border-bottom: 2px solid #ddd; /* Subtle separator */
-  margin: 10px;
-}
-
-/* Content Area (Form & Resume Preview) */
+/* Form & Resume Preview */
 .content-area {
   display: flex;
   justify-content: space-between;
@@ -82,7 +67,7 @@ body {
 /* Right: Resume Preview */
 .preview {
   width: 50%;
-  background: white;
+  background: var(--form-bg);
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -95,6 +80,7 @@ body {
   gap: 10px;
   margin-top: 20px;
 }
+
 .quick-actions button {
   padding: 10px;
   cursor: pointer;

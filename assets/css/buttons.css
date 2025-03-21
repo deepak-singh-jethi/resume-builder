@@ -1,3 +1,5 @@
+@import url("colors.css");
+
 /* 🚀 Form Navigation - Button Container */
 .form-navigation {
   display: flex;
@@ -9,8 +11,8 @@
 
 /* 🔘 Navigation Buttons */
 .form-navigation button {
-  background: #4caf50; /* Green theme */
-  color: white;
+  background: var(--button-bg);
+  color: var(--primary-text);
   font-size: 16px;
   font-weight: 600;
   padding: 12px 20px;
@@ -24,7 +26,7 @@
 
 /* 🔥 Hover & Focus Effects */
 .form-navigation button:hover {
-  background: #45a049;
+  background: var(--button-hover);
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -34,7 +36,7 @@
 
 /* ❌ Disabled Button Styling */
 .form-navigation button:disabled {
-  background: #ccc;
+  background: var(--button-disabled);
   cursor: not-allowed;
   box-shadow: none;
   opacity: 0.6;

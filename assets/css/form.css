@@ -1,7 +1,9 @@
+@import url("colors.css");
+
 /* Left: Form Area */
 .form-area {
   width: 70%;
-  background: white;
+  background: var(--form-bg);
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
@@ -11,20 +13,10 @@
   flex-direction: column;
   gap: 20px;
   padding: 20px 30px;
-  background: white;
+  background: var(--form-bg);
   border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 800px;
-}
-
-/* 🏷️ Form Title */
-.form-section h2 {
-  font-size: 22px;
-  color: #222;
-  text-align: center;
-  margin-bottom: 15px;
-  font-weight: 600;
 }
 
 /* 📌 Input Wrapper */
@@ -42,10 +34,10 @@
   width: 100%;
   padding: 14px 16px;
   padding-left: 45px; /* Space for the icon */
-  border: 2px solid #ddd;
+  border: 2px solid var(--input-border);
   border-radius: 8px;
   font-size: 16px;
-  background-color: #fafafa;
+  background-color: var(--input-bg);
   transition: all 0.3s ease-in-out;
   color: #333;
   font-weight: 500;
@@ -55,7 +47,7 @@
 /* 🔥 Focus Effect */
 .input-wrapper input:focus,
 .input-wrapper textarea:focus {
-  border-color: #4caf50;
+  border-color: var(--input-focus-border);
   box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
   background-color: #fff;
 }
@@ -75,22 +67,16 @@
   padding-top: 14px;
 }
 
-/* 🔗 Optional Fields - Subtle Style When Empty */
+/* 🔗 Optional Fields */
 .input-wrapper input.optional {
-  border: 2px dashed #bbb; /* Dashed border for optional fields */
-  color: #999; /* Light gray text when empty */
-}
-
-/* 🔵 Optional Fields - Becomes Normal on Focus */
-.input-wrapper input.optional:focus {
-  border: 2px solid #007bff;
-  color: #333;
+  border: 2px dashed var(--input-border);
+  color: var(--input-placeholder);
 }
 
 /* 🏷 Optional Labels */
 label.optional {
   font-size: 14px;
-  color: #777;
+  color: var(--input-placeholder);
   font-style: italic;
 }
 

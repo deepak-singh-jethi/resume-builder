@@ -1,10 +1,10 @@
 @import url("colors.css");
 
 .sidebar {
-  width: 15%;
+  width: var(--sidebar-width);
   background-color: var(--sidebar-bg);
   color: var(--primary-text);
-  padding: 20px;
+  padding: 10px;
   height: 100vh;
   position: fixed;
   left: 0;
