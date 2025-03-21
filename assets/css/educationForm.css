@@ -1,0 +1,54 @@
+/* 📌 Education & Certification Section */
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 30px;
+  background: var(--form-bg);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* 📌 Hidden Buttons */
+.hidden {
+  display: none;
+}
+
+/* 📌 Smooth Transition for New Entries */
+.new-entry {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.new-entry.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 📌 Entry Added Visual Effect */
+.entry-added {
+  background-color: #eaffea;
+  transition: background-color 0.5s ease;
+}
+
+/* 📌 Entry Removed Animation */
+.entry-removed {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* 📌 Remove Button */
+.remove-entry {
+  background: #d9534f;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove-entry:hover {
+  background: #c9302c;
+}
