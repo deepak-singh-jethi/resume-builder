@@ -1,19 +1,27 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Select the form element
-  const form = document.getElementById("resume-form");
+  // 📝 Professional Summary Section Logic
+  const summaryTextarea = document.getElementById("summary-text");
+  const charCounter = document.getElementById("char-counter");
+  const maxChars = 300;
 
-  // Listen for any input change in the form
-  form.addEventListener("input", function () {
-    // Get all form data
-    const formData = new FormData(form);
-    const resumeData = {};
+  if (summaryTextarea) {
+    // Update character count dynamically
+    summaryTextarea.addEventListener("input", function () {
+      const charCount = summaryTextarea.value.length;
+      charCounter.textContent = `${charCount}/${maxChars}`;
 
-    // Convert FormData to an object
-    formData.forEach((value, key) => {
-      resumeData[key] = value;
+      // Prevent exceeding character limit
+      if (charCount > maxChars) {
+        summaryTextarea.value = summaryTextarea.value.substring(0, maxChars);
+        charCounter.textContent = `${maxChars}/${maxChars}`;
+      }
     });
 
-    // Update the live resume preview
-    updatePreview(resumeData);
-  });
+    // Function to insert a predefined summary
+    window.insertSuggestion = function () {
+      summaryTextarea.value =
+        "Experienced software engineer with expertise in web development, passionate about creating user-friendly applications.";
+      charCounter.textContent = `${summaryTextarea.value.length}/${maxChars}`;
+    };
+  }
 });

@@ -142,8 +142,27 @@
                 </div>
               </div>
 
+              <!-- 🌟 Professional Summary Section -->
               <div class="form-section hidden" id="summary">
-                <h2>Summary</h2>
+                <h2>Professional Summary</h2>
+
+                <label for="summary-text"
+                  >Write a short summary about yourself:</label
+                >
+                <textarea
+                  id="summary-text"
+                  placeholder="Summarize your experience, skills, and career goals..."></textarea>
+
+                <!-- Character Counter -->
+                <div class="char-counter" id="char-counter">0/300</div>
+
+                <!-- Suggestion Button -->
+                <button
+                  type="button"
+                  class="suggestion-btn"
+                  onclick="insertSuggestion()">
+                  Use Suggested Summary
+                </button>
               </div>
 
               <div class="form-navigation">

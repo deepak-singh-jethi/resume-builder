@@ -1,3 +1,7 @@
+/* -------------------------------- */
+/* This JS files mainly handles  Progress bar and form navigation from sidebar and Prev ,Next button */
+/* -------------------------------- */
+
 document.addEventListener("DOMContentLoaded", function () {
   // Select all sidebar items
   const sidebarItems = document.querySelectorAll(".sidebar-item");
@@ -86,22 +90,4 @@ function updateProgress(currentStep) {
 
   progressBar.style.width = (currentStep / totalSteps) * 100 + "%";
   progressStep.innerText = currentStep + "/" + totalSteps;
-}
-
-/* -------------------------------- */
-/* 🚀 Preview Area 🚀 */
-/* -------------------------------- */
-
-// 4️⃣ **Quick Actions Panel**
-function saveResume() {
-  alert("Resume saved successfully!");
-}
-
-function downloadPDF() {
-  alert("Downloading resume as PDF...");
-}
-
-function clearForm() {
-  document.getElementById("resume-form").reset();
-  alert("Form cleared!");
 }

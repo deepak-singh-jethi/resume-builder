@@ -1,3 +1,21 @@
+/* -------------------------------- */
+/* 🚀 Preview Area 🚀 */
+/* -------------------------------- */
+
+// 4️⃣ **Quick Actions Panel**
+function saveResume() {
+  alert("Resume saved successfully!");
+}
+
+function downloadPDF() {
+  alert("Downloading resume as PDF...");
+}
+
+function clearForm() {
+  document.getElementById("resume-form").reset();
+  alert("Form cleared!");
+}
+
 // Function to update the resume preview in real time
 function updatePreview(data) {
   document.querySelector(".preview").innerHTML = `

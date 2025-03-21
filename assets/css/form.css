@@ -80,6 +80,54 @@ label.optional {
   font-style: italic;
 }
 
+@import url("colors.css");
+
+/* 📌 Professional Summary Section */
+#summary textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 14px;
+  border: 2px solid var(--input-border);
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: var(--input-bg);
+  transition: all 0.3s ease-in-out;
+  color: #333;
+  resize: vertical;
+}
+
+/* 🔥 Focus Effect */
+#summary textarea:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+  background-color: #fff;
+}
+
+/* 📌 Character Counter */
+.char-counter {
+  font-size: 14px;
+  color: var(--input-placeholder);
+  text-align: right;
+  margin-top: 5px;
+}
+
+/* 📌 Summary Suggestion Button */
+.suggestion-btn {
+  background: var(--button-bg);
+  color: var(--primary-text);
+  font-size: 14px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-top: 10px;
+}
+
+.suggestion-btn:hover {
+  background: var(--button-hover);
+}
+
 /* 🌟 Responsive Adjustments */
 @media (max-width: 768px) {
   .form-section {
