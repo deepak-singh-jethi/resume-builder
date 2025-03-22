@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
 /* -------------------------------- */
 /* 🚀 Progress Bar Logic 🚀 */
 /* -------------------------------- */
-const totalSteps = 8;
+const totalSteps = 10;
 
 function updateProgress(currentStep) {
   const progressBar = document.getElementById("progressBar");
