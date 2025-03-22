@@ -77,19 +77,29 @@
               <div class="form-section" id="contact">
                 <h2>Contact Information</h2>
 
-                <!-- 🏷 Full Name -->
-                <div class="input-wrapper">
-                  <i class="material-icons">person</i>
-                  <input
-                    type="text"
-                    id="full-name"
-                    placeholder="Enter your full name"
-                    required />
+                <!-- 🏷 Full Name & Phone (Two Columns) -->
+                <div class="form-row">
+                  <div class="input-group">
+                    <label for="full-name">Full Name</label>
+                    <input
+                      type="text"
+                      id="full-name"
+                      placeholder="Enter your full name"
+                      required />
+                  </div>
+                  <div class="input-group">
+                    <label for="phone">Phone</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      placeholder="+1 234 567 8900"
+                      required />
+                  </div>
                 </div>
 
                 <!-- 📧 Email -->
-                <div class="input-wrapper">
-                  <i class="material-icons">email</i>
+                <div class="input-group">
+                  <label for="email">Email</label>
                   <input
                     type="email"
                     id="email"
@@ -97,60 +107,37 @@
                     required />
                 </div>
 
-                <!-- 📞 Phone -->
-                <div class="input-wrapper">
-                  <i class="material-icons">phone</i>
-                  <input
-                    type="tel"
-                    id="phone"
-                    placeholder="+1 234 567 8900"
-                    required />
-                </div>
-
                 <!-- 📍 Address -->
-                <div class="input-wrapper">
-                  <i class="material-icons">location_on</i>
+                <div class="input-group">
+                  <label for="address">Address</label>
                   <textarea
                     id="address"
                     placeholder="Enter your address"></textarea>
                 </div>
 
-                <!-- 🔗 LinkedIn -->
-                <label for="linkedin" class="optional"
-                  >LinkedIn Profile (Optional)</label
-                >
-                <div class="input-wrapper">
-                  <i class="material-icons">public</i>
-                  <input
-                    type="url"
-                    id="linkedin"
-                    class="optional"
-                    placeholder="https://linkedin.com/in/your-profile" />
+                <!-- 🔗 Social Profiles (LinkedIn, GitHub, Website) -->
+                <div class="form-row">
+                  <div class="input-group">
+                    <label for="linkedin">LinkedIn (Optional)</label>
+                    <input
+                      type="url"
+                      id="linkedin"
+                      placeholder="https://linkedin.com/in/your-profile" />
+                  </div>
+                  <div class="input-group">
+                    <label for="github">GitHub (Optional)</label>
+                    <input
+                      type="url"
+                      id="github"
+                      placeholder="https://github.com/your-profile" />
+                  </div>
                 </div>
 
-                <!-- 🔗 GitHub -->
-                <label for="github" class="optional"
-                  >GitHub Profile (Optional)</label
-                >
-                <div class="input-wrapper">
-                  <i class="material-icons">code</i>
-                  <input
-                    type="url"
-                    id="github"
-                    class="optional"
-                    placeholder="https://github.com/your-profile" />
-                </div>
-
-                <!-- 🔗 Portfolio/Website -->
-                <label for="website" class="optional"
-                  >Portfolio/Website (Optional)</label
-                >
-                <div class="input-wrapper">
-                  <i class="material-icons">web</i>
+                <div class="input-group">
+                  <label for="website">Portfolio/Website (Optional)</label>
                   <input
                     type="url"
                     id="website"
-                    class="optional"
                     placeholder="https://yourwebsite.com" />
                 </div>
               </div>
@@ -324,36 +311,85 @@
                     <input
                       type="text"
                       id="experience-company"
-                      placeholder="Company Name" />
+                      placeholder="Company Name"
+                      required />
                   </div>
                   <div class="input-group">
                     <label>Role:</label>
                     <input
                       type="text"
                       id="experience-role"
-                      placeholder="Your Role" />
+                      placeholder="Your Role"
+                      required />
                   </div>
                 </div>
 
                 <div class="form-row">
                   <div class="input-group">
-                    <label>Duration:</label>
-                    <input
-                      type="text"
-                      id="experience-duration"
-                      placeholder="E.g., 2019-2022" />
+                    <label>Industry:</label>
+                    <select id="experience-industry">
+                      <option value="IT">IT</option>
+                      <option value="Finance">Finance</option>
+                      <option value="Healthcare">Healthcare</option>
+                      <option value="Education">Education</option>
+                      <option value="Other">Other</option>
+                    </select>
                   </div>
+                  <div class="input-group">
+                    <label>Location:</label>
+                    <select id="experience-location">
+                      <option value="Onsite">Onsite</option>
+                      <option value="Remote">Remote</option>
+                      <option value="Hybrid">Hybrid</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="input-group">
+                    <label>Start Date:</label>
+                    <input type="date" id="experience-start" required />
+                  </div>
+                  <div class="input-group">
+                    <label>End Date:</label>
+                    <input type="date" id="experience-end" />
+                  </div>
+                </div>
+
+                <div class="checkbox-group">
+                  <input type="checkbox" id="experience-current" />
+                  <label for="experience-current">Currently Working Here</label>
                 </div>
 
                 <div class="input-group">
                   <label>Description:</label>
                   <textarea
                     id="experience-description"
-                    placeholder="Brief description"></textarea>
+                    placeholder="Brief description..."></textarea>
+                </div>
+
+                <div class="input-group">
+                  <label>Key Achievements:</label>
+                  <textarea
+                    id="experience-achievements"
+                    placeholder="E.g., Increased sales by 20%..."></textarea>
+                </div>
+
+                <div class="input-group">
+                  <label>Skills Used:</label>
+                  <input
+                    type="text"
+                    id="experience-skills"
+                    placeholder="E.g., React, Node.js, SQL" />
                 </div>
 
                 <div class="form-actions">
-                  <button type="button" class="save-entry">✔ Save</button>
+                  <button type="button" id="add-experience" class="save-entry">
+                    ➕ Add Another
+                  </button>
+                  <button type="button" id="next-section" class="next-btn">
+                    ➡ Next
+                  </button>
                 </div>
               </div>
 

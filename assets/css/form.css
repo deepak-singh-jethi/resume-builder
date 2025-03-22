@@ -1,6 +1,6 @@
 @import url("colors.css");
 
-/* 📌 Left: Form Area */
+/* 🎯 General Form Styling */
 .form-area {
   width: 80%;
   background: var(--form-bg);
@@ -10,18 +10,65 @@
 
 /* 📌 Form Section */
 .form-section {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px 10px;
-  background: var(--form-bg);
-  border-radius: 10px;
   width: 100%;
   max-width: 800px;
+  padding: 15px;
+  background: var(--form-bg);
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.form-section > h2 {
+.form-section h2 {
   text-align: center;
+}
+
+/* 📌 Form Row Layout */
+.form-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* 📌 Input Group */
+.input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: var(--primary-text-dark);
+}
+
+/* 📌 Input Fields */
+.input-group input,
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--input-border);
+  border-radius: 5px;
+  font-size: 14px;
+  background: var(--input-bg);
+  transition: all 0.2s ease;
+}
+
+/* 📌 Focus Effect */
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+  outline: none;
+}
+
+/* 📌 Textarea */
+textarea {
+  min-height: 60px;
+  resize: vertical;
 }
 
 /* 📌 Input Wrapper */
@@ -33,7 +80,6 @@
   margin-block: 10px;
 }
 
-/* 📌 Input Fields */
 .input-wrapper input,
 .input-wrapper textarea {
   width: 100%;
@@ -49,64 +95,111 @@
   outline: none;
 }
 
-/* 🔥 Focus Effect */
-.input-wrapper input:focus,
-.input-wrapper textarea:focus {
-  border-color: var(--input-focus-border);
-  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
-  background-color: #fff;
+/* 📌 Checkbox Group */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
 }
 
-/* 🌍 Icons Inside Inputs */
+/* 📌 Buttons */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.save-entry,
+.next-btn {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: none;
+}
+
+.save-entry {
+  background: var(--button-bg);
+  color: white;
+}
+
+.next-btn {
+  background: var(--sidebar-active);
+  color: white;
+}
+
+.save-entry:hover,
+.next-btn:hover {
+  opacity: 0.8;
+}
+
+/* 📌 Table Styling */
+.table-container {
+  margin-top: 15px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 10px;
+  border: 1px solid var(--input-border);
+  text-align: left;
+}
+
+.data-table th {
+  background: var(--primary-bg);
+  color: var(--primary-text);
+}
+
+.data-table tbody tr:nth-child(even) {
+  background: var(--input-bg);
+}
+
+/* 📌 Contact Form Specific Adjustments */
+#contact .form-row {
+  display: flex;
+  gap: 12px;
+}
+
+#contact .input-group input,
+#contact .input-group textarea {
+  padding: 10px; /* Slightly smaller padding for a compact look */
+  font-size: 14px;
+}
+
+/* 📌 Ensure Icons Appear Inside Inputs */
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper input {
+  padding-left: 40px; /* Adjust left padding for icons */
+}
+
 .input-wrapper i {
   position: absolute;
-  left: 14px;
-  color: #777;
-  font-size: 20px;
-}
-
-/* 📝 Textarea Adjustments */
-.input-wrapper textarea {
-  resize: none;
-  min-height: 120px;
-  padding-top: 14px;
-}
-
-/* 📌 Professional Summary Section */
-#summary-text {
-  width: 100%;
-  min-height: 120px;
-  padding: 10px;
-  border: 2px solid var(--input-border);
-  border-radius: 8px;
-  font-size: 16px;
-  background-color: var(--input-bg);
-  transition: all 0.3s ease-in-out;
-  color: #333;
-  resize: none;
-  margin-top: 20px;
-}
-
-#summary-text:focus {
-  border-color: var(--input-focus-border);
-  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
-  background-color: #fff;
-  outline: none;
-}
-
-/* 📌 Character Counter */
-.char-counter {
-  font-size: 14px;
+  left: 10px;
   color: var(--input-placeholder);
-  text-align: right;
-  display: block;
-  margin-top: 5px;
+  font-size: 18px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-/* 🌟 Responsive Adjustments */
+/* 📌 Responsive Adjustments */
 @media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+
   .form-section {
-    padding: 25px;
+    padding: 20px;
     max-width: 95%;
   }
 
