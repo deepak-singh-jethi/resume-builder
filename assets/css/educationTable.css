@@ -1,0 +1,85 @@
+/* 📌 Table Container */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--form-bg);
+  padding: 2px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 📌 Full-Width Table */
+#education-table {
+  width: 100%;
+  border-collapse: collapse;
+  /* background: white; */
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--input-border);
+  margin-top: 30px;
+}
+
+/* 📌 Table Header Styling */
+#education-table thead {
+  background: var(--sidebar-bg); /* ✅ Matches Sidebar Color */
+  color: var(--primary-text); /* ✅ White Text */
+}
+
+#education-table th {
+  padding: 2px 4px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--button-bg);
+  text-align: center;
+}
+
+/* 📌 Table Row Styling */
+#education-table td {
+  padding: 2px 4px;
+  text-align: left;
+  font-size: 14px;
+  color: var(--sidebar-bg);
+  border-bottom: 1px solid var(--input-border);
+  text-align: center;
+}
+
+/* 📌 Alternate Row Background */
+#education-table tr:nth-child(even) {
+  background: var(--background-color);
+}
+
+/* 📌 Hover Effect */
+#education-table tr:hover {
+  /* background: #e9ecef;
+  transition: background 0.3s ease-in-out; */
+}
+
+/* 📌 Action Buttons Inside Table */
+.remove-entry {
+  background: white;
+  font-size: 8px;
+  padding: 2px 3px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.remove-entry:hover {
+  background: #c9302c;
+}
+
+/* 📌 Responsive Design */
+@media (max-width: 768px) {
+  #education-table th,
+  #education-table td {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .remove-entry {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}

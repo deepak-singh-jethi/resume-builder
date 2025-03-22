@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="assets/css/form.css" />
     <link rel="stylesheet" href="assets/css/buttons.css" />
     <link rel="stylesheet" href="assets/css/educationForm.css" />
+    <link rel="stylesheet" href="assets/css/educationTable.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons" />
@@ -146,7 +147,7 @@
               </div>
 
               <!-- !  Professional Summary Section -->
-              <div class="form-section hidden" id="summary">
+              <div class="form-section" id="summary">
                 <h2>Professional Summary</h2>
                 <textarea
                   id="summary-text"
@@ -164,42 +165,132 @@
                 </button>
               </div>
               <!-- ! 🎓 Education Information Section -->
+              <!-- 🎓 Education Information Section -->
               <div class="form-section" id="education">
                 <h2>Educational Information</h2>
 
-                <!-- 📌 Container for Form & Saved Entries -->
-                <div id="education-form-container"></div>
+                <!-- 📌 Education Form -->
+                <div class="education-form">
+                  <div class="form-row">
+                    <div class="input-group">
+                      <label>Course:</label>
+                      <input
+                        type="text"
+                        list="degree-options"
+                        id="education-degree"
+                        placeholder="Enter or select degree" />
+                      <datalist id="degree-options">
+                        <option value="B.Tech"></option>
+                        <option value="M.Tech"></option>
+                        <option value="MBA"></option>
+                        <option value="Diploma"></option>
+                        <option value="B.Sc"></option>
+                        <option value="M.Sc"></option>
+                        <option value="PhD"></option>
+                        <option value="Other"></option>
+                      </datalist>
+                    </div>
+                    <div class="input-group">
+                      <label>Specialization:</label>
+                      <input
+                        type="text"
+                        id="education-subject"
+                        placeholder="E.g., Civil Engineering" />
+                    </div>
+                  </div>
 
-                <!-- 📌 Table Layout (Hidden by Default) -->
-                <table id="education-table" class="hidden">
-                  <thead>
-                    <tr>
-                      <th>Degree</th>
-                      <th>Specialization</th>
-                      <th>Institution</th>
-                      <th>Start Date</th>
-                      <th>End Date</th>
-                      <th>Score Type</th>
-                      <th>Score</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody id="education-list-table"></tbody>
-                </table>
+                  <!-- Institution, Start Year, End Year Row -->
+                  <div class="form-row institution-row">
+                    <div class="input-group">
+                      <label>Institution:</label>
+                      <input
+                        type="text"
+                        id="education-institution"
+                        placeholder="Enter institution name"
+                        required />
+                    </div>
+                    <div class="input-group">
+                      <label>Start Year:</label>
+                      <input
+                        type="number"
+                        min="1900"
+                        max="2030"
+                        step="1"
+                        value="2016"
+                        id="education-start"
+                        required />
+                    </div>
+                    <div class="input-group">
+                      <label>End Year:</label>
+                      <input
+                        type="number"
+                        min="1900"
+                        max="2040"
+                        step="1"
+                        value="2020"
+                        id="education-end" />
+                    </div>
+                  </div>
 
-                <!-- 📌 Card Layout (Visible by Default) -->
-                <div id="education-list-cards"></div>
+                  <!-- Score Type and Score Row -->
+                  <div class="form-row score-row">
+                    <div class="input-group">
+                      <label>Score Type:</label>
+                      <select id="education-score-type">
+                        <option value="CGPA">CGPA</option>
+                        <option value="Percentage">%</option>
+                      </select>
+                    </div>
+                    <div class="input-group">
+                      <label>Score:</label>
+                      <input
+                        type="number"
+                        id="education-score"
+                        placeholder="CGPA or %"
+                        min="1"
+                        required />
+                      <small class="error-message"></small>
+                    </div>
+                  </div>
 
-                <!-- 📌 Add Qualification Button -->
-                <div class="education-buttons">
-                  <button type="button" id="add-education">
-                    ➕ Add Qualification
-                  </button>
+                  <!-- Form Buttons -->
+                  <div class="form-actions">
+                    <button
+                      type="button"
+                      id="save-education"
+                      class="save-entry">
+                      ✔ Save
+                    </button>
+                    <button
+                      type="button"
+                      id="clear-education"
+                      class="cancel-entry">
+                      ✖ Clear
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 📌 Education Table -->
+                <div class="table-container">
+                  <table id="education-table">
+                    <thead>
+                      <tr>
+                        <th>Degree</th>
+                        <th>Specialization</th>
+                        <th>Institution</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Score</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="education-list-table"></tbody>
+                  </table>
                 </div>
               </div>
 
               <!-- ! Certification Information Section -->
-              <div class="form-section hidden" id="certifications">
+              <div class="form-section" id="certifications">
                 <h2>Certification Information</h2>
                 <ul>
                   <li>asdncdas</li>

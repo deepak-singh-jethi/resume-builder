@@ -1,6 +1,15 @@
 /* -------------------------------- */
 /* This JS files mainly handles  Progress bar and form navigation from sidebar and Prev ,Next button */
 /* -------------------------------- */
+const myData = {
+  personalInfo: {},
+  summary: {},
+  education: [],
+  experience: [],
+  skills: [],
+  projects: [],
+  achievements: [],
+};
 
 document.addEventListener("DOMContentLoaded", function () {
   // Select all sidebar items

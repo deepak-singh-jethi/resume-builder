@@ -2,7 +2,7 @@
 
 /* 📌 Left: Form Area */
 .form-area {
-  width: 70%;
+  width: 80%;
   background: var(--form-bg);
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px 30px;
+  padding: 20px 10px;
   background: var(--form-bg);
   border-radius: 10px;
   width: 100%;
