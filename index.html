@@ -164,18 +164,35 @@
                 </button>
               </div>
               <!-- ! 🎓 Education Information Section -->
-              <div class="form-section hidden" id="education">
+              <div class="form-section" id="education">
                 <h2>Educational Information</h2>
 
-                <!-- 📌 Container for saved education entries -->
-                <div id="education-list"></div>
+                <!-- 📌 Container for Form & Saved Entries -->
+                <div id="education-form-container"></div>
 
-                <!-- 📌 Add Qualification Button (Only visible when no form is open) -->
+                <!-- 📌 Table Layout (Hidden by Default) -->
+                <table id="education-table" class="hidden">
+                  <thead>
+                    <tr>
+                      <th>Degree</th>
+                      <th>Specialization</th>
+                      <th>Institution</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Score Type</th>
+                      <th>Score</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="education-list-table"></tbody>
+                </table>
+
+                <!-- 📌 Card Layout (Visible by Default) -->
+                <div id="education-list-cards"></div>
+
+                <!-- 📌 Add Qualification Button -->
                 <div class="education-buttons">
-                  <button
-                    type="button"
-                    id="add-education"
-                    class="suggestion-btn">
+                  <button type="button" id="add-education">
                     ➕ Add Qualification
                   </button>
                 </div>

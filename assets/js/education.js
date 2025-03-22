@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const educationList = document.getElementById("education-list");
+  const educationListTable = document.getElementById("education-list-table");
   const addEducationBtn = document.getElementById("add-education");
+  const educationTable = document.getElementById("education-table");
 
   let educationEntries = []; // Stores saved education data
 
+  // 📌 Create New Education Entry Form
   function createEducationEntry(existingData = null) {
     if (document.querySelector(".education-form")) return;
 
@@ -14,7 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="form-row">
         <div class="input-group">
           <label>Degree:</label>
-          <input type="text" list="degree-options" class="education-degree" placeholder="Enter or select degree">
+          <input type="text" list="degree-options" class="education-degree" placeholder="Enter or select degree" value="${
+            existingData?.degree || ""
+          }">
           <datalist id="degree-options">
             <option value="B.Tech"></option>
             <option value="M.Tech"></option>
@@ -23,63 +27,60 @@ document.addEventListener("DOMContentLoaded", function () {
             <option value="B.Sc"></option>
             <option value="M.Sc"></option>
             <option value="PhD"></option>
-            <option value="LLB"></option>
-            <option value="MBBS"></option>
-            <option value="BBA"></option>
-            <option value="B.Com"></option>
-            <option value="M.Com"></option>
             <option value="Other"></option>
           </datalist>
         </div>
 
         <div class="input-group">
           <label>Specialization:</label>
-          <input type="text" class="education-subject" placeholder="E.g., Civil Engineering">
+          <input type="text" class="education-subject" placeholder="E.g., Civil Engineering" value="${
+            existingData?.subject || ""
+          }">
         </div>
       </div>
 
       <div class="form-row">
         <div class="input-group">
           <label>Institution:</label>
-          <input type="text" class="education-institution" placeholder="Enter institution name" required>
+          <input type="text" class="education-institution" placeholder="Enter institution name" required value="${
+            existingData?.institution || ""
+          }">
         </div>
 
-        <div class="input-group">
-          <label>Location (City, Country):</label>
-          <input type="text" class="education-location" placeholder="Enter location (Optional)">
-        </div>
-      </div>
-
-      <div class="form-row date-score">
         <div class="input-group">
           <label>Start Date:</label>
-          <input type="date" class="education-start" required>
+          <input type="date" class="education-start" required value="${
+            existingData?.startDate || ""
+          }">
         </div>
 
         <div class="input-group">
           <label>End Date:</label>
-          <input type="date" class="education-end">
+          <input type="date" class="education-end" value="${
+            existingData?.endDate || ""
+          }">
         </div>
+      </div>
 
+      <div class="form-row">
         <div class="input-group">
           <label>Score Type:</label>
           <select class="education-score-type">
-            <option value="CGPA">CGPA</option>
-            <option value="Percentage">Percentage</option>
+            <option value="CGPA" ${
+              existingData?.scoreType === "CGPA" ? "selected" : ""
+            }>CGPA</option>
+            <option value="Percentage" ${
+              existingData?.scoreType === "Percentage" ? "selected" : ""
+            }>Percentage</option>
           </select>
         </div>
 
         <div class="input-group">
           <label>Score:</label>
-          <input type="number" class="education-score" placeholder="Enter CGPA or Percentage" required>
+          <input type="number" class="education-score" placeholder="Enter CGPA or Percentage" required value="${
+            existingData?.score || ""
+          }">
           <small class="error-message"></small>
-        </div>
-      </div>
-
-      <div class="form-row full-width">
-        <div class="input-group">
-          <label>Additional Notes:</label>
-          <textarea class="education-notes" placeholder="Honors, Achievements, etc."></textarea>
         </div>
       </div>
 
@@ -89,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     `;
 
-    // Real-time validation
+    // 📌 Real-time validation for CGPA & Percentage
     const scoreInput = entryForm.querySelector(".education-score");
     const scoreTypeSelect = entryForm.querySelector(".education-score-type");
     const errorMsg = entryForm.querySelector(".error-message");
@@ -115,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
     entryForm
       .querySelector(".save-entry")
       .addEventListener("click", function () {
-        saveEducationEntry(entryForm);
+        saveEducationEntry(entryForm, existingData);
       });
 
     entryForm
@@ -125,72 +126,89 @@ document.addEventListener("DOMContentLoaded", function () {
         addEducationBtn.style.display = "block";
       });
 
-    educationList.appendChild(entryForm);
+    document.getElementById("education-form-container").appendChild(entryForm);
     addEducationBtn.style.display = "none";
   }
 
-  function saveEducationEntry(form) {
-    const degree = form.querySelector(".education-degree").value;
-    const subject = form.querySelector(".education-subject").value;
-    const institution = form.querySelector(".education-institution").value;
-    const location = form.querySelector(".education-location").value;
-    const startDate = form.querySelector(".education-start").value;
-    const endDate = form.querySelector(".education-end").value;
-    const scoreType = form.querySelector(".education-score-type").value;
-    const score = form.querySelector(".education-score").value;
-    const notes = form.querySelector(".education-notes").value;
+  // 📌 Save Education Entry
+  function saveEducationEntry(form, existingData = null) {
+    const newEntry = {
+      degree: form.querySelector(".education-degree").value,
+      subject: form.querySelector(".education-subject").value,
+      institution: form.querySelector(".education-institution").value,
+      startDate: form.querySelector(".education-start").value,
+      endDate: form.querySelector(".education-end").value,
+      scoreType: form.querySelector(".education-score-type").value,
+      score: form.querySelector(".education-score").value,
+    };
 
-    if (!degree || !institution || !startDate || !score) {
+    if (
+      !newEntry.degree ||
+      !newEntry.institution ||
+      !newEntry.startDate ||
+      !newEntry.score
+    ) {
       alert("Please fill all required fields.");
       return;
     }
 
-    const newEntry = {
-      degree,
-      subject,
-      institution,
-      location,
-      startDate,
-      endDate,
-      scoreType,
-      score,
-      notes,
-    };
-    educationEntries.push(newEntry);
+    if (
+      newEntry.scoreType === "CGPA" &&
+      (newEntry.score < 0 || newEntry.score > 10)
+    ) {
+      alert("CGPA must be between 0 and 10.");
+      return;
+    } else if (
+      newEntry.scoreType === "Percentage" &&
+      (newEntry.score < 0 || newEntry.score > 100)
+    ) {
+      alert("Percentage must be between 0% and 100%.");
+      return;
+    }
 
+    educationEntries.push(newEntry);
     form.remove();
     displayEducationEntries();
     addEducationBtn.style.display = "block";
   }
 
+  // 📌 Display Education Entries in Table
   function displayEducationEntries() {
-    educationList.innerHTML = "";
+    educationListTable.innerHTML = "";
+
+    if (educationEntries.length === 0) {
+      educationTable.classList.add("hidden");
+      addEducationBtn.style.display = "block"; // ✅ Show button when no entries exist
+      return;
+    }
+
+    educationTable.classList.remove("hidden");
+    addEducationBtn.style.display = "none"; // ✅ Hide button when entries exist
 
     educationEntries.forEach((entry, index) => {
-      const entryDiv = document.createElement("div");
-      entryDiv.classList.add("education-entry");
+      const row = document.createElement("tr");
+      row.innerHTML = `
+            <td>${entry.degree}</td>
+            <td>${entry.subject || "N/A"}</td>
+            <td>${entry.institution}</td>
+            <td>${entry.startDate}</td>
+            <td>${entry.endDate || "Present"}</td>
+            <td>${entry.scoreType}</td>
+            <td>${entry.score}</td>
+            <td>
+                <button class="remove-entry" data-index="${index}">❌ Remove</button>
+            </td>
+        `;
+      educationListTable.appendChild(row);
+    });
 
-      entryDiv.innerHTML = `
-        <div class="education-card">
-          <div class="edu-details">
-            <h3>${entry.degree} in ${entry.subject} - ${entry.institution}</h3>
-            <p>${entry.location || "Location: N/A"}</p>
-            <p>${entry.startDate} to ${entry.endDate || "Present"}</p>
-            <p>${entry.scoreType}: ${entry.score}</p>
-            <p>${entry.notes}</p>
-          </div>
-          <button type="button" class="remove-entry" data-index="${index}">❌ Remove</button>
-        </div>
-      `;
-
-      entryDiv
-        .querySelector(".remove-entry")
-        .addEventListener("click", function () {
-          educationEntries.splice(index, 1);
-          displayEducationEntries();
-        });
-
-      educationList.appendChild(entryDiv);
+    // ✅ Attach Remove Event Listeners After Rendering Entries
+    document.querySelectorAll(".remove-entry").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const index = parseInt(btn.getAttribute("data-index"));
+        educationEntries.splice(index, 1);
+        displayEducationEntries(); // ✅ Update UI after deletion
+      });
     });
   }
 
