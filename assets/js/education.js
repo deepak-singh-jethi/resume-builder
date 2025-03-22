@@ -13,8 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const saveEducationBtn = document.getElementById("save-education");
   const clearEducationBtn = document.getElementById("clear-education");
 
-  let educationEntries = [];
-
   // 📌 Function to Save Education Entry
   function saveEducationEntry() {
     const newEntry = {
@@ -52,8 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("Percentage must be between 0% and 100%.");
       return;
     }
-
-    console.log(newEntry);
 
     // Save new entry
     educationEntries.push(newEntry);
@@ -106,5 +102,3 @@ document.addEventListener("DOMContentLoaded", function () {
   saveEducationBtn.addEventListener("click", saveEducationEntry);
   clearEducationBtn.addEventListener("click", clearForm);
 });
-
-console.log(myData);
