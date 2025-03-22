@@ -54,3 +54,48 @@
 .suggestion-btn:hover {
   background: var(--button-hover);
 }
+
+/* 📌 Buttons */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.save-entry,
+.next-btn {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: none;
+}
+
+.save-entry {
+  background: var(--button-bg);
+  color: white;
+}
+
+.next-btn {
+  background: var(--sidebar-active);
+  color: white;
+}
+
+.save-entry:hover,
+.next-btn:hover,
+.cancel-entry:hover {
+  opacity: 0.8;
+}
+
+.cancel-entry {
+  background-color: var(--cancel-btn-bg);
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: none;
+  color: white;
+}

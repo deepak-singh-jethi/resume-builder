@@ -15,5 +15,6 @@
   --input-border: #ddd;
   --input-focus-border: #4caf50;
   --input-placeholder: #999;
+  --cancel-btn-bg: rgb(222, 73, 73);
   --sidebar-width: 16%;
 }

@@ -34,6 +34,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin: 3px;
 }
 
 .input-group label {
@@ -103,39 +104,6 @@ textarea {
   font-size: 14px;
 }
 
-/* 📌 Buttons */
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.save-entry,
-.next-btn {
-  padding: 8px 12px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  border: none;
-}
-
-.save-entry {
-  background: var(--button-bg);
-  color: white;
-}
-
-.next-btn {
-  background: var(--sidebar-active);
-  color: white;
-}
-
-.save-entry:hover,
-.next-btn:hover {
-  opacity: 0.8;
-}
-
 /* 📌 Table Styling */
 .table-container {
   margin-top: 15px;
@@ -190,6 +158,19 @@ textarea {
   font-size: 18px;
   top: 50%;
   transform: translateY(-50%);
+}
+/* summary area */
+.large-text-area {
+  width: 90%;
+  height: 200px;
+  margin: 30px 30px 4px 30px;
+  padding: 20px;
+}
+
+.char-counter {
+  display: flex;
+  justify-content: end;
+  margin-right: 50px;
 }
 
 /* 📌 Responsive Adjustments */

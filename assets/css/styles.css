@@ -86,3 +86,7 @@ body {
   padding: 10px;
   cursor: pointer;
 }
+
+.form-margin {
+  margin-top: 20px;
+}

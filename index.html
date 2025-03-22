@@ -78,7 +78,7 @@
                 <h2>Contact Information</h2>
 
                 <!-- 🏷 Full Name & Phone (Two Columns) -->
-                <div class="form-row">
+                <div class="form-row form-margin">
                   <div class="input-group">
                     <label for="full-name">Full Name</label>
                     <input
@@ -147,11 +147,11 @@
                 <h2>Professional Summary</h2>
                 <textarea
                   id="summary-text"
+                  class="large-text-area form-margin"
                   placeholder="Summarize your experience, skills, and career goals..."></textarea>
 
                 <!-- Character Counter -->
                 <div class="char-counter" id="char-counter">0/300</div>
-
                 <!-- Suggestion Button -->
                 <button
                   type="button"
@@ -161,12 +161,11 @@
                 </button>
               </div>
               <!-- ! 🎓 Education Information Section -->
-              <!-- 🎓 Education Information Section -->
               <div class="form-section" id="education">
                 <h2>Educational Information</h2>
 
                 <!-- 📌 Education Form -->
-                <div class="education-form">
+                <div class="education-form form-margin">
                   <div class="form-row">
                     <div class="input-group">
                       <label>Course:</label>
@@ -305,7 +304,7 @@
               <div class="form-section experience-form" id="experience">
                 <h2>Work Experience</h2>
 
-                <div class="form-row">
+                <div class="form-row form-margin">
                   <div class="input-group">
                     <label>Company:</label>
                     <input
@@ -387,8 +386,8 @@
                   <button type="button" id="add-experience" class="save-entry">
                     ➕ Add Another
                   </button>
-                  <button type="button" id="next-section" class="next-btn">
-                    ➡ Next
+                  <button type="button" id="next-section" class="cancel-entry">
+                    cancel
                   </button>
                 </div>
               </div>
@@ -397,7 +396,7 @@
               <div class="form-section projects-form" id="projects">
                 <h2>Projects</h2>
 
-                <div class="form-row">
+                <div class="form-row form-margin">
                   <div class="input-group">
                     <label>Title:</label>
                     <input
@@ -435,6 +434,7 @@
                 <input
                   type="text"
                   id="skills-input"
+                  class="form-margin"
                   placeholder="E.g., JavaScript, React, Python" />
               </div>
 
@@ -444,6 +444,7 @@
                 <input
                   type="text"
                   id="languages-input"
+                  class="form-margin"
                   placeholder="E.g., English, Spanish, Hindi, Python, Java" />
               </div>
 
@@ -452,6 +453,7 @@
                 <h2>Achievements</h2>
                 <textarea
                   id="achievement-text"
+                  class="form-margin"
                   placeholder="List your achievements"></textarea>
 
                 <div class="form-actions">
@@ -465,6 +467,7 @@
                 <input
                   type="text"
                   id="hobbies-input"
+                  class="form-margin"
                   placeholder="E.g., Reading, Gaming, Traveling" />
               </div>
 
