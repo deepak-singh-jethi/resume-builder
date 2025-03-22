@@ -7,8 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 📌 Create New Education Entry Form
   function createEducationEntry(existingData = null) {
+    // if a form already exist dont open other education form
     if (document.querySelector(".education-form")) return;
 
+    // create a education form using js
     const entryForm = document.createElement("div");
     entryForm.classList.add("education-form");
 
@@ -142,6 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
       score: form.querySelector(".education-score").value,
     };
 
+    // check if all data exist
     if (
       !newEntry.degree ||
       !newEntry.institution ||
@@ -152,6 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    // validation for marks range
     if (
       newEntry.scoreType === "CGPA" &&
       (newEntry.score < 0 || newEntry.score > 10)
@@ -165,10 +169,15 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("Percentage must be between 0% and 100%.");
       return;
     }
-
+    // push new entry into the array
     educationEntries.push(newEntry);
+
+    // remove form
     form.remove();
+
+    // display table again
     displayEducationEntries();
+    // again show add education button
     addEducationBtn.style.display = "block";
   }
 
@@ -177,13 +186,15 @@ document.addEventListener("DOMContentLoaded", function () {
     educationListTable.innerHTML = "";
 
     if (educationEntries.length === 0) {
-      educationTable.classList.add("hidden");
+      educationTable.classList.add("hidden"); // ✅ don't show table when no entries exist
       addEducationBtn.style.display = "block"; // ✅ Show button when no entries exist
       return;
     }
 
-    educationTable.classList.remove("hidden");
+    educationTable.classList.remove("hidden"); // ✅ show table when entries exist
     addEducationBtn.style.display = "none"; // ✅ Hide button when entries exist
+
+    // Render Table on display
 
     educationEntries.forEach((entry, index) => {
       const row = document.createElement("tr");
@@ -205,8 +216,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅ Attach Remove Event Listeners After Rendering Entries
     document.querySelectorAll(".remove-entry").forEach((btn) => {
       btn.addEventListener("click", function () {
+        // get the index in the array in which remove is pressed
         const index = parseInt(btn.getAttribute("data-index"));
+        // remove that part
         educationEntries.splice(index, 1);
+
+        // render the table again
         displayEducationEntries(); // ✅ Update UI after deletion
       });
     });
