@@ -26,7 +26,7 @@
           <i class="material-icons">summarize</i> Summary
         </li>
         <li class="sidebar-item" data-section="education">
-          <i class="material-icons">school</i> Education 
+          <i class="material-icons">school</i> Education
         </li>
         <li class="sidebar-item" data-section="certifications">
           <i class="material-icons">verified_user</i> Certifications
@@ -163,21 +163,22 @@
                   Use Suggested Summary
                 </button>
               </div>
-              <!-- ! Education Information Section -->
+              <!-- ! 🎓 Education Information Section -->
               <div class="form-section hidden" id="education">
-                <h2>Education Information</h2>
-                <ul>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                </ul>
+                <h2>Educational Information</h2>
+
+                <!-- 📌 Container for saved education entries -->
+                <div id="education-list"></div>
+
+                <!-- 📌 Add Qualification Button (Only visible when no form is open) -->
+                <div class="education-buttons">
+                  <button
+                    type="button"
+                    id="add-education"
+                    class="suggestion-btn">
+                    ➕ Add Qualification
+                  </button>
+                </div>
               </div>
 
               <!-- ! Certification Information Section -->
@@ -194,6 +195,7 @@
                   <li>asdncdas</li>
                   <li>asdncdas</li>
                   <li>a</li>
+                </ul>
               </div>
 
               <div class="form-navigation">

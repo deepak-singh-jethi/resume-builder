@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // !Change this based on the total number of sections
 
-const totalSteps = 7;
+const totalSteps = 8;
 
 function updateProgress(currentStep) {
   const progressBar = document.getElementById("progressBar");

@@ -4,16 +4,16 @@
 
 // 4️⃣ **Quick Actions Panel**
 function saveResume() {
-  alert("Resume saved successfully!");
+  alert("Chutiyaa....");
 }
 
 function downloadPDF() {
-  alert("Downloading resume as PDF...");
+  alert("Land....");
 }
 
 function clearForm() {
   document.getElementById("resume-form").reset();
-  alert("Form cleared!");
+  alert("Muttthiii....");
 }
 
 // Function to update the resume preview in real time
