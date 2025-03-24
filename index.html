@@ -189,7 +189,7 @@
                       <input
                         type="text"
                         id="education-degree"
-                        placeholder="Enter degree" />
+                        placeholder="E.g., MBBBS, Enter Course Name " />
                     </div>
                     <div class="input-group">
                       <label>Specialization:</label>
@@ -214,7 +214,8 @@
                         type="number"
                         id="education-start"
                         min="1900"
-                        max="2030" />
+                        max="2030"
+                        value="2014" />
                     </div>
                     <div class="input-group">
                       <label>End Year:</label>
@@ -222,7 +223,8 @@
                         type="number"
                         id="education-end"
                         min="1900"
-                        max="2040" />
+                        max="2040"
+                        value="2018" />
                     </div>
                   </div>
 
@@ -249,7 +251,7 @@
                       type="button"
                       id="save-education"
                       class="save-entry">
-                      Save Entry
+                      Add Entry
                     </button>
                     <button
                       type="button"
@@ -267,7 +269,7 @@
                   <span class="close-btn" id="close-education-modal"
                     >&times;</span
                   >
-                  <h3>🎓 Saved Education Entries</h3>
+                  <h3>Saved Education Entries</h3>
                   <div class="table-container">
                     <table id="education-modal-table">
                       <thead>
@@ -364,7 +366,7 @@
 
                 <div class="form-actions">
                   <button type="button" id="save-experience" class="save-entry">
-                    Save Entry
+                    Add Entry
                   </button>
                   <button
                     type="button"
@@ -381,7 +383,7 @@
                   <span class="close-btn" id="close-experience-modal"
                     >&times;</span
                   >
-                  <h3>📂 Saved Work Experience</h3>
+                  <h3>Saved Work Experience</h3>
                   <div class="table-container">
                     <table id="experience-modal-table">
                       <thead>
@@ -418,7 +420,27 @@
                 </ul>
               </div>
 
-              <!-- !🎯 Projects Section -->
+              <!-- ✅ Projects Modal -->
+              <div id="project-modal">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h2>Saved Projects</h2>
+                    <span id="close-project-modal" class="close-modal">❌</span>
+                  </div>
+                  <table class="project-table">
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="project-modal-list"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- ✅ Project Form -->
               <div class="form-section projects-form" id="projects">
                 <h2>Projects</h2>
 
@@ -450,8 +472,34 @@
                 </div>
 
                 <div class="form-actions">
-                  <button type="button" class="save-entry">✔ Save</button>
+                  <!-- ✅ View Projects Button -->
+                  <button
+                    type="button"
+                    id="open-project-modal"
+                    class="suggestion-btn">
+                    View (0) Projects
+                  </button>
+                  <button type="button" id="save-project" class="save-entry">
+                    ✔ Save
+                  </button>
                 </div>
+              </div>
+
+              <!-- ! Certification Information Section -->
+              <div class="form-section" id="certifications">
+                <h2>Certification Information</h2>
+                <ul>
+                  <li>asdncdas</li>
+                  <li>asdncdas</li>
+                  <li>asdncdas</li>
+                  <li>asdncdas</li>
+                  <li>asdncdas</li>
+                  <li>asdncdas</li>
+                  <li>asdncdas</li>
+                  <li>asdncdas</li>
+                  <li>asdncdas</li>
+                  <li>a</li>
+                </ul>
               </div>
 
               <!-- !🎯 Skills Section -->

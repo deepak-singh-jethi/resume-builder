@@ -16,9 +16,10 @@ let myData = {
   hobbies: [],
 };
 
-// ✅ Global Arrays for Education & Experience Data
+// ✅ Global Arrays for Education  Experience and Project Data
 let educationEntries = [];
 let experienceEntries = [];
+let projectEntries = [];
 
 document.addEventListener("DOMContentLoaded", function () {
   // ✅ Get references to sidebar items, form sections, and navigation buttons

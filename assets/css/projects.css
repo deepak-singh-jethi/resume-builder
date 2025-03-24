@@ -1,0 +1,64 @@
+/* ✅ Modal Styling */
+#project-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 50%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-header h2 {
+  margin: 0;
+}
+
+.close-modal {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* ✅ Table Styling */
+.project-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.project-table th,
+.project-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.project-table th {
+  background: #f4f4f4;
+}
+
+.project-table a {
+  text-decoration: none;
+  color: blue;
+}
+
+.project-table button {
+  background: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
