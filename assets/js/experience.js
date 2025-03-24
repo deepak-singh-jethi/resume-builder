@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅ Save Entry in Global Array & Local Storage
     experienceEntries.push(newEntry);
     localStorage.setItem("experienceData", JSON.stringify(experienceEntries));
+    openExperienceModalBtn.innerText = `View (${experienceEntries.length}) Entries`;
 
     // ✅ Update UI
     displayExperienceEntries();
@@ -115,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
           JSON.stringify(experienceEntries)
         ); // Update localStorage
         displayExperienceEntries(); // Refresh list
+        updateViewEntriesButton(); // update View entries button text
       });
     });
   }
@@ -134,6 +136,10 @@ document.addEventListener("DOMContentLoaded", function () {
     endDateInput.disabled = false; // Ensure End Date is enabled after reset
   }
 
+  function updateViewEntriesButton() {
+    openExperienceModalBtn.innerText = `View (${experienceEntries.length}) Entries`;
+  }
+  updateViewEntriesButton();
   // ✅ Attach Event Listener to Save Button
   saveExperienceBtn.addEventListener("click", saveExperienceEntry);
 });

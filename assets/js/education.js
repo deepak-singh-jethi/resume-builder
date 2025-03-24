@@ -77,6 +77,8 @@ document.addEventListener("DOMContentLoaded", function () {
     educationEntries.push(newEntry);
     localStorage.setItem("educationData", JSON.stringify(educationEntries));
 
+    updateViewEntriesButton();
+
     // ✅ Refresh the UI and clear form fields after saving
     displayEducationEntries();
     clearEducationForm();
@@ -101,7 +103,10 @@ document.addEventListener("DOMContentLoaded", function () {
         <td>${entry.institution}</td>
         <td>${entry.startYear}</td>
         <td>${entry.endYear}</td>
-        <td>${entry.score} ${entry.scoreType}</td>
+        <td>${entry.score} ${
+        entry.scoreType === "Percentage" ? "%" : entry.scoreType
+      }</td>
+
         <td><button class="remove-entry" data-index="${index}">❌</button></td>
       `;
       educationModalList.appendChild(row);
@@ -113,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const index = parseInt(btn.getAttribute("data-index")); // Get entry index
         educationEntries.splice(index, 1); // Remove entry from array
         localStorage.setItem("educationData", JSON.stringify(educationEntries)); // Update localStorage
+        updateViewEntriesButton(); // update number of entries in the view entries button
         displayEducationEntries(); // Refresh UI
       });
     });
@@ -129,8 +135,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("education-score").value = "";
   }
 
+  function updateViewEntriesButton() {
+    openEducationModalBtn.innerText = `View (${educationEntries.length}) Entries`;
+  }
+
   // ✅ Load existing education records from localStorage on page load
   displayEducationEntries();
+  updateViewEntriesButton();
 
   // ✅ Attach event listener to the "Save Education" button
   saveEducationBtn.addEventListener("click", saveEducationEntry);
