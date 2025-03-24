@@ -6,7 +6,7 @@ let myData = {
   personalInfo: {},
   summary: {},
   education: [],
-  experience: [], // ✅ Added Experience Section
+  experience: [],
   projects: [],
   skills: [],
   languages: [],
@@ -14,8 +14,8 @@ let myData = {
   hobbies: [],
 };
 
-let educationEntries = [];
-let experienceEntries = []; // ✅ Added Experience Array
+let educationEntries = []; // ✅ Global Education Array
+let experienceEntries = []; // ✅ Global Experience Array
 
 document.addEventListener("DOMContentLoaded", function () {
   const sidebarItems = document.querySelectorAll(".sidebar-item");
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const savedData = localStorage.getItem("resumeData");
   if (savedData) {
     myData = JSON.parse(savedData);
-    educationEntries = myData.education || [];
+    educationEntries = myData.education || []; // ✅ Load saved education
     experienceEntries = myData.experience || []; // ✅ Load saved experience
     console.log("Loaded Saved Data:", myData);
   }
@@ -62,13 +62,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Handle Next & Previous Button Clicks
+  // Handle Next  Button Clicks
   nextBtn.addEventListener("click", () => {
     saveCurrentFormData();
     const newIndex = currentSectionIndex + 1;
     if (newIndex < sidebarItems.length) showSectionByIndex(newIndex);
   });
 
+  // Handle Previous Button Clicks
   prevBtn.addEventListener("click", () => {
     saveCurrentFormData();
     const newIndex = currentSectionIndex - 1;
@@ -154,12 +155,15 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Updated Data:", myData);
   }
 
+  // at first the first form :- Contact Info will be shown
   showSectionByIndex(0);
 });
 
 /* -------------------------------- */
 /* 🚀 Progress Bar Logic 🚀 */
 /* -------------------------------- */
+
+// !Adjust steps based on number of Steps
 const totalSteps = 10;
 
 function updateProgress(currentStep) {

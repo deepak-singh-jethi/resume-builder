@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="assets/css/experience.css" />
     <link rel="stylesheet" href="assets/css/projects.css" />
     <link rel="stylesheet" href="assets/css/skill.css" />
+    <link rel="stylesheet" href="assets/css/summary.css" />
+
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons" />
@@ -142,9 +144,11 @@
                 </div>
               </div>
 
-              <!-- !  Professional Summary Section -->
+              <!-- ! Professional Summary Section -->
               <div class="form-section" id="summary">
                 <h2>Professional Summary</h2>
+
+                <!-- Summary Textarea -->
                 <textarea
                   id="summary-text"
                   class="large-text-area form-margin"
@@ -152,14 +156,27 @@
 
                 <!-- Character Counter -->
                 <div class="char-counter" id="char-counter">0/300</div>
+
                 <!-- Suggestion Button -->
                 <button
                   type="button"
                   class="suggestion-btn"
-                  onclick="insertSuggestion()">
-                  Use Suggested Summary
+                  id="open-summary-modal">
+                  ✨ Get Suggestions
                 </button>
+
+                <!-- Summary Suggestions Modal -->
+                <div id="summary-modal" class="modal">
+                  <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <h3>Select a Suggested Summary</h3>
+                    <ul id="summary-list">
+                      <!-- Summary options will be inserted dynamically -->
+                    </ul>
+                  </div>
+                </div>
               </div>
+
               <!-- ! 🎓 Education Information Section -->
               <div class="form-section" id="education">
                 <h2>Educational Information</h2>
@@ -492,7 +509,7 @@
     </div>
 
     <script src="assets/js/script.js"></script>
-    <script src="assets/js/form-handler.js"></script>
+    <script src="assets/js/summary.js"></script>
     <script src="assets/js/preview.js"></script>
     <script src="assets/js/education.js"></script>
     <script src="assets/js/experience.js"></script>
