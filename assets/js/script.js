@@ -1,6 +1,8 @@
 /* -------------------------------- */
-/* Handles Progress Bar, Sidebar Navigation & Form Data Sync */
+/* Resume Form Handler Script 🚀 */
 /* -------------------------------- */
+
+// ✅ Manages Progress Bar, Sidebar Navigation & Form Data Sync
 
 let myData = {
   personalInfo: {},
@@ -14,39 +16,48 @@ let myData = {
   hobbies: [],
 };
 
-let educationEntries = []; // ✅ Global Education Array
-let experienceEntries = []; // ✅ Global Experience Array
+// ✅ Global Arrays for Education & Experience Data
+let educationEntries = [];
+let experienceEntries = [];
 
 document.addEventListener("DOMContentLoaded", function () {
+  // ✅ Get references to sidebar items, form sections, and navigation buttons
   const sidebarItems = document.querySelectorAll(".sidebar-item");
   const formSections = document.querySelectorAll(".form-section");
   const prevBtn = document.getElementById("prev-btn");
   const nextBtn = document.getElementById("next-btn");
 
-  let currentSectionIndex = 0;
+  let currentSectionIndex = 0; // ✅ Track current form section index
 
-  // Restore saved data from localStorage
+  // ✅ Restore saved form data from localStorage (if available)
   const savedData = localStorage.getItem("resumeData");
   if (savedData) {
     myData = JSON.parse(savedData);
-    educationEntries = myData.education || []; // ✅ Load saved education
-    experienceEntries = myData.experience || []; // ✅ Load saved experience
+    educationEntries = myData.education || [];
+    experienceEntries = myData.experience || [];
     console.log("Loaded Saved Data:", myData);
   }
 
+  /**
+   * ✅ Show a specific section based on index
+   * @param {number} index - Index of the section to display
+   */
   function showSectionByIndex(index) {
     if (index < 0 || index >= sidebarItems.length) return;
 
     const targetSection = sidebarItems[index].getAttribute("data-section");
 
+    // Hide all sections and display the active one
     formSections.forEach((section) => (section.style.display = "none"));
     const activeSection = document.getElementById(targetSection);
     if (activeSection) activeSection.style.display = "block";
 
+    // Highlight the active sidebar item
     sidebarItems.forEach((item, i) =>
       item.classList.toggle("active", i === index)
     );
 
+    // Enable/Disable navigation buttons based on the current section
     prevBtn.disabled = index === 0;
     nextBtn.disabled = index === sidebarItems.length - 1;
 
@@ -54,29 +65,31 @@ document.addEventListener("DOMContentLoaded", function () {
     updateProgress(index + 1);
   }
 
-  // Handle Sidebar Clicks
+  // ✅ Handle Sidebar Click Events
   sidebarItems.forEach((item, index) => {
     item.addEventListener("click", () => {
-      saveCurrentFormData();
+      saveCurrentFormData(); // Save data before switching
       showSectionByIndex(index);
     });
   });
 
-  // Handle Next  Button Clicks
+  // ✅ Handle "Next" Button Click
   nextBtn.addEventListener("click", () => {
     saveCurrentFormData();
     const newIndex = currentSectionIndex + 1;
     if (newIndex < sidebarItems.length) showSectionByIndex(newIndex);
   });
 
-  // Handle Previous Button Clicks
+  // ✅ Handle "Previous" Button Click
   prevBtn.addEventListener("click", () => {
     saveCurrentFormData();
     const newIndex = currentSectionIndex - 1;
     if (newIndex >= 0) showSectionByIndex(newIndex);
   });
 
-  // ✅ Save Form Data Before Switching Sections
+  /**
+   * ✅ Save Form Data Before Switching Sections
+   */
   function saveCurrentFormData() {
     const activeSection =
       sidebarItems[currentSectionIndex].getAttribute("data-section");
@@ -101,11 +114,11 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
 
       case "education":
-        myData.education = [...educationEntries]; // ✅ Sync Education Data
+        myData.education = [...educationEntries];
         break;
 
       case "experience":
-        myData.experience = [...experienceEntries]; // ✅ Sync Experience Data
+        myData.experience = [...experienceEntries];
         break;
 
       case "projects":
@@ -150,12 +163,12 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
     }
 
-    // ✅ Store Data in localStorage for Persistence
+    // ✅ Save data to localStorage for persistence
     localStorage.setItem("resumeData", JSON.stringify(myData));
     console.log("Updated Data:", myData);
   }
 
-  // at first the first form :- Contact Info will be shown
+  // ✅ Initially show the first section (Contact Info)
   showSectionByIndex(0);
 });
 
@@ -163,9 +176,12 @@ document.addEventListener("DOMContentLoaded", function () {
 /* 🚀 Progress Bar Logic 🚀 */
 /* -------------------------------- */
 
-// !Adjust steps based on number of Steps
-const totalSteps = 10;
+const totalSteps = 10; // ✅ Define total steps for progress calculation
 
+/**
+ * ✅ Update Progress Bar
+ * @param {number} currentStep - The current step number
+ */
 function updateProgress(currentStep) {
   const progressBar = document.getElementById("progressBar");
   const progressStep = document.getElementById("progressStep");

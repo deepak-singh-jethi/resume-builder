@@ -1,12 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // 📌 Get modal elements
   const summaryModal = document.getElementById("summary-modal");
   const openModalBtn = document.getElementById("open-summary-modal");
   const closeModalBtn = document.querySelector(".close-btn");
   const summaryList = document.getElementById("summary-list");
   const summaryTextarea = document.getElementById("summary-text");
   const charCounter = document.getElementById("char-counter");
-  const maxChars = 300;
+  const maxChars = 300; // 🔢 Maximum character limit for summary
 
+  // 📝 List of predefined summary suggestions
   const suggestions = [
     "Experienced software engineer specializing in web development and UI/UX design.",
     "Creative and detail-oriented developer with a passion for building interactive applications.",
@@ -30,25 +32,25 @@ document.addEventListener("DOMContentLoaded", function () {
     "DevOps engineer with expertise in CI/CD pipelines, Kubernetes, and cloud deployment automation.",
   ];
 
-  // 🟢 Open modal
+  // 🟢 Open modal when button is clicked
   openModalBtn.addEventListener("click", function () {
     summaryModal.style.display = "flex";
-    renderSummaries();
+    renderSummaries(); // 🔄 Load summary suggestions into the modal
   });
 
-  // ❌ Close modal
+  // ❌ Close modal when close button is clicked
   closeModalBtn.addEventListener("click", function () {
     summaryModal.style.display = "none";
   });
 
-  // 🔲 Close modal when clicking outside
+  // 🔲 Close modal when clicking outside of it
   window.addEventListener("click", function (event) {
     if (event.target === summaryModal) {
       summaryModal.style.display = "none";
     }
   });
 
-  // limit summary text length
+  // ⏳ Limit summary text length and update character counter
   summaryTextarea.addEventListener("input", function () {
     if (summaryTextarea.value.length > maxChars) {
       summaryTextarea.value = summaryTextarea.value.substring(0, maxChars);
@@ -56,16 +58,16 @@ document.addEventListener("DOMContentLoaded", function () {
     charCounter.textContent = `${summaryTextarea.value.length}/${maxChars}`;
   });
 
-  // 📜 Render summary suggestions in modal
+  // 📜 Render summary suggestions inside the modal
   function renderSummaries() {
-    summaryList.innerHTML = "";
+    summaryList.innerHTML = ""; // 🔄 Clear existing list before adding new ones
     suggestions.forEach((text) => {
       const li = document.createElement("li");
       li.textContent = text;
       li.addEventListener("click", function () {
-        summaryTextarea.value = text;
+        summaryTextarea.value = text; // 📝 Set selected summary text
         charCounter.textContent = `${text.length}/${maxChars}`;
-        summaryModal.style.display = "none";
+        summaryModal.style.display = "none"; // ❌ Close modal after selection
       });
       summaryList.appendChild(li);
     });
