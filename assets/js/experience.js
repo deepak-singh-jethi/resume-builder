@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
     current: document.getElementById("experience-current"),
     location: document.getElementById("experience-location"),
     description: document.getElementById("experience-description"),
-    achievements: document.getElementById("experience-achievements"),
     skills: document.getElementById("experience-skills"),
     form: document.getElementById("experience-form"), // Form element for reset
   };
@@ -35,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
         : formElements.endDate.value,
       location: formElements.location.value,
       description: formElements.description.value.trim(),
-      achievements: formElements.achievements.value.trim(),
       skills: formElements.skills.value.split(",").map((skill) => skill.trim()),
     };
 

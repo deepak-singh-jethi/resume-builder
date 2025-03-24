@@ -47,6 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
       summaryModal.style.display = "none";
     }
   });
+
+  // limit summary text length
   summaryTextarea.addEventListener("input", function () {
     if (summaryTextarea.value.length > maxChars) {
       summaryTextarea.value = summaryTextarea.value.substring(0, maxChars);
