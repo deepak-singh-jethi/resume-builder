@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // ✅ Retrieve stored education data from localStorage, or initialize an empty array if none exists
-  let educationEntries =
-    JSON.parse(localStorage.getItem("educationData")) || [];
+  // ✅ Retrieve stored education data from localStorage, or initialize global array if none exists
+  educationEntries = JSON.parse(localStorage.getItem("educationData")) || [];
 
   // ✅ Select modal-related DOM elements
   const educationModal = document.getElementById("education-modal");

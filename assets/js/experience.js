@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // ✅ Retrieve stored experience entries from localStorage (or set to an empty array if none exist)
-  let experienceEntries =
-    JSON.parse(localStorage.getItem("experienceData")) || [];
+  // ✅ Retrieve stored experience entries from localStorage (or set to global array if none exist)
+  experienceEntries = JSON.parse(localStorage.getItem("experienceData")) || [];
 
   // ✅ Modal Elements
   const experienceModal = document.getElementById("experience-modal"); // Modal container
