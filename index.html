@@ -188,19 +188,8 @@
                       <label>Course:</label>
                       <input
                         type="text"
-                        list="degree-options"
                         id="education-degree"
-                        placeholder="Enter or select degree" />
-                      <datalist id="degree-options">
-                        <option value="B.Tech"></option>
-                        <option value="M.Tech"></option>
-                        <option value="MBA"></option>
-                        <option value="Diploma"></option>
-                        <option value="B.Sc"></option>
-                        <option value="M.Sc"></option>
-                        <option value="PhD"></option>
-                        <option value="Other"></option>
-                      </datalist>
+                        placeholder="Enter degree" />
                     </div>
                     <div class="input-group">
                       <label>Specialization:</label>
@@ -211,46 +200,38 @@
                     </div>
                   </div>
 
-                  <!-- Institution, Start Year, End Year Row -->
-                  <div class="form-row institution-row">
+                  <div class="form-row">
                     <div class="input-group">
                       <label>Institution:</label>
                       <input
                         type="text"
                         id="education-institution"
-                        placeholder="Enter institution name"
-                        required />
+                        placeholder="Enter institution name" />
                     </div>
                     <div class="input-group">
                       <label>Start Year:</label>
                       <input
                         type="number"
-                        min="1900"
-                        max="2030"
-                        step="1"
-                        value="2016"
                         id="education-start"
-                        required />
+                        min="1900"
+                        max="2030" />
                     </div>
                     <div class="input-group">
                       <label>End Year:</label>
                       <input
                         type="number"
+                        id="education-end"
                         min="1900"
-                        max="2040"
-                        step="1"
-                        value="2020"
-                        id="education-end" />
+                        max="2040" />
                     </div>
                   </div>
 
-                  <!-- Score Type and Score Row -->
-                  <div class="form-row score-row">
+                  <div class="form-row">
                     <div class="input-group">
                       <label>Score Type:</label>
                       <select id="education-score-type">
                         <option value="CGPA">CGPA</option>
-                        <option value="Percentage">%</option>
+                        <option value="Percentage">Percentage</option>
                       </select>
                     </div>
                     <div class="input-group">
@@ -258,10 +239,7 @@
                       <input
                         type="number"
                         id="education-score"
-                        placeholder="CGPA or %"
-                        min="1"
-                        required />
-                      <small class="error-message"></small>
+                        placeholder="CGPA or %" />
                     </div>
                   </div>
 
@@ -275,29 +253,37 @@
                     </button>
                     <button
                       type="button"
-                      id="clear-education"
-                      class="cancel-entry">
-                      ✖ Clear
+                      id="open-education-modal"
+                      class="education-btn suggestion-btn">
+                      📚 View Education Entries
                     </button>
                   </div>
                 </div>
+              </div>
 
-                <!-- 📌 Education Table -->
-                <div class="table-container">
-                  <table id="education-table">
-                    <thead>
-                      <tr>
-                        <th>Degree</th>
-                        <th>Specialization</th>
-                        <th>Institution</th>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Score</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody id="education-list-table"></tbody>
-                  </table>
+              <!-- 📌 Education Entries Modal -->
+              <div id="education-modal" class="modal">
+                <div class="modal-content">
+                  <span class="close-btn" id="close-education-modal"
+                    >&times;</span
+                  >
+                  <h3>🎓 Saved Education Entries</h3>
+                  <div class="table-container">
+                    <table id="education-modal-table">
+                      <thead>
+                        <tr>
+                          <th>Degree</th>
+                          <th>Specialization</th>
+                          <th>Institution</th>
+                          <th>Start</th>
+                          <th>End</th>
+                          <th>Score</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="education-modal-list"></tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 

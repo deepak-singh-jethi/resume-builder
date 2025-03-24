@@ -9,34 +9,62 @@ const educationObject = {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  const educationListTable = document.getElementById("education-list-table");
+  const educationListTable = document.getElementById("education-modal-list"); // ✅ Using modal table
   const saveEducationBtn = document.getElementById("save-education");
   const clearEducationBtn = document.getElementById("clear-education");
+
+  // ✅ Modal Elements
+  const educationModal = document.getElementById("education-modal");
+  const openEducationModalBtn = document.getElementById("open-education-modal");
+  const closeEducationModalBtn = document.getElementById(
+    "close-education-modal"
+  );
+
+  // ✅ Ensure Modal is Hidden on Load
+  educationModal.style.display = "none";
+
+  // 📌 Open Modal on Button Click
+  openEducationModalBtn.addEventListener("click", function () {
+    educationModal.style.display = "flex";
+    displayEducationEntries(); // ✅ Render entries inside modal
+  });
+
+  // 📌 Close Modal on "X" Click
+  closeEducationModalBtn.addEventListener("click", function () {
+    educationModal.style.display = "none";
+  });
+
+  // 📌 Close Modal When Clicking Outside
+  window.addEventListener("click", function (event) {
+    if (event.target === educationModal) {
+      educationModal.style.display = "none";
+    }
+  });
 
   // 📌 Function to Save Education Entry
   function saveEducationEntry() {
     const newEntry = {
       degree: document.getElementById("education-degree").value,
-      subject: document.getElementById("education-subject").value,
+      specialization: document.getElementById("education-subject").value,
       institution: document.getElementById("education-institution").value,
-      startDate: document.getElementById("education-start").value,
-      endDate: document.getElementById("education-end").value || "Present",
+      startYear: document.getElementById("education-start").value,
+      endYear: document.getElementById("education-end").value || "Present",
       scoreType: document.getElementById("education-score-type").value,
       score: document.getElementById("education-score").value,
     };
 
-    // Check for missing required fields
+    // ✅ Validation for Required Fields
     if (
       !newEntry.degree ||
       !newEntry.institution ||
-      !newEntry.startDate ||
+      !newEntry.startYear ||
       !newEntry.score
     ) {
       alert("Please fill all required fields.");
       return;
     }
 
-    // Validate score range
+    // ✅ Validate Score Range
     if (
       newEntry.scoreType === "CGPA" &&
       (newEntry.score < 0 || newEntry.score > 10)
@@ -51,33 +79,36 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Save new entry
+    // ✅ Save Entry
     educationEntries.push(newEntry);
-    displayEducationEntries();
+    displayEducationEntries(); // ✅ Updates modal table
     clearForm();
   }
 
-  // 📌 Function to Display Education Entries
+  // 📌 Function to Display Education Entries in Modal Table
   function displayEducationEntries() {
-    educationListTable.innerHTML = "";
+    educationListTable.innerHTML = ""; // ✅ Clear previous entries
+
+    if (educationEntries.length === 0) {
+      educationListTable.innerHTML = `<tr><td colspan="7">No education records found.</td></tr>`;
+      return;
+    }
 
     educationEntries.forEach((entry, index) => {
       const row = document.createElement("tr");
       row.innerHTML = `
-                <td>${entry.degree}</td>
-                <td>${entry.subject || "N/A"}</td>
-                <td>${entry.institution}</td>
-                <td>${entry.startDate}</td>
-                <td>${entry.endDate}</td>
-                <td>${entry.score} ${entry.scoreType}</td>
-                <td>
-                    <button class="remove-entry" data-index="${index}">❌</button>
-                </td>
-            `;
+        <td>${entry.degree}</td>
+        <td>${entry.specialization || "N/A"}</td>
+        <td>${entry.institution}</td>
+        <td>${entry.startYear}</td>
+        <td>${entry.endYear}</td>
+        <td>${entry.score} ${entry.scoreType}</td>
+        <td><button class="remove-entry" data-index="${index}">❌</button></td>
+      `;
       educationListTable.appendChild(row);
     });
 
-    // Attach remove event listeners
+    // ✅ Attach Remove Event Listeners
     document.querySelectorAll(".remove-entry").forEach((btn) => {
       btn.addEventListener("click", function () {
         const index = parseInt(btn.getAttribute("data-index"));
@@ -98,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("education-score").value = "";
   }
 
-  // Event Listeners
+  // ✅ Event Listeners
   saveEducationBtn.addEventListener("click", saveEducationEntry);
   clearEducationBtn.addEventListener("click", clearForm);
 });

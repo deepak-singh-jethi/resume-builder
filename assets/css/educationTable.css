@@ -1,85 +1,85 @@
-/* 📌 Table Container */
-.table-container {
+/* 🔲 Education Modal Overlay */
+#education-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
   width: 100%;
-  overflow-x: auto;
-  background: var(--form-bg);
-  padding: 2px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 📌 Full-Width Table */
-#education-table {
+/* 📌 Modal Box */
+#education-modal .modal-content {
+  background: var(--form-bg);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 700px;
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-30px);
+  opacity: 0;
+  animation: fadeInUp 0.3s forwards;
+}
+
+/* 🎥 Smooth Modal Animation */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ❌ Close Button */
+#close-education-modal {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--sidebar-text);
+  transition: color 0.3s;
+}
+
+#close-education-modal:hover {
+  color: red;
+}
+
+/* 🔲 Table Styling */
+.table-container {
+  max-height: 60vh;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+#education-modal-table {
   width: 100%;
   border-collapse: collapse;
-  /* background: white; */
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--input-border);
-  margin-top: 30px;
 }
 
-/* 📌 Table Header Styling */
-#education-table thead {
-  background: var(--sidebar-bg); /* ✅ Matches Sidebar Color */
-  color: var(--primary-text); /* ✅ White Text */
-}
-
-#education-table th {
-  padding: 2px 4px;
-  text-align: left;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  border-bottom: 2px solid var(--button-bg);
+#education-modal-table th,
+#education-modal-table td {
+  padding: 10px;
   text-align: center;
-}
-
-/* 📌 Table Row Styling */
-#education-table td {
-  padding: 2px 4px;
-  text-align: left;
-  font-size: 14px;
-  color: var(--sidebar-bg);
   border-bottom: 1px solid var(--input-border);
-  text-align: center;
 }
 
-/* 📌 Alternate Row Background */
-#education-table tr:nth-child(even) {
-  background: var(--background-color);
+#education-modal-table th {
+  background: var(--sidebar-bg);
+  color: var(--primary-text);
+  font-weight: bold;
 }
 
-/* 📌 Hover Effect */
-#education-table tr:hover {
-  /* background: #e9ecef;
-  transition: background 0.3s ease-in-out; */
-}
-
-/* 📌 Action Buttons Inside Table */
-.remove-entry {
-  background: white;
-  font-size: 8px;
-  padding: 2px 3px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.remove-entry:hover {
-  background: #c9302c;
-}
-
-/* 📌 Responsive Design */
-@media (max-width: 768px) {
-  #education-table th,
-  #education-table td {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .remove-entry {
-    font-size: 12px;
-    padding: 6px 10px;
-  }
+#education-modal-table tbody tr:hover {
+  background: var(--button-bg);
+  color: var(--primary-text);
 }
