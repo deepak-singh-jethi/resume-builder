@@ -2,67 +2,137 @@ document.addEventListener("DOMContentLoaded", function () {
   let experienceEntries =
     JSON.parse(localStorage.getItem("experienceData")) || [];
 
-  // Cache DOM elements once
-  const formElements = {
-    company: document.getElementById("experience-company"),
-    role: document.getElementById("experience-role"),
-    industry: document.getElementById("experience-industry"),
-    startDate: document.getElementById("experience-start"),
-    endDate: document.getElementById("experience-end"),
-    current: document.getElementById("experience-current"),
-    location: document.getElementById("experience-location"),
-    description: document.getElementById("experience-description"),
-    skills: document.getElementById("experience-skills"),
-    form: document.getElementById("experience-form"), // Form element for reset
-  };
+  // ✅ Modal Elements
+  const experienceModal = document.getElementById("experience-modal");
+  const openExperienceModalBtn = document.getElementById(
+    "open-experience-modal"
+  );
+  const closeExperienceModalBtn = document.getElementById(
+    "close-experience-modal"
+  );
+  const experienceModalList = document.getElementById("experience-modal-list");
+  const saveExperienceBtn = document.getElementById("save-experience");
 
-  // Handle "Currently Working Here" checkbox
-  formElements.current.addEventListener("change", function () {
-    formElements.endDate.disabled = this.checked;
-    if (this.checked) formElements.endDate.value = "";
+  // ✅ Form Elements
+  const endDateInput = document.getElementById("experience-end");
+  const currentCheckbox = document.getElementById("experience-current");
+
+  // ✅ Ensure Modal is Hidden on Load
+  experienceModal.style.display = "none";
+
+  // ✅ Handle "Currently Working Here" Checkbox (Disable Instead of Hiding)
+  currentCheckbox.addEventListener("change", function () {
+    endDateInput.disabled = this.checked; // ✅ Disable if checked
+    if (this.checked) {
+      endDateInput.value = ""; // ✅ Clear End Date when disabled
+    }
   });
 
-  // Function to save experience entry
+  // ✅ Open Modal on Click
+  openExperienceModalBtn.addEventListener("click", function () {
+    experienceModal.style.display = "flex";
+    displayExperienceEntries();
+  });
+
+  // ✅ Close Modal on "X" Click
+  closeExperienceModalBtn.addEventListener("click", function () {
+    experienceModal.style.display = "none";
+  });
+
+  // ✅ Close Modal When Clicking Outside
+  window.addEventListener("click", function (event) {
+    if (event.target === experienceModal) {
+      experienceModal.style.display = "none";
+    }
+  });
+
+  // ✅ Function to Save Experience Entry
   function saveExperienceEntry() {
     const newEntry = {
-      company: formElements.company.value.trim(),
-      role: formElements.role.value.trim(),
-      industry: formElements.industry.value,
-      startDate: formElements.startDate.value,
-      endDate: formElements.current.checked
-        ? "Present"
-        : formElements.endDate.value,
-      location: formElements.location.value,
-      description: formElements.description.value.trim(),
-      skills: formElements.skills.value.split(",").map((skill) => skill.trim()),
+      company: document.getElementById("experience-company").value.trim(),
+      role: document.getElementById("experience-role").value.trim(),
+      industry: document.getElementById("experience-industry").value,
+      startDate: document.getElementById("experience-start").value,
+      endDate: currentCheckbox.checked ? "Present" : endDateInput.value,
+      location: document.getElementById("experience-location").value,
+      description: document
+        .getElementById("experience-description")
+        .value.trim(),
+      skills: document
+        .getElementById("experience-skills")
+        .value.split(",")
+        .map((skill) => skill.trim()),
     };
 
-    // Validation: Ensure required fields are filled
+    // ✅ Validation for Required Fields
     if (!newEntry.company || !newEntry.role || !newEntry.startDate) {
       alert("Please fill in required fields (Company, Role, Start Date).");
       return;
     }
 
+    // ✅ Save Entry in Global Array & Local Storage
     experienceEntries.push(newEntry);
+    localStorage.setItem("experienceData", JSON.stringify(experienceEntries));
 
-    // ✅ Debounce localStorage update (Waits 500ms before saving)
-    clearTimeout(window.experienceSaveTimeout);
-    window.experienceSaveTimeout = setTimeout(() => {
-      localStorage.setItem("experienceData", JSON.stringify(experienceEntries));
-      console.log("Saved to localStorage");
-    }, 500);
-
-    console.log("Experience Saved:", experienceEntries);
+    // ✅ Update UI
+    displayExperienceEntries();
     clearExperienceForm();
   }
 
-  // Function to clear form fields
-  function clearExperienceForm() {
-    formElements.form?.reset(); // ✅ Reset entire form instead of clearing each field
-    formElements.endDate.disabled = false; // Ensure End Date is enabled
+  // ✅ Function to Display Experience Entries in Modal Table
+  function displayExperienceEntries() {
+    experienceModalList.innerHTML = ""; // ✅ Clear previous list
+
+    if (experienceEntries.length === 0) {
+      experienceModalList.innerHTML = `<tr><td colspan="7">No experience records found.</td></tr>`;
+      return;
+    }
+
+    experienceEntries.forEach((entry, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${entry.company}</td>
+        <td>${entry.role}</td>
+        <td>${entry.industry}</td>
+        <td>${entry.location}</td>
+        <td>${entry.startDate}</td>
+        <td>${
+          entry.endDate === "Present" ? "Present" : entry.endDate
+        }</td> <!-- ✅ Display "Present" when checked -->
+        <td><button class="remove-entry" data-index="${index}">❌</button></td>
+      `;
+      experienceModalList.appendChild(row);
+    });
+
+    // ✅ Attach Remove Event Listeners
+    document.querySelectorAll(".remove-entry").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const index = parseInt(btn.getAttribute("data-index"));
+        experienceEntries.splice(index, 1);
+        localStorage.setItem(
+          "experienceData",
+          JSON.stringify(experienceEntries)
+        );
+        displayExperienceEntries();
+      });
+    });
   }
 
-  document
-    .getElementById("add-experience")
-    .addEventListener("click", saveExperienceEntry);
+  // ✅ Function to Clear Form
+  function clearExperienceForm() {
+    document.getElementById("experience-company").value = "";
+    document.getElementById("experience-role").value = "";
+    document.getElementById("experience-industry").value = "IT";
+    document.getElementById("experience-start").value = "";
+    document.getElementById("experience-end").value = "";
+    document.getElementById("experience-current").checked = false;
+    document.getElementById("experience-location").value = "Onsite";
+    document.getElementById("experience-description").value = "";
+    document.getElementById("experience-skills").value = "";
+
+    endDateInput.disabled = false; // ✅ Ensure End Date is enabled when form resets
+  }
+
+  // ✅ Attach Event Listeners
+  saveExperienceBtn.addEventListener("click", saveExperienceEntry);
 });

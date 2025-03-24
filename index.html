@@ -363,12 +363,41 @@
                 </div>
 
                 <div class="form-actions">
-                  <button type="button" id="add-experience" class="save-entry">
-                    ➕ Add Another
+                  <button type="button" id="save-experience" class="save-entry">
+                    ➕ Save Experience
                   </button>
-                  <button type="button" id="next-section" class="cancel-entry">
-                    cancel
+                  <button
+                    type="button"
+                    id="open-experience-modal"
+                    class="suggestion-btn">
+                    📂 View Experience Entries
                   </button>
+                </div>
+              </div>
+
+              <!-- 📌 Experience Entries Modal -->
+              <div id="experience-modal" class="modal">
+                <div class="modal-content">
+                  <span class="close-btn" id="close-experience-modal"
+                    >&times;</span
+                  >
+                  <h3>📂 Saved Work Experience</h3>
+                  <div class="table-container">
+                    <table id="experience-modal-table">
+                      <thead>
+                        <tr>
+                          <th>Company</th>
+                          <th>Role</th>
+                          <th>Industry</th>
+                          <th>Location</th>
+                          <th>Start</th>
+                          <th>End</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="experience-modal-list"></tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 
