@@ -1,4 +1,11 @@
 /* 🎓 Education-Specific Styles */
+#education-modal {
+  display: none;
+}
+
+.education-modal .modal-content {
+  max-width: 750px;
+}
 
 /* Adjustments for Institution & Scores */
 .institution-row .input-group:nth-child(1) {

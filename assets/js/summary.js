@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const charCounter = document.getElementById("char-counter");
   const maxChars = 300; // 🔢 Maximum character limit for summary
 
+  summaryModal.style.display = "none";
+
   // 📝 List of predefined summary suggestions
   const suggestions = [
     "Experienced software engineer specializing in web development and UI/UX design.",

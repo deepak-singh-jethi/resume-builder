@@ -102,6 +102,7 @@ textarea {
   align-items: center;
   gap: 5px;
   font-size: 14px;
+  margin-block: 20px;
 }
 
 /* 📌 Table Styling */

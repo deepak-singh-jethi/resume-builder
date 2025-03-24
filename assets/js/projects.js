@@ -3,19 +3,19 @@ document.addEventListener("DOMContentLoaded", function () {
   projectEntries = JSON.parse(localStorage.getItem("projectData")) || [];
 
   // ✅ Modal Elements
-  const projectModal = document.getElementById("project-modal"); // Modal container
-  const openProjectModalBtn = document.getElementById("open-project-modal"); // Open modal button
-  const closeProjectModalBtn = document.getElementById("close-project-modal"); // Close modal button
-  const projectModalList = document.getElementById("project-modal-list"); // Table to display projects
-  const saveProjectBtn = document.getElementById("save-project"); // Save button
+  const projectModal = document.getElementById("project-modal");
+  const openProjectModalBtn = document.getElementById("open-project-modal");
+  const closeProjectModalBtn = document.getElementById("close-project-modal");
+  const projectModalList = document.getElementById("project-modal-list");
+  const saveProjectBtn = document.getElementById("save-project");
 
   // ✅ Ensure Modal is Hidden on Load
   projectModal.style.display = "none";
 
-  // ✅ Open Modal
+  // ✅ Open Modal on Click
   openProjectModalBtn.addEventListener("click", function () {
     projectModal.style.display = "flex";
-    displayProjectEntries(); // Load projects
+    displayProjectEntries();
   });
 
   // ✅ Close Modal on "X" Click
@@ -32,20 +32,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ✅ Function to Save Project Entry
   function saveProjectEntry() {
-    // Create a new project object
     const newEntry = {
       title: document.getElementById("project-title").value.trim(),
       description: document.getElementById("project-description").value.trim(),
+      technologies: document
+        .getElementById("project-technologies")
+        .value.trim(),
       link: document.getElementById("project-link").value.trim(),
     };
 
-    // ✅ Validation: Ensure required fields are filled
-    if (!newEntry.title) {
-      alert("Please enter a project title.");
+    // ✅ Validation
+    if (!newEntry.title || !newEntry.description) {
+      alert("Please enter at least the project title and description.");
       return;
     }
 
-    // ✅ Save Entry in Array & Local Storage
+    // ✅ Save Entry
     projectEntries.push(newEntry);
     localStorage.setItem("projectData", JSON.stringify(projectEntries));
 
@@ -60,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
     projectModalList.innerHTML = "";
 
     if (projectEntries.length === 0) {
-      projectModalList.innerHTML = `<tr><td colspan="3">No projects added yet.</td></tr>`;
+      projectModalList.innerHTML = `<tr><td colspan="5">No projects added yet.</td></tr>`;
       return;
     }
 
@@ -69,10 +71,9 @@ document.addEventListener("DOMContentLoaded", function () {
       row.innerHTML = `
         <td>${entry.title}</td>
         <td>${entry.description}</td>
-        <td>
-          <a href="${entry.link}" target="_blank">🔗</a>
-          <button class="remove-project" data-index="${index}">❌</button>
-        </td>
+        <td>${entry.technologies}</td>
+        <td><a href="${entry.link}" target="_blank">🔗</a></td>
+        <td><button class="remove-project" data-index="${index}">❌</button></td>
       `;
       projectModalList.appendChild(row);
     });
@@ -93,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function clearProjectForm() {
     document.getElementById("project-title").value = "";
     document.getElementById("project-description").value = "";
+    document.getElementById("project-technologies").value = "";
     document.getElementById("project-link").value = "";
   }
 

@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="assets/css/sidebar.css" />
     <link rel="stylesheet" href="assets/css/form.css" />
     <link rel="stylesheet" href="assets/css/buttons.css" />
-    <link rel="stylesheet" href="assets/css/educationForm.css" />
-    <link rel="stylesheet" href="assets/css/educationTable.css" />
+    <link rel="stylesheet" href="assets/css/education.css" />
     <link rel="stylesheet" href="assets/css/experience.css" />
     <link rel="stylesheet" href="assets/css/projects.css" />
     <link rel="stylesheet" href="assets/css/skill.css" />
     <link rel="stylesheet" href="assets/css/summary.css" />
+    <link rel="stylesheet" href="assets/css/modal.css" />
 
     <link
       rel="stylesheet"
@@ -403,6 +403,85 @@
                 </div>
               </div>
 
+              <!--!@🎯 Projects Section -->
+              <div class="form-section projects-form" id="projects">
+                <h2>Projects</h2>
+
+                <div class="form-row form-margin">
+                  <div class="input-group">
+                    <label>Project Title:</label>
+                    <input
+                      type="text"
+                      id="project-title"
+                      placeholder="Enter project title"
+                      required />
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <label>Description:</label>
+                  <textarea
+                    id="project-description"
+                    placeholder="Brief project description..."></textarea>
+                </div>
+
+                <div class="form-row">
+                  <div class="input-group">
+                    <label>Technologies Used:</label>
+                    <input
+                      type="text"
+                      id="project-technologies"
+                      placeholder="E.g., React, Node.js, SQL" />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="input-group">
+                    <label>Project Link:</label>
+                    <input
+                      type="url"
+                      id="project-link"
+                      placeholder="GitHub or Live Link" />
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <button type="button" id="save-project" class="save-entry">
+                    Add Entry
+                  </button>
+                  <button
+                    type="button"
+                    id="open-project-modal"
+                    class="suggestion-btn">
+                    View Entries
+                  </button>
+                </div>
+              </div>
+
+              <!-- 📌 Projects Entries Modal -->
+              <div id="project-modal" class="modal">
+                <div class="modal-content">
+                  <span class="close-btn" id="close-project-modal"
+                    >&times;</span
+                  >
+                  <h3>Saved Projects</h3>
+                  <div class="table-container">
+                    <table id="project-modal-table">
+                      <thead>
+                        <tr>
+                          <th>Title</th>
+                          <th>Description</th>
+                          <th>Technologies</th>
+                          <th>Link</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="project-modal-list"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
               <!-- ! Certification Information Section -->
               <div class="form-section" id="certifications">
                 <h2>Certification Information</h2>
@@ -418,71 +497,6 @@
                   <li>asdncdas</li>
                   <li>a</li>
                 </ul>
-              </div>
-
-              <!-- ✅ Projects Modal -->
-              <div id="project-modal">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h2>Saved Projects</h2>
-                    <span id="close-project-modal" class="close-modal">❌</span>
-                  </div>
-                  <table class="project-table">
-                    <thead>
-                      <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody id="project-modal-list"></tbody>
-                  </table>
-                </div>
-              </div>
-
-              <!-- ✅ Project Form -->
-              <div class="form-section projects-form" id="projects">
-                <h2>Projects</h2>
-
-                <div class="form-row form-margin">
-                  <div class="input-group">
-                    <label>Title:</label>
-                    <input
-                      type="text"
-                      id="project-title"
-                      placeholder="Project Name" />
-                  </div>
-                </div>
-
-                <div class="input-group">
-                  <label>Description:</label>
-                  <textarea
-                    id="project-description"
-                    placeholder="Brief Description"></textarea>
-                </div>
-
-                <div class="form-row">
-                  <div class="input-group">
-                    <label>Project Link:</label>
-                    <input
-                      type="url"
-                      id="project-link"
-                      placeholder="GitHub or Live Link" />
-                  </div>
-                </div>
-
-                <div class="form-actions">
-                  <!-- ✅ View Projects Button -->
-                  <button
-                    type="button"
-                    id="open-project-modal"
-                    class="suggestion-btn">
-                    View (0) Projects
-                  </button>
-                  <button type="button" id="save-project" class="save-entry">
-                    ✔ Save
-                  </button>
-                </div>
               </div>
 
               <!-- ! Certification Information Section -->
