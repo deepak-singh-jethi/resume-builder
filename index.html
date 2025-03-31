@@ -50,9 +50,7 @@
         <li class="sidebar-item" data-section="language">
           <i class="material-icons">build</i> language
         </li>
-        <li class="sidebar-item" data-section="achievements">
-          <i class="material-icons">emoji_events</i> Achievements
-        </li>
+
         <li class="sidebar-item" data-section="hobbies">
           <i class="material-icons">sports_esports</i> Hobbies
         </li>
@@ -124,7 +122,7 @@
                   <label class="toggle-label" id="linkedin-toggle">
                     + LinkedIn (optional)
                   </label>
-                  <div class="input-group hidden" id="linkedin-input">
+                  <div class="hidden" id="linkedin-input">
                     <input
                       type="url"
                       id="linkedin"
@@ -152,7 +150,7 @@
                   <label class="toggle-label" id="website-toggle">
                     + Add Website (optional)
                   </label>
-                  <div class="input-group hidden" id="website-input">
+                  <div class="hidden" id="website-input">
                     <input
                       type="url"
                       id="website"
@@ -454,57 +452,70 @@
               </div>
 
               <!--!@🎯 Projects Section -->
-              <div class="form-section projects-form" id="projects">
-                <h2>Projects</h2>
-
-                <div class="form-row form-margin">
-                  <div class="input-group">
-                    <label>Project Title:</label>
-                    <input
-                      type="text"
-                      id="project-title"
-                      placeholder="Enter project title"
-                      required />
+              <div class="form-section" id="projects">
+                <!-- !option to open Experience  or not -->
+                <div class="form-option-container">
+                  <h2 class="form-question">Do you have any projects?</h2>
+                  <div class="form-option-group">
+                    <div class="form-option">
+                      <label class="form-label" for="project-yes">Yes</label>
+                      <input
+                        type="radio"
+                        name="project"
+                        id="project-yes"
+                        value="yes"
+                        class="form-radio" />
+                    </div>
+                    <div class="form-option">
+                      <label class="form-label" for="project-no">No</label>
+                      <input
+                        type="radio"
+                        name="project"
+                        id="project-no"
+                        value="no"
+                        class="form-radio" />
+                    </div>
                   </div>
                 </div>
 
-                <div class="input-group">
-                  <label>Description:</label>
-                  <textarea
-                    id="project-description"
-                    placeholder="Brief project description..."></textarea>
-                </div>
+                <div class="projects-form">
+                  <h2>Projects</h2>
 
-                <div class="form-row">
-                  <div class="input-group">
-                    <label>Technologies Used:</label>
-                    <input
-                      type="text"
-                      id="project-technologies"
-                      placeholder="E.g., React, Node.js, SQL" />
+                  <div class="form-row form-margin">
+                    <div class="input-group">
+                      <label>Project Title:</label>
+                      <input
+                        type="text"
+                        id="project-title"
+                        placeholder="Enter project title"
+                        required />
+                    </div>
                   </div>
-                </div>
 
-                <div class="form-row">
                   <div class="input-group">
-                    <label>Project Link:</label>
-                    <input
-                      type="url"
-                      id="project-link"
-                      placeholder="GitHub or Live Link" />
+                    <label>Description:</label>
+                    <textarea
+                      id="project-description"
+                      placeholder="Brief project description..."></textarea>
                   </div>
-                </div>
+                  <div class="input-group">
+                    <label>Achievements:</label>
+                    <textarea
+                      id="project-achievements"
+                      placeholder="Achievements......"></textarea>
+                  </div>
 
-                <div class="form-actions">
-                  <button type="button" id="save-project" class="save-entry">
-                    Add Entry
-                  </button>
-                  <button
-                    type="button"
-                    id="open-project-modal"
-                    class="suggestion-btn">
-                    View Entries
-                  </button>
+                  <div class="form-actions">
+                    <button type="button" id="save-project" class="save-entry">
+                      Add Entry
+                    </button>
+                    <button
+                      type="button"
+                      id="open-project-modal"
+                      class="suggestion-btn">
+                      View Entries
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -521,8 +532,6 @@
                         <tr>
                           <th>Title</th>
                           <th>Description</th>
-                          <th>Technologies</th>
-                          <th>Link</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -534,36 +543,82 @@
 
               <!-- ! Certification Information Section -->
               <div class="form-section" id="certifications">
-                <h2>Certification Information</h2>
-                <ul>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>a</li>
-                </ul>
-              </div>
+                <!-- !option to open certification  or not -->
+                <div class="form-option-container">
+                  <h2 class="form-question">Do you have any Certification?</h2>
+                  <div class="form-option-group">
+                    <div class="form-option">
+                      <label class="form-label" for="certificate-yes"
+                        >Yes</label
+                      >
+                      <input
+                        type="radio"
+                        name="certificate"
+                        id="certificate-yes"
+                        value="yes"
+                        class="form-radio" />
+                    </div>
+                    <div class="form-option">
+                      <label class="form-label" for="certificate-no">No</label>
+                      <input
+                        type="radio"
+                        name="certificate"
+                        id="certificate-no"
+                        value="no"
+                        class="form-radio" />
+                    </div>
+                  </div>
+                </div>
 
-              <!-- ! Certification Information Section -->
-              <div class="form-section" id="certifications">
-                <h2>Certification Information</h2>
-                <ul>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>asdncdas</li>
-                  <li>a</li>
-                </ul>
+                <!-- ! main form  -->
+                <div class="certificate-form">
+                  <h2>CERTIFICATE / License</h2>
+
+                  <div class="form-row form-margin">
+                    <div class="input-group">
+                      <label>Certification/ License Details:</label>
+                      <textarea
+                        type="text"
+                        id="certificate-details"
+                        placeholder="Certification/License Details..."
+                        required></textarea>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button
+                      type="button"
+                      id="save-certificate"
+                      class="save-entry">
+                      Add Entry
+                    </button>
+                    <button
+                      type="button"
+                      id="open-certificate-modal"
+                      class="suggestion-btn">
+                      View Entries
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- ! certificate  Entries Modal -->
+              <div id="certificate-modal" class="modal">
+                <div class="modal-content">
+                  <span class="close-btn" id="close-certificate-modal"
+                    >&times;</span
+                  >
+                  <h3>Saved Certification / License</h3>
+                  <div class="table-container">
+                    <table id="certificate-modal-table">
+                      <thead>
+                        <tr>
+                          <th>Details</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="certificate-modal-list"></tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
 
               <!-- !🎯 Skills Section -->
@@ -636,6 +691,7 @@
     <script src="assets/js/education.js"></script>
     <script src="assets/js/experience.js"></script>
     <script src="assets/js/projects.js"></script>
+    <script src="assets/js/certificate.js"></script>
     <script src="assets/js/skils.js"></script>
   </body>
 </html>

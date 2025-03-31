@@ -1,5 +1,31 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // ✅ Show/Hide project Form Based on Radio Selection
+  const projectYesRadio = document.getElementById("project-yes");
+  const projectNoRadio = document.getElementById("project-no");
+  const projectForm = document.querySelector(".projects-form");
+
+  // Initially hide the project form
+  projectForm.style.display = "none";
+
+  // When "Yes" is selected, show the project form
+  projectYesRadio.addEventListener("change", function () {
+    console.log("Yes radio button clicked");
+
+    if (this.checked) {
+      projectForm.style.display = "block"; // Show project form
+    }
+  });
+
+  // When "No" is selected, hide the project form
+  projectNoRadio.addEventListener("change", function () {
+    console.log("No radio button clicked");
+    if (this.checked) {
+      projectForm.style.display = "none"; // Hide project form
+    }
+  });
+
   // ✅ Retrieve stored projects from localStorage or initialize an empty array
+
   projectEntries = JSON.parse(localStorage.getItem("projectData")) || [];
 
   // ✅ Modal Elements
@@ -36,9 +62,8 @@ document.addEventListener("DOMContentLoaded", function () {
       title: document.getElementById("project-title").value.trim(),
       description: document.getElementById("project-description").value.trim(),
       technologies: document
-        .getElementById("project-technologies")
+        .getElementById("project-achievements")
         .value.trim(),
-      link: document.getElementById("project-link").value.trim(),
     };
 
     // ✅ Validation
@@ -70,9 +95,11 @@ document.addEventListener("DOMContentLoaded", function () {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${entry.title}</td>
-        <td>${entry.description}</td>
-        <td>${entry.technologies}</td>
-        <td><a href="${entry.link}" target="_blank">🔗</a></td>
+        <td>${
+          entry.description.length > 15
+            ? entry.description.slice(0, 15) + "..."
+            : entry.description
+        }</td>
         <td><button class="remove-project" data-index="${index}">❌</button></td>
       `;
       projectModalList.appendChild(row);
@@ -94,8 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function clearProjectForm() {
     document.getElementById("project-title").value = "";
     document.getElementById("project-description").value = "";
-    document.getElementById("project-technologies").value = "";
-    document.getElementById("project-link").value = "";
+    document.getElementById("project-achievements").value = "";
   }
 
   // ✅ Function to Update View Projects Button

@@ -20,6 +20,7 @@ let myData = {
 let educationEntries = [];
 let experienceEntries = [];
 let projectEntries = [];
+let certificateEntries = [];
 
 document.addEventListener("DOMContentLoaded", function () {
   // ✅ Get references to sidebar items, form sections, and navigation buttons
@@ -123,11 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
 
       case "projects":
-        myData.projects.push({
-          title: document.getElementById("project-title").value,
-          description: document.getElementById("project-description").value,
-          link: document.getElementById("project-link").value,
-        });
+        myData.projects = [...projectEntries];
         break;
 
       case "skills":
@@ -146,13 +143,8 @@ document.addEventListener("DOMContentLoaded", function () {
           .filter((lang) => lang !== "");
         break;
 
-      case "achievements":
-        const newAchievement = document
-          .getElementById("achievement-text")
-          .value.trim();
-        if (newAchievement) {
-          myData.achievements.push({ achievement: newAchievement });
-        }
+      case "certifications":
+        myData.certifications = [...certificateEntries];
         break;
 
       case "hobbies":

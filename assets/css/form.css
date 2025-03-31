@@ -174,68 +174,6 @@ textarea {
   margin-right: 50px;
 }
 
-/* for form option */
-
-/* General container for form options */
-.form-option-container {
-  background-color: #f9f9f9; /* Soft background color */
-  border-radius: 8px; /* Rounded corners */
-  padding: 20px; /* Spacing inside the container */
-  margin-bottom: 20px; /* Spacing between form sections */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
-}
-
-/* Styling for form questions */
-.form-question {
-  font-size: 1.6rem; /* Bigger font for question */
-  font-weight: bold; /* Make the question bold */
-  margin-bottom: 10px; /* Space below the question */
-  color: #333; /* Darker text for better readability */
-}
-
-/* Grouping options (Yes/No) together */
-.form-option-group {
-  display: flex;
-  gap: 20px; /* Adds space between options */
-  margin-top: 10px;
-  justify-content: center; /* Center the options */
-  align-items: center; /* Align items vertically */
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
-  padding: 10px; /* Padding around the options */
-  background-color: #fff; /* White background for options */
-}
-
-/* Styling for individual options (Yes/No) */
-.form-option {
-  display: flex;
-  align-items: center;
-}
-
-/* Styling for labels */
-.form-label {
-  font-size: 1.2rem; /* Slightly larger text for clarity */
-  color: #666; /* Lighter color for the labels */
-  cursor: pointer; /* Pointer on hover */
-  transition: color 0.3s; /* Smooth transition on hover */
-}
-
-/* Hover effect for labels */
-.form-label:hover {
-  color: #007bff; /* Change color on hover */
-}
-
-/* Styling for radio buttons */
-.form-radio {
-  margin-left: 8px; /* Space between label and radio button */
-  accent-color: #007bff; /* Customize the radio button color */
-  transform: scale(1.2); /* Slightly larger radio button */
-}
-
-/* Adding focus effect for better accessibility */
-.form-radio:focus {
-  outline: 2px solid #007bff;
-}
-
 /* 📌 Responsive Adjustments */
 @media (max-width: 768px) {
   .form-row {
