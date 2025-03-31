@@ -1,0 +1,79 @@
+/* General styling for skills section */
+.skills-form {
+  margin: 20px;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 10px;
+}
+
+#skills-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.suggestions-dropdown {
+  position: absolute;
+  background: white;
+  width: 100%;
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  display: none;
+  z-index: 10;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions-dropdown div {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions-dropdown div:hover {
+  background-color: #f0f0f0;
+}
+
+.skills-list {
+  margin-top: 10px;
+}
+
+.skill-tag {
+  display: flex;
+  width: fit-content;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+  color: var(--sidebar-hover);
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin: 5px;
+  cursor: pointer;
+  border: #ccc 1px solid;
+}
+
+.skill-tag:hover {
+  scale: 1.05;
+}
+
+.skill-tag i {
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+/* Smooth transition for skills */
+.skill-tag {
+  transition: all 0.3s ease;
+}
+
+.delete-btn {
+  cursor: pointer;
+  margin-left: 10px;
+  color: var(--cancel-btn-bg); /* or any color you prefer */
+  font-size: 18px;
+}
+
+.delete-btn:hover {
+  color: #ff0000; /* Change to red on hover */
+}

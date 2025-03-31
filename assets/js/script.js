@@ -21,6 +21,7 @@ let educationEntries = [];
 let experienceEntries = [];
 let projectEntries = [];
 let certificateEntries = [];
+let skillList = [];
 
 document.addEventListener("DOMContentLoaded", function () {
   // ✅ Get references to sidebar items, form sections, and navigation buttons
@@ -128,11 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
 
       case "skills":
-        myData.skills = document
-          .getElementById("skills-input")
-          .value.split(",")
-          .map((skill) => skill.trim())
-          .filter((skill) => skill !== "");
+        myData.skills = [...skillList];
         break;
 
       case "languages":
