@@ -1,4 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // ✅ Show/Hide Experience Form Based on Radio Selection
+  const experienceYesRadio = document.getElementById("experience-yes");
+  const experienceNoRadio = document.getElementById("experience-no");
+  const experienceForm = document.querySelector(".experience-form");
+
+  // Initially hide the experience form
+  experienceForm.style.display = "none";
+
+  // When "Yes" is selected, show the experience form
+  experienceYesRadio.addEventListener("change", function () {
+    if (this.checked) {
+      experienceForm.style.display = "block"; // Show experience form
+    }
+  });
+
+  // When "No" is selected, hide the experience form
+  experienceNoRadio.addEventListener("change", function () {
+    if (this.checked) {
+      experienceForm.style.display = "none"; // Hide experience form
+    }
+  });
+
   // ✅ Retrieve stored experience entries from localStorage (or set to global array if none exist)
   experienceEntries = JSON.parse(localStorage.getItem("experienceData")) || [];
 
@@ -57,12 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
       endDate: currentCheckbox.checked ? "Present" : endDateInput.value, // Set "Present" if checkbox is checked
       location: document.getElementById("experience-location").value,
       description: document
-        .getElementById("experience-description")
+        .getElementById("experience-responsibility")
         .value.trim(),
-      skills: document
-        .getElementById("experience-skills")
-        .value.split(",")
-        .map((skill) => skill.trim()), // Convert skills to array
     };
 
     // ✅ Validation: Ensure required fields are filled
@@ -130,9 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("experience-end").value = "";
     document.getElementById("experience-current").checked = false;
     document.getElementById("experience-location").value = "Onsite";
-    document.getElementById("experience-description").value = "";
-    document.getElementById("experience-skills").value = "";
-
+    document.getElementById("experience-responsibility").value = "";
     endDateInput.disabled = false; // Ensure End Date is enabled after reset
   }
 

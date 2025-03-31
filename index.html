@@ -75,11 +75,11 @@
         <div class="form-area">
           <div class="form-container">
             <form id="resume-form">
-              <!-- !  Contact Information Form -->
+              <!-- !  Personal Info Information Form -->
               <div class="form-section" id="contact">
                 <h2>Contact Information</h2>
 
-                <!-- 🏷 Full Name & Phone (Two Columns) -->
+                <!-- Full Name & Phone -->
                 <div class="form-row form-margin">
                   <div class="input-group">
                     <label for="full-name">Full Name</label>
@@ -99,7 +99,7 @@
                   </div>
                 </div>
 
-                <!-- 📧 Email -->
+                <!-- Email -->
                 <div class="input-group">
                   <label for="email">Email</label>
                   <input
@@ -109,7 +109,7 @@
                     required />
                 </div>
 
-                <!-- 📍 Address -->
+                <!-- Address -->
                 <div class="input-group">
                   <label for="address">Address</label>
                   <textarea
@@ -117,30 +117,47 @@
                     placeholder="Enter your address"></textarea>
                 </div>
 
-                <!-- 🔗 Social Profiles (LinkedIn, GitHub, Website) -->
-                <div class="form-row">
-                  <div class="input-group">
-                    <label for="linkedin">LinkedIn (Optional)</label>
+                <!-- Social Profiles Section (LinkedIn, GitHub, Website) -->
+
+                <!-- (LinkedIn) -->
+                <div class="toggle-section input-group" id="linkedin-section">
+                  <label class="toggle-label" id="linkedin-toggle">
+                    + LinkedIn (optional)
+                  </label>
+                  <div class="input-group hidden" id="linkedin-input">
                     <input
                       type="url"
                       id="linkedin"
                       placeholder="https://linkedin.com/in/your-profile" />
                   </div>
-                  <div class="input-group">
-                    <label for="github">GitHub (Optional)</label>
+                </div>
+                <hr />
+                <!-- (GitHub) -->
+
+                <div class="toggle-section input-group" id="github-section">
+                  <label class="toggle-label" id="github-toggle">
+                    + Add GitHub (optional)
+                  </label>
+                  <div class="hidden" id="github-input">
                     <input
                       type="url"
                       id="github"
                       placeholder="https://github.com/your-profile" />
                   </div>
                 </div>
+                <hr />
+                <!-- (Website) -->
 
-                <div class="input-group">
-                  <label for="website">Portfolio/Website (Optional)</label>
-                  <input
-                    type="url"
-                    id="website"
-                    placeholder="https://yourwebsite.com" />
+                <div class="toggle-section input-group" id="website-section">
+                  <label class="toggle-label" id="website-toggle">
+                    + Add Website (optional)
+                  </label>
+                  <div class="input-group hidden" id="website-input">
+                    <input
+                      type="url"
+                      id="website"
+                      placeholder="https://yourwebsite.com" />
+                  </div>
                 </div>
               </div>
 
@@ -202,7 +219,7 @@
 
                   <div class="form-row">
                     <div class="input-group">
-                      <label>Institution:</label>
+                      <label>School/College:</label>
                       <input
                         type="text"
                         id="education-institution"
@@ -229,6 +246,13 @@
                   </div>
 
                   <div class="form-row">
+                    <div class="input-group">
+                      <label>Location:</label>
+                      <input
+                        type="text"
+                        id="education-location"
+                        placeholder="Eg: City/Country" />
+                    </div>
                     <div class="input-group">
                       <label>Score Type:</label>
                       <select id="education-score-type">
@@ -263,7 +287,7 @@
                 </div>
               </div>
 
-              <!-- 📌 Education Entries Modal -->
+              <!--  📌 Education Entries Modal -->
               <div id="education-modal" class="modal">
                 <div class="modal-content">
                   <span class="close-btn" id="close-education-modal"
@@ -279,6 +303,7 @@
                           <th>Institution</th>
                           <th>Start</th>
                           <th>End</th>
+                          <th>Location</th>
                           <th>Score</th>
                           <th>Actions</th>
                         </tr>
@@ -290,90 +315,115 @@
               </div>
 
               <!--!@🎯 Experience Section -->
-              <div class="form-section experience-form" id="experience">
-                <h2>Work Experience</h2>
-
-                <div class="form-row form-margin">
-                  <div class="input-group">
-                    <label>Company:</label>
-                    <input
-                      type="text"
-                      id="experience-company"
-                      placeholder="Company Name"
-                      required />
-                  </div>
-                  <div class="input-group">
-                    <label>Role:</label>
-                    <input
-                      type="text"
-                      id="experience-role"
-                      placeholder="Your Role"
-                      required />
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="input-group">
-                    <label>Industry:</label>
-                    <select id="experience-industry">
-                      <option value="IT">IT</option>
-                      <option value="Finance">Finance</option>
-                      <option value="Healthcare">Healthcare</option>
-                      <option value="Education">Education</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                  <div class="input-group">
-                    <label>Location:</label>
-                    <select id="experience-location">
-                      <option value="Onsite">Onsite</option>
-                      <option value="Remote">Remote</option>
-                      <option value="Hybrid">Hybrid</option>
-                    </select>
+              <div class="form-section" id="experience">
+                <!-- !option to open Experience  or not -->
+                <div class="form-option-container">
+                  <h2 class="form-question">Do you have any experience?</h2>
+                  <div class="form-option-group">
+                    <div class="form-option">
+                      <label class="form-label" for="experience-yes">Yes</label>
+                      <input
+                        type="radio"
+                        name="experience"
+                        id="experience-yes"
+                        value="yes"
+                        class="form-radio" />
+                    </div>
+                    <div class="form-option">
+                      <label class="form-label" for="experience-no">No</label>
+                      <input
+                        type="radio"
+                        name="experience"
+                        id="experience-no"
+                        value="no"
+                        class="form-radio" />
+                    </div>
                   </div>
                 </div>
 
-                <div class="form-row">
-                  <div class="input-group">
-                    <label>Start Date:</label>
-                    <input type="date" id="experience-start" required />
+                <!-- ! main form  -->
+                <div class="experience-form">
+                  <h2>Work Experience</h2>
+
+                  <div class="form-row form-margin">
+                    <div class="input-group">
+                      <label>Company:</label>
+                      <input
+                        type="text"
+                        id="experience-company"
+                        placeholder="Company Name"
+                        required />
+                    </div>
+                    <div class="input-group">
+                      <label>Role:</label>
+                      <input
+                        type="text"
+                        id="experience-role"
+                        placeholder="Your Role"
+                        required />
+                    </div>
                   </div>
-                  <div class="input-group">
-                    <label>End Date:</label>
-                    <input type="date" id="experience-end" />
+
+                  <div class="form-row">
+                    <div class="input-group">
+                      <label>Industry:</label>
+                      <select id="experience-industry">
+                        <option value="IT">IT</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Education">Education</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="input-group">
+                      <label>Location:</label>
+                      <select id="experience-location">
+                        <option value="Onsite">Onsite</option>
+                        <option value="Remote">Remote</option>
+                        <option value="Hybrid">Hybrid</option>
+                      </select>
+                    </div>
                   </div>
-                </div>
 
-                <div class="checkbox-group">
-                  <input type="checkbox" id="experience-current" />
-                  <label for="experience-current">Currently Working Here</label>
-                </div>
+                  <div class="form-row">
+                    <div class="input-group">
+                      <label>Start Date:</label>
+                      <input type="date" id="experience-start" required />
+                    </div>
+                    <div class="input-group">
+                      <label>End Date:</label>
+                      <input type="date" id="experience-end" />
+                    </div>
+                  </div>
 
-                <div class="input-group">
-                  <label>Description & Achievements:</label>
-                  <textarea
-                    id="experience-description"
-                    placeholder="Brief description and Achievements..."></textarea>
-                </div>
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="experience-current" />
+                    <label for="experience-current"
+                      >Currently Working Here</label
+                    >
+                  </div>
 
-                <div class="input-group">
-                  <label>Skills Used:</label>
-                  <input
-                    type="text"
-                    id="experience-skills"
-                    placeholder="E.g., React, Node.js, SQL" />
-                </div>
+                  <div class="input-group">
+                    <label>Job responsibility:</label>
+                    <textarea
+                      id="experience-responsibility"
+                      placeholder="Brief description and Achievements..."></textarea>
+                  </div>
 
-                <div class="form-actions">
-                  <button type="button" id="save-experience" class="save-entry">
-                    Add Entry
-                  </button>
-                  <button
-                    type="button"
-                    id="open-experience-modal"
-                    class="suggestion-btn">
-                    View Entries
-                  </button>
+                  <div class="form-actions">
+                    <button
+                      type="button"
+                      id="save-experience"
+                      class="save-entry">
+                      Add Entry
+                    </button>
+                    <button
+                      type="button"
+                      id="open-experience-modal"
+                      class="suggestion-btn">
+                      View Entries
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -580,6 +630,7 @@
     </div>
 
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/contact.js"></script>
     <script src="assets/js/summary.js"></script>
     <script src="assets/js/preview.js"></script>
     <script src="assets/js/education.js"></script>
