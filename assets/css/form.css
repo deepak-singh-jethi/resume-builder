@@ -13,13 +13,8 @@
   width: 100%;
   max-width: 800px;
   padding: 15px;
-  background: var(--form-bg);
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.form-section h2 {
-  text-align: center;
 }
 
 /* 📌 Form Row Layout */
@@ -72,7 +67,7 @@ textarea {
   resize: vertical;
 }
 
-/* 📌 Input Wrapper */
+/* 📌 Input Wrapper (Merged Redundant Rules) */
 .input-wrapper {
   position: relative;
   width: 100%;
@@ -96,6 +91,16 @@ textarea {
   outline: none;
 }
 
+/* 📌 Ensure Icons Appear Inside Inputs */
+.input-wrapper i {
+  position: absolute;
+  left: 10px;
+  color: var(--input-placeholder);
+  font-size: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 /* 📌 Checkbox Group */
 .checkbox-group {
   display: flex;
@@ -106,13 +111,10 @@ textarea {
 }
 
 /* 📌 Table Styling */
-.table-container {
-  margin-top: 15px;
-}
-
 .data-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 15px; /* Moved from .table-container */
 }
 
 .data-table th,
@@ -133,34 +135,16 @@ textarea {
 
 /* 📌 Contact Form Specific Adjustments */
 #contact .form-row {
-  display: flex;
   gap: 12px;
 }
 
 #contact .input-group input,
 #contact .input-group textarea {
-  padding: 10px; /* Slightly smaller padding for a compact look */
+  padding: 10px;
   font-size: 14px;
 }
 
-/* 📌 Ensure Icons Appear Inside Inputs */
-.input-wrapper {
-  position: relative;
-}
-
-.input-wrapper input {
-  padding-left: 40px; /* Adjust left padding for icons */
-}
-
-.input-wrapper i {
-  position: absolute;
-  left: 10px;
-  color: var(--input-placeholder);
-  font-size: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-/* summary area */
+/* 📌 Summary Area */
 .large-text-area {
   width: 90%;
   height: 200px;

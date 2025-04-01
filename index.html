@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="assets/css/skill.css" />
     <link rel="stylesheet" href="assets/css/summary.css" />
     <link rel="stylesheet" href="assets/css/modal.css" />
+    <link rel="stylesheet" href="assets/css/hobbies.css" />
 
     <link
       rel="stylesheet"
@@ -54,7 +55,7 @@
         <li class="sidebar-item" data-section="hobbies">
           <i class="material-icons">sports_esports</i> Hobbies
         </li>
-        <li class="sidebar-item" data-section="hobbies">
+        <li class="sidebar-item" data-section="personal-info">
           <i class="material-icons"> star </i> Personal Information
         </li>
       </ul>
@@ -76,7 +77,7 @@
         <div class="form-area">
           <div class="form-container">
             <form id="resume-form">
-              <!-- ! 1- Personal Info Information Form -->
+              <!-- ! 1- contact info section-->
               <div class="form-section" id="contact">
                 <h2>Contact Information</h2>
 
@@ -306,7 +307,7 @@
                 </div>
               </div>
 
-              <!--  📌 Education Entries Modal -->
+              <!--  ! 3b  Education Entries Modal -->
               <div id="education-modal" class="modal">
                 <div class="modal-content">
                   <span class="close-btn" id="close-education-modal"
@@ -446,7 +447,7 @@
                 </div>
               </div>
 
-              <!-- 📌 Experience Entries Modal -->
+              <!-- ! 4b Experience Entries Modal -->
               <div id="experience-modal" class="modal">
                 <div class="modal-content">
                   <span class="close-btn" id="close-experience-modal"
@@ -540,7 +541,7 @@
                 </div>
               </div>
 
-              <!-- 📌 Projects Entries Modal -->
+              <!-- ! 5b Projects Entries Modal -->
               <div id="project-modal" class="modal">
                 <div class="modal-content">
                   <span class="close-btn" id="close-project-modal"
@@ -643,7 +644,6 @@
               </div>
 
               <!-- ! 8- Skills Section -->
-              <!-- 🎯 Skills Section -->
               <div class="form-section skills-form" id="skills">
                 <h2>Skills</h2>
                 <input
@@ -662,7 +662,101 @@
                   type="text"
                   id="hobbies-input"
                   class="form-margin"
-                  placeholder="E.g., Reading, Gaming, Traveling" />
+                  placeholder="E.g., Reading, Painting, Gaming" />
+                <div
+                  id="hobbies-suggestions"
+                  class="suggestions-dropdown"></div>
+                <div id="hobbies-list" class="hobbies-list"></div>
+              </div>
+              <!-- ! 10 - personal info Section -->
+              <div class="form-section hobbies-form" id="personal-info">
+                <h2>Personal Information</h2>
+
+                <!-- Date of Birth & Gender -->
+                <div class="form-row form-margin">
+                  <div class="input-group">
+                    <label for="dob">Date of Birth</label>
+                    <input
+                      type="date"
+                      id="dob"
+                      placeholder="Enter your date of birth"
+                      required />
+                  </div>
+                  <div class="input-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" required>
+                      <option value="" disabled selected>Select Gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Marital Status & Religion -->
+                <div class="form-row form-margin">
+                  <div class="input-group">
+                    <label for="marital-status">Marital Status</label>
+                    <select id="marital-status" required>
+                      <option value="" disabled selected>
+                        Select Marital Status
+                      </option>
+                      <option value="single">Single</option>
+                      <option value="married">Married</option>
+                      <option value="divorced">Divorced</option>
+                    </select>
+                  </div>
+                  <div class="input-group">
+                    <label for="religion">Religion</label>
+                    <input
+                      type="text"
+                      id="religion"
+                      placeholder="Enter your religion"
+                      required />
+                  </div>
+                </div>
+
+                <!-- Optional Personal Data -->
+                <!-- Father Name -->
+                <div class="toggle-section input-group" id="father-section">
+                  <label class="toggle-label" id="father-toggle"
+                    >+ Father Name (optional)</label
+                  >
+                  <div class="hidden" id="father-input">
+                    <input
+                      type="text"
+                      id="father"
+                      placeholder="Enter your father's name" />
+                  </div>
+                </div>
+                <hr />
+
+                <!-- Spouse Name -->
+                <div class="toggle-section input-group" id="spouse-section">
+                  <label class="toggle-label" id="spouse-toggle"
+                    >+ Spouse Name (optional)</label
+                  >
+                  <div class="hidden" id="spouse-input">
+                    <input
+                      type="text"
+                      id="spouse"
+                      placeholder="Enter spouse's name" />
+                  </div>
+                </div>
+                <hr />
+
+                <!-- Mother Name -->
+                <div class="toggle-section input-group" id="mother-section">
+                  <label class="toggle-label" id="mother-toggle"
+                    >+ Mother Name (optional)</label
+                  >
+                  <div class="hidden" id="mother-input">
+                    <input
+                      type="text"
+                      id="mother"
+                      placeholder="Enter mother's name" />
+                  </div>
+                </div>
               </div>
 
               <div class="form-navigation">
@@ -694,5 +788,7 @@
     <script src="assets/js/projects.js"></script>
     <script src="assets/js/certificate.js"></script>
     <script src="assets/js/skils.js"></script>
+    <script src="assets/js/hobbies.js"></script>
+    <script src="assets/js/personal-info.js"></script>
   </body>
 </html>

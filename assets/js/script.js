@@ -5,7 +5,7 @@
 // ✅ Manages Progress Bar, Sidebar Navigation & Form Data Sync
 
 let myData = {
-  personalInfo: {},
+  contactInfo: {},
   summary: {},
   education: [],
   experience: [],
@@ -22,6 +22,7 @@ let experienceEntries = [];
 let projectEntries = [];
 let certificateEntries = [];
 let skillList = [];
+let hobbiesList = [];
 
 document.addEventListener("DOMContentLoaded", function () {
   // ✅ Get references to sidebar items, form sections, and navigation buttons
@@ -99,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     switch (activeSection) {
       case "contact":
-        myData.personalInfo = {
+        myData.contactInfo = {
           fullName: document.getElementById("full-name").value,
           email: document.getElementById("email").value,
           phone: document.getElementById("phone").value,
@@ -134,24 +135,23 @@ document.addEventListener("DOMContentLoaded", function () {
         myData.skills = [...skillList];
         break;
 
-      case "languages":
-        myData.languages = document
-          .getElementById("languages-input")
-          .value.split(",")
-          .map((lang) => lang.trim())
-          .filter((lang) => lang !== "");
-        break;
-
       case "certifications":
         myData.certifications = [...certificateEntries];
         break;
 
       case "hobbies":
-        myData.hobbies = document
-          .getElementById("hobbies-input")
-          .value.split(",")
-          .map((hobby) => hobby.trim())
-          .filter((hobby) => hobby !== "");
+        myData.hobbies = [...hobbiesList];
+        break;
+      case "personal-info":
+        myData.personalInfo = {
+          dob: document.getElementById("dob").value,
+          gender: document.getElementById("gender").value,
+          maritalStatus: document.getElementById("marital-status").value,
+          religion: document.getElementById("religion").value,
+          father: document.getElementById("father").value,
+          spouse: document.getElementById("spouse").value,
+          mother: document.getElementById("mother").value,
+        };
         break;
     }
 
