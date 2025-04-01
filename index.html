@@ -76,7 +76,7 @@
         <div class="form-area">
           <div class="form-container">
             <form id="resume-form">
-              <!-- !  Personal Info Information Form -->
+              <!-- ! 1- Personal Info Information Form -->
               <div class="form-section" id="contact">
                 <h2>Contact Information</h2>
 
@@ -99,6 +99,32 @@
                       required />
                   </div>
                 </div>
+                <div class="form-row form-margin">
+                  <div class="input-group">
+                    <label for="full-name">City</label>
+                    <input
+                      type="text"
+                      id="city-name"
+                      placeholder="City name"
+                      required />
+                  </div>
+                  <div class="input-group">
+                    <label for="phone">Country</label>
+                    <input
+                      type="text"
+                      id="country-name"
+                      placeholder="Country name"
+                      required />
+                  </div>
+                  <div class="input-group">
+                    <label for="phone">Pin-Code</label>
+                    <input
+                      type="number"
+                      id="pin-code"
+                      placeholder="Pin-Code"
+                      required />
+                  </div>
+                </div>
 
                 <!-- Email -->
                 <div class="input-group">
@@ -108,14 +134,6 @@
                     id="email"
                     placeholder="example@email.com"
                     required />
-                </div>
-
-                <!-- Address -->
-                <div class="input-group">
-                  <label for="address">Address</label>
-                  <textarea
-                    id="address"
-                    placeholder="Enter your address"></textarea>
                 </div>
 
                 <!-- Social Profiles Section (LinkedIn, GitHub, Website) -->
@@ -162,7 +180,7 @@
                 </div>
               </div>
 
-              <!-- ! Professional Summary Section -->
+              <!-- ! 2- Professional Summary Section -->
               <div class="form-section" id="summary">
                 <h2>Professional Summary</h2>
 
@@ -195,7 +213,7 @@
                 </div>
               </div>
 
-              <!-- ! 🎓 Education Information Section -->
+              <!-- ! 3- Education Information Section -->
               <div class="form-section" id="education">
                 <h2>Educational Information</h2>
 
@@ -315,7 +333,7 @@
                 </div>
               </div>
 
-              <!--!@🎯 Experience Section -->
+              <!--! 4- Experience Section -->
               <div class="form-section" id="experience">
                 <!-- !option to open Experience  or not -->
                 <div class="form-option-container">
@@ -454,7 +472,7 @@
                 </div>
               </div>
 
-              <!--!@🎯 Projects Section -->
+              <!--! 5- Projects Section -->
               <div class="form-section" id="projects">
                 <!-- !option to open Experience  or not -->
                 <div class="form-option-container">
@@ -544,7 +562,7 @@
                 </div>
               </div>
 
-              <!-- ! Certification Information Section -->
+              <!-- ! 6- Certification Information Section -->
               <div class="form-section" id="certifications">
                 <!-- !option to open certification  or not -->
                 <div class="form-option-container">
@@ -603,7 +621,7 @@
                   </div>
                 </div>
               </div>
-              <!-- ! certificate  Entries Modal -->
+              <!-- ! 7- certificate  Entries Modal -->
               <div id="certificate-modal" class="modal">
                 <div class="modal-content">
                   <span class="close-btn" id="close-certificate-modal"
@@ -624,7 +642,7 @@
                 </div>
               </div>
 
-              <!-- !🎯 Skills Section -->
+              <!-- ! 8- Skills Section -->
               <!-- 🎯 Skills Section -->
               <div class="form-section skills-form" id="skills">
                 <h2>Skills</h2>
@@ -637,20 +655,7 @@
                 <div id="skills-list" class="skills-list"></div>
               </div>
 
-              <!-- !🎯 Achievements Section -->
-              <div class="form-section achievements-form" id="achievements">
-                <h2>Achievements</h2>
-                <textarea
-                  id="achievement-text"
-                  class="form-margin"
-                  placeholder="List your achievements"></textarea>
-
-                <div class="form-actions">
-                  <button type="button" class="save-entry">✔ Save</button>
-                </div>
-              </div>
-
-              <!-- !🎯 Hobbies Section -->
+              <!-- ! 9- Hobbies Section -->
               <div class="form-section hobbies-form" id="hobbies">
                 <h2>Hobbies</h2>
                 <input
