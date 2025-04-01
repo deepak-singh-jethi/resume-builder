@@ -2,7 +2,7 @@
 
 /* 🎯 General Form Styling */
 .form-area {
-  width: 80%;
+  width: 100%;
   background: var(--form-bg);
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -11,10 +11,16 @@
 /* 📌 Form Section */
 .form-section {
   width: 100%;
-  max-width: 800px;
+  /* max-width: 800px; */
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.form-section h2 {
+  font-size: 24px;
+  /* color: var(--primary-text); */
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 /* 📌 Form Row Layout */
@@ -67,7 +73,7 @@ textarea {
   resize: vertical;
 }
 
-/* 📌 Input Wrapper (Merged Redundant Rules) */
+/* 📌 Input Wrapper */
 .input-wrapper {
   position: relative;
   width: 100%;
@@ -91,7 +97,6 @@ textarea {
   outline: none;
 }
 
-/* 📌 Ensure Icons Appear Inside Inputs */
 .input-wrapper i {
   position: absolute;
   left: 10px;
@@ -114,7 +119,7 @@ textarea {
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 15px; /* Moved from .table-container */
+  margin-top: 15px;
 }
 
 .data-table th,
@@ -133,7 +138,7 @@ textarea {
   background: var(--input-bg);
 }
 
-/* 📌 Contact Form Specific Adjustments */
+/* 📌 Contact Form  */
 #contact .form-row {
   gap: 12px;
 }

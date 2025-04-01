@@ -1,28 +1,17 @@
-/* -------------------------------- */
-/* 🚀 Preview Area 🚀 */
-/* -------------------------------- */
+document.addEventListener("DOMContentLoaded", function () {
+  // get data from localStorage
+  const resumeData = localStorage.getItem("resumeData");
+  console.log(resumeData);
 
-// 4️⃣ **Quick Actions Panel**
-function saveResume() {
-  alert("Chutiyaa....");
-}
-
-function downloadPDF() {
-  alert("Land....");
-}
-
-function clearForm() {
-  document.getElementById("resume-form").reset();
-  alert("Muttthiii....");
-}
-
-// Function to update the resume preview in real time
-function updatePreview(data) {
-  document.querySelector(".preview").innerHTML = `
-        <h2>Resume Preview</h2>
-        <p><strong>Name:</strong> ${data["fullName"] || "N/A"}</p>
-        <p><strong>Email:</strong> ${data["email"] || "N/A"}</p>
-        <p><strong>Phone:</strong> ${data["phone"] || "N/A"}</p>
-        <p><strong>Summary:</strong> ${data["summary"] || "N/A"}</p>
-    `;
-}
+  /* -------------------------------- */
+  /* 🚀 return back to main page 🚀 */
+  /* -------------------------------- */
+  const returnBtn = document.getElementById("return-btn");
+  if (returnBtn) {
+    returnBtn.addEventListener("click", function () {
+      window.location.href = "index.html"; // Redirect to the main form page
+    });
+  } else {
+    console.error("Return button not found!");
+  }
+});

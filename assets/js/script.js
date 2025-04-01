@@ -63,7 +63,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Enable/Disable navigation buttons based on the current section
     prevBtn.disabled = index === 0;
-    nextBtn.disabled = index === sidebarItems.length - 1;
+    if (index === sidebarItems.length - 1) {
+      nextBtn.innerText = "Finish"; // Change text to "Finish" on last section
+      nextBtn.onclick = () => {
+        saveCurrentFormData();
+        alert("Form Completed! ✅ Data Saved.");
+        // redirect or handle submission here
+      };
+    } else {
+      nextBtn.innerText = "Next";
+      nextBtn.onclick = () => {
+        saveCurrentFormData();
+        showSectionByIndex(index + 1);
+      };
+    }
 
     currentSectionIndex = index;
     updateProgress(index + 1);
@@ -90,6 +103,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const newIndex = currentSectionIndex - 1;
     if (newIndex >= 0) showSectionByIndex(newIndex);
   });
+  // ✅ Handle "preview-resume-btn" Button Click
+  const previewBtn = document.getElementById("preview-resume-btn");
+  if (previewBtn) {
+    previewBtn.addEventListener("click", function () {
+      alert("Opening Resume Preview...");
+      window.location.href = "resume-preview.html"; // Replace with actual preview page
+    });
+  } else {
+    console.error("Preview button not found!");
+  }
 
   /**
    * ✅ Save Form Data Before Switching Sections
@@ -168,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
 /* 🚀 Progress Bar Logic 🚀 */
 /* -------------------------------- */
 
-const totalSteps = 10; // ✅ Define total steps for progress calculation
+const totalSteps = 9; // ✅ Define total steps for progress calculation
 
 /**
  * ✅ Update Progress Bar

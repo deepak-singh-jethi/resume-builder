@@ -10,7 +10,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
@@ -91,7 +91,7 @@ tbody tr:hover {
   justify-content: center;
 }
 
-/* 🎯 Ensure All Modals Use the Same Modal Content */
+/*  Modals */
 .experience-modal .modal-content,
 .education-modal .modal-content,
 .project-modal .modal-content {

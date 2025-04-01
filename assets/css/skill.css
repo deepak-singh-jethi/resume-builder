@@ -77,10 +77,10 @@
 .delete-btn {
   cursor: pointer;
   margin-left: 10px;
-  color: var(--cancel-btn-bg); /* or any color you prefer */
+  color: var(--cancel-btn-bg);
   font-size: 18px;
 }
 
 .delete-btn:hover {
-  color: #ff0000; /* Change to red on hover */
+  color: #ff0000;
 }

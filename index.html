@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="assets/css/summary.css" />
     <link rel="stylesheet" href="assets/css/modal.css" />
     <link rel="stylesheet" href="assets/css/hobbies.css" />
+    <link rel="stylesheet" href="assets/css/preview.css" />
 
     <link
       rel="stylesheet"
@@ -35,7 +36,6 @@
         <li class="sidebar-item" data-section="education">
           <i class="material-icons">school</i> Education
         </li>
-
         <li class="sidebar-item" data-section="experience">
           <i class="material-icons">work</i> Experience
         </li>
@@ -45,20 +45,21 @@
         <li class="sidebar-item" data-section="certifications">
           <i class="material-icons">verified_user</i> Certifications
         </li>
-
         <li class="sidebar-item" data-section="skills">
           <i class="material-icons">build</i> Skills
         </li>
-
-        <!-- !done till here -->
-
         <li class="sidebar-item" data-section="hobbies">
           <i class="material-icons">sports_esports</i> Hobbies
         </li>
         <li class="sidebar-item" data-section="personal-info">
-          <i class="material-icons"> star </i> Personal Information
+          <i class="material-icons">star</i> Personal Information
         </li>
       </ul>
+
+      <!-- ✅ Preview Button -->
+      <button id="preview-resume-btn" class="preview-button">
+        🔍 Preview Resume
+      </button>
     </div>
 
     <!-- Main Content -->
@@ -768,21 +769,20 @@
         </div>
 
         <!-- Right Section: Resume Preview -->
-        <div class="preview">
+        <!-- <div class="preview">
           <h2>Resume Preview</h2>
           <div class="quick-actions">
             <button onclick="saveResume()">💾 Save</button>
             <button onclick="downloadPDF()">📥 Download PDF</button>
             <button onclick="clearForm()">🗑️ Clear</button>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
     <script src="assets/js/script.js"></script>
     <script src="assets/js/contact.js"></script>
     <script src="assets/js/summary.js"></script>
-    <script src="assets/js/preview.js"></script>
     <script src="assets/js/education.js"></script>
     <script src="assets/js/experience.js"></script>
     <script src="assets/js/projects.js"></script>
