@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // ✅ Get references to sidebar items, form sections, and navigation buttons
   const sidebarItems = document.querySelectorAll(".sidebar-item");
   const formSections = document.querySelectorAll(".form-section");
-  const prevBtn = document.getElementById("prev-btn");
-  const nextBtn = document.getElementById("next-btn");
+  let prevBtn = document.getElementById("prev-btn");
+  let nextBtn = document.getElementById("next-btn");
 
   let currentSectionIndex = 0; // ✅ Track current form section index
 
@@ -63,20 +63,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Enable/Disable navigation buttons based on the current section
     prevBtn.disabled = index === 0;
+
     if (index === sidebarItems.length - 1) {
-      nextBtn.innerText = "Finish"; // Change text to "Finish" on last section
-      nextBtn.onclick = () => {
+      nextBtn.innerText = "Finish";
+
+      // ✅ Remove previous event listener before adding a new one
+      nextBtn.replaceWith(nextBtn.cloneNode(true));
+      nextBtn = document.getElementById("next-btn"); // Get new reference
+
+      nextBtn.addEventListener("click", () => {
         saveCurrentFormData();
         alert("Form Completed! ✅ Data Saved.");
-        // redirect or handle submission here
-      };
+      });
     } else {
       nextBtn.innerText = "Next";
-      nextBtn.onclick = () => {
+
+      // ✅ Remove previous event listener before adding a new one
+      nextBtn.replaceWith(nextBtn.cloneNode(true));
+      nextBtn = document.getElementById("next-btn"); // Get new reference
+
+      nextBtn.addEventListener("click", () => {
         saveCurrentFormData();
         showSectionByIndex(index + 1);
-      };
+      });
     }
+
+    // ✅ Remove and reattach previous button event listener
+    prevBtn.replaceWith(prevBtn.cloneNode(true));
+    prevBtn = document.getElementById("prev-btn"); // Get new reference
+
+    prevBtn.addEventListener("click", () => {
+      saveCurrentFormData();
+      showSectionByIndex(index - 1);
+    });
 
     currentSectionIndex = index;
     updateProgress(index + 1);
@@ -94,6 +113,8 @@ document.addEventListener("DOMContentLoaded", function () {
   nextBtn.addEventListener("click", () => {
     saveCurrentFormData();
     const newIndex = currentSectionIndex + 1;
+    console.log(newIndex);
+
     if (newIndex < sidebarItems.length) showSectionByIndex(newIndex);
   });
 
