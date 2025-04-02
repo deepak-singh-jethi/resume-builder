@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const hobbiesItem = document.getElementById("hobbies-list");
   const hobbiesSuggestions = document.getElementById("hobbies-suggestions");
 
-  let hobbiesArray = JSON.parse(localStorage.getItem("hobbiesData")) || [];
+  hobbiesList = JSON.parse(localStorage.getItem("hobbiesData")) || [];
   const hobbySuggestionsData = [
     "Reading",
     "Traveling",
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const filtered = hobbySuggestionsData.filter(
       (hobby) =>
         hobby.toLowerCase().includes(query.toLowerCase()) &&
-        !hobbiesArray.includes(hobby)
+        !hobbiesList.includes(hobby)
     );
 
     filtered.forEach((hobby) => {
@@ -50,10 +50,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function addHobby(hobby) {
-    if (!hobbiesArray.includes(hobby)) {
-      hobbiesArray.push(hobby);
-      myData.hobbies = [...hobbiesArray];
-      localStorage.setItem("hobbiesData", JSON.stringify(hobbiesArray));
+    if (!hobbiesList.includes(hobby)) {
+      hobbiesList.push(hobby);
+      myData.hobbies = [...hobbiesList];
+      localStorage.setItem("hobbiesData", JSON.stringify(hobbiesList));
       localStorage.setItem("resumeData", JSON.stringify(myData));
       renderHobbies();
     }
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function renderHobbies() {
     hobbiesItem.innerHTML = "";
-    hobbiesArray.forEach((hobby) => {
+    hobbiesList.forEach((hobby) => {
       const hobbyTag = document.createElement("div");
       hobbyTag.classList.add("hobby-tag");
       hobbyTag.textContent = hobby;
@@ -79,9 +79,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function removeHobby(hobby) {
-    hobbiesArray = hobbiesArray.filter((item) => item !== hobby);
-    myData.hobbies = [...hobbiesArray];
-    localStorage.setItem("hobbiesData", JSON.stringify(hobbiesArray));
+    hobbiesList = hobbiesList.filter((item) => item !== hobby);
+    myData.hobbies = [...hobbiesList];
+    localStorage.setItem("hobbiesData", JSON.stringify(hobbiesList));
     localStorage.setItem("resumeData", JSON.stringify(myData));
     renderHobbies();
   }

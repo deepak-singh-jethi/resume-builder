@@ -1,5 +1,5 @@
 /* -------------------------------- */
-/* Resume Form Handler Script 🚀 */
+/* 🚀 Resume Form Handler Script 🚀 */
 /* -------------------------------- */
 
 // ✅ Manages Progress Bar, Sidebar Navigation & Form Data Sync
@@ -11,18 +11,21 @@ let myData = {
   experience: [],
   projects: [],
   skills: [],
-  languages: [],
-  achievements: [],
   hobbies: [],
+  certifications: [],
+  personalInfo: {},
 };
 
-// ✅ Global Arrays for Education  Experience and Project Data
+// ✅ Global Arrays for Form Data
 let educationEntries = [];
 let experienceEntries = [];
 let projectEntries = [];
 let certificateEntries = [];
 let skillList = [];
 let hobbiesList = [];
+let contactInfo = {};
+let personalInfo = {};
+let summary = {};
 
 document.addEventListener("DOMContentLoaded", function () {
   // ✅ Get references to sidebar items, form sections, and navigation buttons
@@ -33,106 +36,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let currentSectionIndex = 0; // ✅ Track current form section index
 
-  // ✅ Restore saved form data from localStorage (if available)
+  // ✅ Restore saved form data from localStorage
   const savedData = localStorage.getItem("resumeData");
   if (savedData) {
     myData = JSON.parse(savedData);
+
     educationEntries = myData.education || [];
     experienceEntries = myData.experience || [];
+    projectEntries = myData.projects || [];
+    certificateEntries = myData.certifications || [];
+    skillList = myData.skills || [];
+    hobbiesList = myData.hobbies || [];
+    contactInfo = myData.contactInfo || {};
+    summary = myData.summary || {};
+    personalInfo = myData.personalInfo || {};
+
     console.log("Loaded Saved Data:", myData);
-  }
 
-  /**
-   * ✅ Show a specific section based on index
-   * @param {number} index - Index of the section to display
-   */
-  function showSectionByIndex(index) {
-    if (index < 0 || index >= sidebarItems.length) return;
-
-    const targetSection = sidebarItems[index].getAttribute("data-section");
-
-    // Hide all sections and display the active one
-    formSections.forEach((section) => (section.style.display = "none"));
-    const activeSection = document.getElementById(targetSection);
-    if (activeSection) activeSection.style.display = "block";
-
-    // Highlight the active sidebar item
-    sidebarItems.forEach((item, i) =>
-      item.classList.toggle("active", i === index)
-    );
-
-    // Enable/Disable navigation buttons based on the current section
-    prevBtn.disabled = index === 0;
-
-    if (index === sidebarItems.length - 1) {
-      nextBtn.innerText = "Finish";
-
-      // ✅ Remove previous event listener before adding a new one
-      nextBtn.replaceWith(nextBtn.cloneNode(true));
-      nextBtn = document.getElementById("next-btn"); // Get new reference
-
-      nextBtn.addEventListener("click", () => {
-        saveCurrentFormData();
-        alert("Form Completed! ✅ Data Saved.");
-      });
-    } else {
-      nextBtn.innerText = "Next";
-
-      // ✅ Remove previous event listener before adding a new one
-      nextBtn.replaceWith(nextBtn.cloneNode(true));
-      nextBtn = document.getElementById("next-btn"); // Get new reference
-
-      nextBtn.addEventListener("click", () => {
-        saveCurrentFormData();
-        showSectionByIndex(index + 1);
-      });
+    // ✅ Autofill form fields if data exists
+    if (myData.contactInfo) {
+      document.getElementById("full-name").value =
+        myData.contactInfo.fullName || "";
+      document.getElementById("email").value = myData.contactInfo.email || "";
+      document.getElementById("phone").value = myData.contactInfo.phone || "";
+      document.getElementById("city-name").value =
+        myData.contactInfo.city || "";
+      document.getElementById("country-name").value =
+        myData.contactInfo.country || "";
+      document.getElementById("pin-code").value =
+        myData.contactInfo.pinCode || "";
+      document.getElementById("linkedin").value =
+        myData.contactInfo.linkedin || "";
+      document.getElementById("github").value = myData.contactInfo.github || "";
+      document.getElementById("website").value =
+        myData.contactInfo.website || "";
     }
 
-    // ✅ Remove and reattach previous button event listener
-    prevBtn.replaceWith(prevBtn.cloneNode(true));
-    prevBtn = document.getElementById("prev-btn"); // Get new reference
+    if (myData.summary) {
+      document.getElementById("summary-text").value = myData.summary.text || "";
+    }
 
-    prevBtn.addEventListener("click", () => {
-      saveCurrentFormData();
-      showSectionByIndex(index - 1);
-    });
-
-    currentSectionIndex = index;
-    updateProgress(index + 1);
-  }
-
-  // ✅ Handle Sidebar Click Events
-  sidebarItems.forEach((item, index) => {
-    item.addEventListener("click", () => {
-      saveCurrentFormData(); // Save data before switching
-      showSectionByIndex(index);
-    });
-  });
-
-  // ✅ Handle "Next" Button Click
-  nextBtn.addEventListener("click", () => {
-    saveCurrentFormData();
-    const newIndex = currentSectionIndex + 1;
-    console.log(newIndex);
-
-    if (newIndex < sidebarItems.length) showSectionByIndex(newIndex);
-  });
-
-  // ✅ Handle "Previous" Button Click
-  prevBtn.addEventListener("click", () => {
-    saveCurrentFormData();
-    const newIndex = currentSectionIndex - 1;
-    if (newIndex >= 0) showSectionByIndex(newIndex);
-  });
-  // ✅ Handle "preview-resume-btn" Button Click
-  const previewBtn = document.getElementById("preview-resume-btn");
-  if (previewBtn) {
-    previewBtn.addEventListener("click", function () {
-      alert("Opening Resume Preview...");
-      window.location.href = "resume-preview.html"; // Replace with actual preview page
-    });
-  } else {
-    console.error("Preview button not found!");
+    if (myData.personalInfo) {
+      document.getElementById("dob").value = myData.personalInfo.dob || "";
+      document.getElementById("gender").value =
+        myData.personalInfo.gender || "";
+      document.getElementById("marital-status").value =
+        myData.personalInfo.maritalStatus || "";
+      document.getElementById("religion").value =
+        myData.personalInfo.religion || "";
+      document.getElementById("father").value =
+        myData.personalInfo.father || "";
+      document.getElementById("spouse").value =
+        myData.personalInfo.spouse || "";
+      document.getElementById("mother").value =
+        myData.personalInfo.mother || "";
+    }
   }
 
   /**
@@ -142,9 +100,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const activeSection =
       sidebarItems[currentSectionIndex].getAttribute("data-section");
 
+    // Load previous data to prevent overwriting
+    let storedData = JSON.parse(localStorage.getItem("resumeData")) || {};
+
     switch (activeSection) {
       case "contact":
-        myData.contactInfo = {
+        storedData.contactInfo = {
           fullName: document.getElementById("full-name").value,
           email: document.getElementById("email").value,
           phone: document.getElementById("phone").value,
@@ -158,36 +119,37 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
 
       case "summary":
-        myData.summary = {
+        storedData.summary = {
           text: document.getElementById("summary-text").value,
         };
         break;
 
       case "education":
-        myData.education = [...educationEntries];
+        storedData.education = [...educationEntries];
         break;
 
       case "experience":
-        myData.experience = [...experienceEntries];
+        storedData.experience = [...experienceEntries];
         break;
 
       case "projects":
-        myData.projects = [...projectEntries];
+        storedData.projects = [...projectEntries];
         break;
 
       case "skills":
-        myData.skills = [...skillList];
+        storedData.skills = [...skillList];
         break;
 
       case "certifications":
-        myData.certifications = [...certificateEntries];
+        storedData.certifications = [...certificateEntries];
         break;
 
       case "hobbies":
-        myData.hobbies = [...hobbiesList];
+        storedData.hobbies = [...hobbiesList];
         break;
+
       case "personal-info":
-        myData.personalInfo = {
+        storedData.personalInfo = {
           dob: document.getElementById("dob").value,
           gender: document.getElementById("gender").value,
           maritalStatus: document.getElementById("marital-status").value,
@@ -199,12 +161,77 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
     }
 
-    // ✅ Save data to localStorage for persistence
-    localStorage.setItem("resumeData", JSON.stringify(myData));
-    console.log("Updated Data:", myData);
+    // ✅ Save merged data to localStorage
+    localStorage.setItem("resumeData", JSON.stringify(storedData));
+    console.log("Updated Data Saved in localStorage:", storedData);
   }
 
-  // ✅ Initially show the first section (Contact Info)
+  // ✅ Show a specific section based on index
+  function showSectionByIndex(index) {
+    if (index < 0 || index >= sidebarItems.length) return;
+
+    const targetSection = sidebarItems[index].getAttribute("data-section");
+
+    formSections.forEach((section) => (section.style.display = "none"));
+    const activeSection = document.getElementById(targetSection);
+    if (activeSection) activeSection.style.display = "block";
+
+    sidebarItems.forEach((item, i) =>
+      item.classList.toggle("active", i === index)
+    );
+
+    prevBtn.disabled = index === 0;
+
+    if (index === sidebarItems.length - 1) {
+      nextBtn.innerText = "Finish";
+      nextBtn.replaceWith(nextBtn.cloneNode(true));
+      nextBtn = document.getElementById("next-btn");
+
+      nextBtn.addEventListener("click", () => {
+        saveCurrentFormData();
+        alert("Form Completed! ✅ Data Saved.");
+      });
+    } else {
+      nextBtn.innerText = "Next";
+      nextBtn.replaceWith(nextBtn.cloneNode(true));
+      nextBtn = document.getElementById("next-btn");
+
+      nextBtn.addEventListener("click", () => {
+        saveCurrentFormData();
+        showSectionByIndex(index + 1);
+      });
+    }
+
+    prevBtn.replaceWith(prevBtn.cloneNode(true));
+    prevBtn = document.getElementById("prev-btn");
+
+    prevBtn.addEventListener("click", () => {
+      saveCurrentFormData();
+      showSectionByIndex(index - 1);
+    });
+
+    currentSectionIndex = index;
+    updateProgress(index + 1);
+  }
+
+  // ✅ Handle Sidebar Click Events
+  sidebarItems.forEach((item, index) => {
+    item.addEventListener("click", () => {
+      saveCurrentFormData();
+      showSectionByIndex(index);
+    });
+  });
+
+  // ✅ Handle "preview-resume-btn"
+  const previewBtn = document.getElementById("preview-resume-btn");
+  if (previewBtn) {
+    previewBtn.addEventListener("click", function () {
+      alert("Opening Resume Preview...");
+      window.location.href = "resume-preview.html";
+    });
+  }
+
+  // ✅ Initially show the first section
   showSectionByIndex(0);
 });
 
@@ -212,12 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
 /* 🚀 Progress Bar Logic 🚀 */
 /* -------------------------------- */
 
-const totalSteps = 9; // ✅ Define total steps for progress calculation
-
-/**
- * ✅ Update Progress Bar
- * @param {number} currentStep - The current step number
- */
+const totalSteps = 9;
 function updateProgress(currentStep) {
   const progressBar = document.getElementById("progressBar");
   const progressStep = document.getElementById("progressStep");

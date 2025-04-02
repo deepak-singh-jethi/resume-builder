@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   // get data from localStorage
   const resumeData = localStorage.getItem("resumeData");
-  console.log(resumeData);
 
   /* -------------------------------- */
   /* 🚀 return back to main page 🚀 */
