@@ -189,7 +189,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       nextBtn.addEventListener("click", () => {
         saveCurrentFormData();
-        alert("Form Completed! ✅ Data Saved.");
       });
     } else {
       nextBtn.innerText = "Next";

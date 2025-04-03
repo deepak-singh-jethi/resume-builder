@@ -10,6 +10,7 @@
 #skills-input,
 #hobbies-input {
   width: 100%;
+  height: 40px;
   padding: 8px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -17,7 +18,7 @@
 }
 
 .suggestions-dropdown {
-  position: absolute;
+  position: relative;
   background: white;
   width: 100%;
   border: 1px solid #ccc;

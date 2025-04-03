@@ -10,7 +10,7 @@
 
 /* 📌 Form Section */
 .form-section {
-  width: 100%;
+  width: auto;
   /* max-width: 800px; */
   padding: 15px;
   border-radius: 8px;
