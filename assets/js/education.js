@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Retrieve stored education data from localStorage or initialize an empty array
-  educationEntries = JSON.parse(localStorage.getItem("educationData")) || [];
-
   // Select modal-related DOM elements
   const educationModal = document.getElementById("education-modal");
   const openEducationModalBtn = document.getElementById("open-education-modal");
@@ -10,37 +7,46 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   const educationModalList = document.getElementById("education-modal-list");
   const saveEducationBtn = document.getElementById("save-education");
+  const prevButton = document.getElementById("prev-btn-education");
+  const nextButton = document.getElementById("next-btn-education");
+
+  // ✅ Handle "save and Next" button click
+  nextButton.addEventListener("click", function () {
+    const educationState = localStorage.getItem("educationState");
+    if (educationState === "yes") saveEducationEntry(); // Save the education entry
+
+    const nextSectionId = nextButton.getAttribute("action-section");
+
+    if (nextSectionId) {
+      showSection(nextSectionId);
+    }
+  });
+  // ✅ Handle "Previous" button click
+
+  prevButton.addEventListener("click", function () {
+    const prevSectionId = prevButton.getAttribute("action-section");
+    if (prevSectionId) {
+      showSection(prevSectionId);
+    }
+  });
+
+  // ✅ Safe function to get stored education data
+
+  function getStoredEducationData() {
+    try {
+      return JSON.parse(localStorage.getItem("educationData")) || [];
+    } catch (error) {
+      console.error("Invalid JSON in localStorage:", error);
+      return [];
+    }
+  }
+
+  let educationData = getStoredEducationData(); // Load existing data
 
   // Hide modal initially
   educationModal.style.display = "none";
 
-  // Open the education modal
-  openEducationModalBtn.addEventListener("click", function () {
-    toggleModal(educationModal, true);
-    displayEducationEntries();
-  });
-
-  // Close the modal when the close button is clicked
-  closeEducationModalBtn.addEventListener("click", function () {
-    toggleModal(educationModal, false);
-  });
-
-  // Close the modal if the user clicks outside of it
-  window.addEventListener("click", function (event) {
-    if (event.target === educationModal) {
-      toggleModal(educationModal, false);
-    }
-  });
-
-  // Save a new education entry
-  saveEducationBtn.addEventListener("click", saveEducationEntry);
-
-  // Function to toggle modal visibility
-  function toggleModal(modal, show) {
-    modal.style.display = show ? "flex" : "none";
-  }
-
-  // Function to save a new education entry
+  // ✅ Save education entry
   function saveEducationEntry() {
     const newEntry = {
       degree: document.getElementById("education-degree").value.trim(),
@@ -76,35 +82,58 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Save the new entry
-    educationEntries.push(newEntry);
-    localStorage.setItem("educationData", JSON.stringify(educationEntries));
+    console.log("New Education Entry:", newEntry);
+
+    // ✅ Add new entry and update localStorage
+    educationData.push(newEntry);
+    localStorage.setItem("educationData", JSON.stringify(educationData));
 
     updateViewEntriesButton();
     displayEducationEntries();
     clearEducationForm();
   }
 
-  // Function to validate score based on score type
+  // ✅ Validate score
   function isValidScore(score, scoreType) {
-    if (scoreType === "CGPA") {
-      return score >= 0 && score <= 10;
-    } else if (scoreType === "Percentage") {
-      return score >= 0 && score <= 100;
-    }
+    if (scoreType === "CGPA") return score >= 0 && score <= 10;
+    if (scoreType === "Percentage") return score >= 0 && score <= 100;
     return false;
   }
 
-  // Function to display stored education entries
+  // ✅ Open the education modal
+  openEducationModalBtn.addEventListener("click", function () {
+    toggleModal(educationModal, true);
+    displayEducationEntries();
+  });
+
+  // ✅ Close modal logic
+  closeEducationModalBtn.addEventListener("click", function () {
+    toggleModal(educationModal, false);
+  });
+  window.addEventListener("click", function (event) {
+    if (event.target === educationModal) {
+      toggleModal(educationModal, false);
+    }
+  });
+
+  // ✅ Save education entry on button click
+  saveEducationBtn.addEventListener("click", saveEducationEntry);
+
+  // ✅ Toggle modal visibility
+  function toggleModal(modal, show) {
+    modal.style.display = show ? "flex" : "none";
+  }
+
+  // ✅ Display stored education entries
   function displayEducationEntries() {
     educationModalList.innerHTML = ""; // Clear previous entries
 
-    if (educationEntries.length === 0) {
+    if (educationData.length === 0) {
       educationModalList.innerHTML = `<tr><td colspan="7">No education records found.</td></tr>`;
       return;
     }
 
-    educationEntries.forEach((entry, index) => {
+    educationData.forEach((entry, index) => {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${entry.degree}</td>
@@ -121,19 +150,21 @@ document.addEventListener("DOMContentLoaded", function () {
       educationModalList.appendChild(row);
     });
 
-    // Attach event listeners to delete buttons
+    // ✅ Attach event listeners to delete buttons
     document.querySelectorAll(".remove-entry").forEach((btn) => {
       btn.addEventListener("click", function () {
         const index = parseInt(btn.getAttribute("data-index"));
-        educationEntries.splice(index, 1);
-        localStorage.setItem("educationData", JSON.stringify(educationEntries));
+        educationData.splice(index, 1);
+
+        // ✅ Update localStorage with modified data
+        localStorage.setItem("educationData", JSON.stringify(educationData));
         updateViewEntriesButton();
         displayEducationEntries();
       });
     });
   }
 
-  // Function to clear input fields
+  // ✅ Clear input fields
   function clearEducationForm() {
     document.getElementById("education-degree").value = "";
     document.getElementById("education-subject").value = "";
@@ -145,12 +176,12 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("education-location").value = "";
   }
 
-  // Function to update the "View Entries" button text
+  // ✅ Update "View Entries" button text
   function updateViewEntriesButton() {
-    openEducationModalBtn.innerText = `View (${educationEntries.length}) Entries`;
+    openEducationModalBtn.innerText = `View (${educationData.length}) Entries`;
   }
 
-  // Initialize the UI on page load
+  // ✅ Initialize UI
   displayEducationEntries();
   updateViewEntriesButton();
 });

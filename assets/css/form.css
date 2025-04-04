@@ -70,7 +70,7 @@
 
 /* 📌 Textarea */
 textarea {
-  min-height: 60px;
+  min-height: 96px;
   resize: vertical;
 }
 

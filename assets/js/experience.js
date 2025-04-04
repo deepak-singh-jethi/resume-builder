@@ -1,21 +1,52 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // ✅ Retrieve stored experience entries from localStorage (or set to global array if none exist)
-  experienceEntries = JSON.parse(localStorage.getItem("experienceData")) || [];
+  const prevBtn = document.getElementById("prev-btn-experience");
+  const nextBtn = document.getElementById("next-btn-experience");
+
+  // ✅ Handle Previous button navigation
+  prevBtn.addEventListener("click", function () {
+    const prevSectionId = prevBtn.getAttribute("action-section");
+    if (prevSectionId) {
+      showSection(prevSectionId); // Show the previous section
+    }
+  });
+
+  // ✅ Handle save Next button navigation
+  nextBtn.addEventListener("click", function () {
+    const experienceState = localStorage.getItem("experienceState");
+    if (experienceState === "yes") saveExperienceEntry(); // Save the experience entry
+
+    const nextSectionId = nextBtn.getAttribute("action-section");
+    if (nextSectionId) {
+      showSection(nextSectionId); // Show the next section
+    }
+  });
+
+  // ✅ Retrieve stored experience entries safely
+  function getStoredExperienceData() {
+    try {
+      return JSON.parse(localStorage.getItem("experienceData")) || [];
+    } catch (error) {
+      console.error("Invalid JSON in localStorage:", error);
+      return [];
+    }
+  }
+
+  let experienceEntries = getStoredExperienceData();
 
   // ✅ Modal Elements
   const experienceModal = document.getElementById("experience-modal"); // Modal container
   const openExperienceModalBtn = document.getElementById(
     "open-experience-modal"
-  ); // Button to open modal
+  ); // Open modal button
   const closeExperienceModalBtn = document.getElementById(
     "close-experience-modal"
-  ); // Button to close modal
-  const experienceModalList = document.getElementById("experience-modal-list"); // Table to display experience entries
-  const saveExperienceBtn = document.getElementById("save-experience"); // Button to save experience entry
+  ); // Close modal button
+  const experienceModalList = document.getElementById("experience-modal-list"); // Table to display experiences
+  const saveExperienceBtn = document.getElementById("save-experience"); // Save button
 
   // ✅ Form Elements
   const endDateInput = document.getElementById("experience-end"); // End date input field
-  const currentCheckbox = document.getElementById("experience-current"); // Checkbox for "Currently Working Here"
+  const currentCheckbox = document.getElementById("experience-current"); // "Currently Working" checkbox
 
   // ✅ Ensure Modal is Hidden on Load
   experienceModal.style.display = "none";
@@ -70,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅ Save Entry in Global Array & Local Storage
     experienceEntries.push(newEntry);
     localStorage.setItem("experienceData", JSON.stringify(experienceEntries));
-    openExperienceModalBtn.innerText = `View (${experienceEntries.length}) Entries`;
+    updateViewEntriesButton(); // Update button text
 
     // ✅ Update UI
     displayExperienceEntries();
@@ -112,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
           JSON.stringify(experienceEntries)
         ); // Update localStorage
         displayExperienceEntries(); // Refresh list
-        updateViewEntriesButton(); // update View entries button text
+        updateViewEntriesButton(); // Update button text
       });
     });
   }
@@ -133,7 +164,10 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateViewEntriesButton() {
     openExperienceModalBtn.innerText = `View (${experienceEntries.length}) Entries`;
   }
+
+  // ✅ Initialize UI with stored data
   updateViewEntriesButton();
+
   // ✅ Attach Event Listener to Save Button
   saveExperienceBtn.addEventListener("click", saveExperienceEntry);
 });

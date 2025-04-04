@@ -1,14 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const saveAndNextButton = document.getElementById("next-btn-summary");
+  const prevButton = document.getElementById("prev-btn-summary");
+
   // 📌 Get modal elements
   const summaryModal = document.getElementById("summary-modal");
   const openModalBtn = document.getElementById("open-summary-modal");
   const closeModalBtn = document.querySelector(".close-btn");
   const summaryList = document.getElementById("summary-list");
-  const summaryTextarea = document.getElementById("summary-text");
+
   const charCounter = document.getElementById("char-counter");
   const maxChars = 300; // 🔢 Maximum character limit for summary
+  const summaryTextarea = document.getElementById("summary-text");
 
   summaryModal.style.display = "none";
+
+  // ✅ Retrieve summary data from localStorage
+  const storedSummary = localStorage.getItem("summaryData") || "";
+  summaryTextarea.value = storedSummary;
+  charCounter.textContent = `${storedSummary.length}/${maxChars}`;
 
   // 📝 List of predefined summary suggestions
   const suggestions = [
@@ -33,6 +42,37 @@ document.addEventListener("DOMContentLoaded", function () {
     "Game developer with proficiency in Unity and Unreal Engine, passionate about immersive experiences.",
     "DevOps engineer with expertise in CI/CD pipelines, Kubernetes, and cloud deployment automation.",
   ];
+
+  // ✅ Handle Save and Next
+  saveAndNextButton.addEventListener("click", function () {
+    const summaryTextValue = summaryTextarea.value.trim();
+
+    if (summaryTextValue === "") {
+      alert("Please fill in the summary text.");
+      return;
+    }
+
+    // ✅ Save summary separately in localStorage
+    localStorage.setItem("summaryData", summaryTextValue);
+
+    // ✅ Navigate to the next section
+    const nextSectionId = saveAndNextButton.getAttribute("action-section");
+    if (nextSectionId) {
+      showSection(nextSectionId);
+    }
+  });
+
+  // ✅ Handle Previous button
+  prevButton.addEventListener("click", function () {
+    const prevSectionId = prevButton.getAttribute("action-section");
+    if (prevSectionId) {
+      showSection(prevSectionId);
+    }
+  });
+
+  //  ********* //
+  // MODAL LOGIC //
+  //  ********* //
 
   // 🟢 Open modal when button is clicked
   openModalBtn.addEventListener("click", function () {
@@ -66,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
     suggestions.forEach((text) => {
       const li = document.createElement("li");
       li.textContent = text;
+      li.classList.add("summary-item");
       li.addEventListener("click", function () {
         summaryTextarea.value = text; // 📝 Set selected summary text
         charCounter.textContent = `${text.length}/${maxChars}`;

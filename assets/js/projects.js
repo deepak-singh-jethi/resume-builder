@@ -1,22 +1,52 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // ✅ Retrieve stored projects from localStorage or initialize an empty array
+  const nextButton = document.getElementById("next-btn-projects");
+  const prevButton = document.getElementById("prev-btn-projects");
 
-  projectEntries = JSON.parse(localStorage.getItem("projectData")) || [];
+  // ✅ Handle "Previous" button click
+  prevButton.addEventListener("click", function () {
+    const prevSectionId = prevButton.getAttribute("action-section");
+    if (prevSectionId) {
+      showSection(prevSectionId); // Show the previous section
+    }
+  });
+
+  // ✅ Handle "save and Next" button click
+  nextButton.addEventListener("click", function () {
+    const projectState = localStorage.getItem("projectState");
+    if (projectState === "yes") saveProjectEntry(); // Save the project entry
+
+    const nextSectionId = nextButton.getAttribute("action-section");
+    if (nextSectionId) {
+      showSection(nextSectionId); // Show the next section
+    }
+  });
+
+  // ✅ Retrieve stored project entries safely
+  function getStoredProjectData() {
+    try {
+      return JSON.parse(localStorage.getItem("projectData")) || [];
+    } catch (error) {
+      console.error("Invalid JSON in localStorage:", error);
+      return [];
+    }
+  }
+
+  let projectEntries = getStoredProjectData();
 
   // ✅ Modal Elements
-  const projectModal = document.getElementById("project-modal");
-  const openProjectModalBtn = document.getElementById("open-project-modal");
-  const closeProjectModalBtn = document.getElementById("close-project-modal");
-  const projectModalList = document.getElementById("project-modal-list");
-  const saveProjectBtn = document.getElementById("save-project");
+  const projectModal = document.getElementById("project-modal"); // Modal container
+  const openProjectModalBtn = document.getElementById("open-project-modal"); // Open modal button
+  const closeProjectModalBtn = document.getElementById("close-project-modal"); // Close modal button
+  const projectModalList = document.getElementById("project-modal-list"); // Table to display projects
+  const saveProjectBtn = document.getElementById("save-project"); // Save button
 
   // ✅ Ensure Modal is Hidden on Load
   projectModal.style.display = "none";
 
-  // ✅ Open Modal on Click
+  // ✅ Open Modal on Click (Displays the project list)
   openProjectModalBtn.addEventListener("click", function () {
-    projectModal.style.display = "flex";
-    displayProjectEntries();
+    projectModal.style.display = "flex"; // Show modal
+    displayProjectEntries(); // Load existing projects
   });
 
   // ✅ Close Modal on "X" Click
@@ -24,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
     projectModal.style.display = "none";
   });
 
-  // ✅ Close Modal When Clicking Outside
+  // ✅ Close Modal When Clicking Outside of It
   window.addEventListener("click", function (event) {
     if (event.target === projectModal) {
       projectModal.style.display = "none";
@@ -41,31 +71,33 @@ document.addEventListener("DOMContentLoaded", function () {
         .value.trim(),
     };
 
-    // ✅ Validation
+    // ✅ Validation: Ensure required fields are filled
     if (!newEntry.title || !newEntry.description) {
       alert("Please enter at least the project title and description.");
       return;
     }
 
-    // ✅ Save Entry
+    // ✅ Save Entry in Global Array & Local Storage
     projectEntries.push(newEntry);
     localStorage.setItem("projectData", JSON.stringify(projectEntries));
+    updateViewProjectsButton(); // Update button text
 
     // ✅ Update UI
     displayProjectEntries();
-    clearProjectForm();
-    updateViewProjectsButton();
+    clearProjectForm(); // Clear the form after saving
   }
 
-  // ✅ Function to Display Projects
+  // ✅ Function to Display Project Entries in Modal Table
   function displayProjectEntries() {
-    projectModalList.innerHTML = "";
+    projectModalList.innerHTML = ""; // Clear previous list
 
+    // ✅ If no entries exist, display a message
     if (projectEntries.length === 0) {
-      projectModalList.innerHTML = `<tr><td colspan="5">No projects added yet.</td></tr>`;
+      projectModalList.innerHTML = `<tr><td colspan="3">No projects added yet.</td></tr>`;
       return;
     }
 
+    // ✅ Populate Table with Entries
     projectEntries.forEach((entry, index) => {
       const row = document.createElement("tr");
       row.innerHTML = `
@@ -83,16 +115,16 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅ Attach Event Listeners to Remove Buttons
     document.querySelectorAll(".remove-project").forEach((btn) => {
       btn.addEventListener("click", function () {
-        const index = parseInt(btn.getAttribute("data-index"));
-        projectEntries.splice(index, 1);
-        localStorage.setItem("projectData", JSON.stringify(projectEntries));
-        displayProjectEntries();
-        updateViewProjectsButton();
+        const index = parseInt(btn.getAttribute("data-index")); // Get entry index
+        projectEntries.splice(index, 1); // Remove entry from array
+        localStorage.setItem("projectData", JSON.stringify(projectEntries)); // Update localStorage
+        displayProjectEntries(); // Refresh list
+        updateViewProjectsButton(); // Update button text
       });
     });
   }
 
-  // ✅ Function to Clear Form
+  // ✅ Function to Clear Form Fields
   function clearProjectForm() {
     document.getElementById("project-title").value = "";
     document.getElementById("project-description").value = "";
@@ -104,6 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
     openProjectModalBtn.innerText = `View (${projectEntries.length}) Projects`;
   }
 
+  // ✅ Initialize UI with stored data
   updateViewProjectsButton();
 
   // ✅ Attach Event Listener to Save Button
