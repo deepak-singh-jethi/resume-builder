@@ -1,26 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // ✅ Show/Hide Experience Form Based on Radio Selection
-  const experienceYesRadio = document.getElementById("experience-yes");
-  const experienceNoRadio = document.getElementById("experience-no");
-  const experienceForm = document.querySelector(".experience-form");
-
-  // Initially hide the experience form
-  experienceForm.style.display = "none";
-
-  // When "Yes" is selected, show the experience form
-  experienceYesRadio.addEventListener("change", function () {
-    if (this.checked) {
-      experienceForm.style.display = "block"; // Show experience form
-    }
-  });
-
-  // When "No" is selected, hide the experience form
-  experienceNoRadio.addEventListener("change", function () {
-    if (this.checked) {
-      experienceForm.style.display = "none"; // Hide experience form
-    }
-  });
-
   // ✅ Retrieve stored experience entries from localStorage (or set to global array if none exist)
   experienceEntries = JSON.parse(localStorage.getItem("experienceData")) || [];
 

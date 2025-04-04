@@ -1,26 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // ✅ Show/Hide Certificate Form Based on Radio Selection
-  const certificateYesRadio = document.getElementById("certificate-yes");
-  const certificateNoRadio = document.getElementById("certificate-no");
-  const certificateForm = document.querySelector(".certificate-form");
-
-  // Initially hide the certificate form
-  certificateForm.style.display = "none";
-
-  // When "Yes" is selected, show the certificate form
-  certificateYesRadio.addEventListener("change", function () {
-    if (this.checked) {
-      certificateForm.style.display = "block"; // Show certificate form
-    }
-  });
-
-  // When "No" is selected, hide the certificate form
-  certificateNoRadio.addEventListener("change", function () {
-    if (this.checked) {
-      certificateForm.style.display = "none"; // Hide certificate form
-    }
-  });
-
   // ✅ Retrieve stored certificates from localStorage or initialize an empty array
   certificateEntries =
     JSON.parse(localStorage.getItem("certificateData")) || [];

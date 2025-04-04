@@ -1,29 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // ✅ Show/Hide project Form Based on Radio Selection
-  const projectYesRadio = document.getElementById("project-yes");
-  const projectNoRadio = document.getElementById("project-no");
-  const projectForm = document.querySelector(".projects-form");
-
-  // Initially hide the project form
-  projectForm.style.display = "none";
-
-  // When "Yes" is selected, show the project form
-  projectYesRadio.addEventListener("change", function () {
-    console.log("Yes radio button clicked");
-
-    if (this.checked) {
-      projectForm.style.display = "block"; // Show project form
-    }
-  });
-
-  // When "No" is selected, hide the project form
-  projectNoRadio.addEventListener("change", function () {
-    console.log("No radio button clicked");
-    if (this.checked) {
-      projectForm.style.display = "none"; // Hide project form
-    }
-  });
-
   // ✅ Retrieve stored projects from localStorage or initialize an empty array
 
   projectEntries = JSON.parse(localStorage.getItem("projectData")) || [];
