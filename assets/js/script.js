@@ -2,8 +2,7 @@
 /* 🚀 Resume Form Handler Script 🚀 */
 /* -------------------------------- */
 
-// ✅ Manages Progress Bar, Sidebar Navigation & Form Data Sync
-
+// ✅ Global Object for Form Data
 let myData = {
   contactInfo: {},
   summary: {},
@@ -39,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ✅ Restore saved form data from localStorage
   const savedData = localStorage.getItem("resumeData");
   if (savedData) {
-    myData = JSON.parse(savedData);
+    myData = JSON.parse(savedData) || {};
 
     educationEntries = myData.education || [];
     experienceEntries = myData.experience || [];
@@ -52,46 +51,38 @@ document.addEventListener("DOMContentLoaded", function () {
     personalInfo = myData.personalInfo || {};
 
     console.log("Loaded Saved Data:", myData);
+  }
 
-    // ✅ Autofill form fields if data exists
-    if (myData.contactInfo) {
-      document.getElementById("full-name").value =
-        myData.contactInfo.fullName || "";
-      document.getElementById("email").value = myData.contactInfo.email || "";
-      document.getElementById("phone").value = myData.contactInfo.phone || "";
-      document.getElementById("city-name").value =
-        myData.contactInfo.city || "";
-      document.getElementById("country-name").value =
-        myData.contactInfo.country || "";
-      document.getElementById("pin-code").value =
-        myData.contactInfo.pinCode || "";
-      document.getElementById("linkedin").value =
-        myData.contactInfo.linkedin || "";
-      document.getElementById("github").value = myData.contactInfo.github || "";
-      document.getElementById("website").value =
-        myData.contactInfo.website || "";
+  // ✅ Autofill form fields if data exists
+  function autofillFields() {
+    if (contactInfo) {
+      document.getElementById("full-name").value = contactInfo.fullName || "";
+      document.getElementById("email").value = contactInfo.email || "";
+      document.getElementById("phone").value = contactInfo.phone || "";
+      document.getElementById("city-name").value = contactInfo.city || "";
+      document.getElementById("country-name").value = contactInfo.country || "";
+      document.getElementById("pin-code").value = contactInfo.pinCode || "";
+      document.getElementById("linkedin").value = contactInfo.linkedin || "";
+      document.getElementById("github").value = contactInfo.github || "";
+      document.getElementById("website").value = contactInfo.website || "";
     }
 
-    if (myData.summary) {
-      document.getElementById("summary-text").value = myData.summary.text || "";
+    if (summary) {
+      document.getElementById("summary-text").value = summary.text || "";
     }
 
-    if (myData.personalInfo) {
-      document.getElementById("dob").value = myData.personalInfo.dob || "";
-      document.getElementById("gender").value =
-        myData.personalInfo.gender || "";
+    if (personalInfo) {
+      document.getElementById("dob").value = personalInfo.dob || "";
+      document.getElementById("gender").value = personalInfo.gender || "";
       document.getElementById("marital-status").value =
-        myData.personalInfo.maritalStatus || "";
-      document.getElementById("religion").value =
-        myData.personalInfo.religion || "";
-      document.getElementById("father").value =
-        myData.personalInfo.father || "";
-      document.getElementById("spouse").value =
-        myData.personalInfo.spouse || "";
-      document.getElementById("mother").value =
-        myData.personalInfo.mother || "";
+        personalInfo.maritalStatus || "";
+      document.getElementById("religion").value = personalInfo.religion || "";
+      document.getElementById("father").value = personalInfo.father || "";
+      document.getElementById("spouse").value = personalInfo.spouse || "";
+      document.getElementById("mother").value = personalInfo.mother || "";
     }
   }
+  autofillFields();
 
   /**
    * ✅ Save Form Data Before Switching Sections
@@ -100,8 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const activeSection =
       sidebarItems[currentSectionIndex].getAttribute("data-section");
 
-    // Load previous data to prevent overwriting
-    let storedData = JSON.parse(localStorage.getItem("resumeData")) || {};
+    let storedData = JSON.parse(localStorage.getItem("resumeData")) || myData;
 
     switch (activeSection) {
       case "contact":
@@ -161,7 +151,6 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
     }
 
-    // ✅ Save merged data to localStorage
     localStorage.setItem("resumeData", JSON.stringify(storedData));
     console.log("Updated Data Saved in localStorage:", storedData);
   }
@@ -170,11 +159,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function showSectionByIndex(index) {
     if (index < 0 || index >= sidebarItems.length) return;
 
-    const targetSection = sidebarItems[index].getAttribute("data-section");
-
     formSections.forEach((section) => (section.style.display = "none"));
-    const activeSection = document.getElementById(targetSection);
-    if (activeSection) activeSection.style.display = "block";
+    const targetSection = document.getElementById(
+      sidebarItems[index].getAttribute("data-section")
+    );
+    if (targetSection) targetSection.style.display = "block";
 
     sidebarItems.forEach((item, i) =>
       item.classList.toggle("active", i === index)
@@ -182,24 +171,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     prevBtn.disabled = index === 0;
 
-    if (index === sidebarItems.length - 1) {
-      nextBtn.innerText = "Finish";
-      nextBtn.replaceWith(nextBtn.cloneNode(true));
-      nextBtn = document.getElementById("next-btn");
+    nextBtn.innerText = index === sidebarItems.length - 1 ? "Finish" : "Next";
 
-      nextBtn.addEventListener("click", () => {
-        saveCurrentFormData();
-      });
-    } else {
-      nextBtn.innerText = "Next";
-      nextBtn.replaceWith(nextBtn.cloneNode(true));
-      nextBtn = document.getElementById("next-btn");
+    nextBtn.replaceWith(nextBtn.cloneNode(true));
+    nextBtn = document.getElementById("next-btn");
 
-      nextBtn.addEventListener("click", () => {
-        saveCurrentFormData();
-        showSectionByIndex(index + 1);
-      });
-    }
+    nextBtn.addEventListener("click", () => {
+      saveCurrentFormData();
+      if (index < sidebarItems.length - 1) showSectionByIndex(index + 1);
+    });
 
     prevBtn.replaceWith(prevBtn.cloneNode(true));
     prevBtn = document.getElementById("prev-btn");
@@ -237,12 +217,10 @@ document.addEventListener("DOMContentLoaded", function () {
 /* -------------------------------- */
 /* 🚀 Progress Bar Logic 🚀 */
 /* -------------------------------- */
-
 const totalSteps = 9;
 function updateProgress(currentStep) {
-  const progressBar = document.getElementById("progressBar");
-  const progressStep = document.getElementById("progressStep");
-
-  progressBar.style.width = (currentStep / totalSteps) * 100 + "%";
-  progressStep.innerText = currentStep + "/" + totalSteps;
+  document.getElementById("progressBar").style.width =
+    (currentStep / totalSteps) * 100 + "%";
+  document.getElementById("progressStep").innerText =
+    currentStep + "/" + totalSteps;
 }

@@ -51,6 +51,7 @@
 .input-group textarea {
   width: 100%;
   padding: 8px;
+  height: 40px;
   border: 1px solid var(--input-border);
   border-radius: 5px;
   font-size: 14px;
