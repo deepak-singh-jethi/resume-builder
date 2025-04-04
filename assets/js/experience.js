@@ -12,14 +12,50 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ✅ Handle save Next button navigation
   nextBtn.addEventListener("click", function () {
-    const experienceState = localStorage.getItem("experienceState");
-    if (experienceState === "yes") saveExperienceEntry(); // Save the experience entry
+    const experienceState = localStorage.getItem("experienceState"); // "yes" or "no"
+    const experienceData =
+      JSON.parse(localStorage.getItem("experienceData")) || []; // Get stored experiences
+    const hasSavedExperiences = experienceData.length > 0; // Check if experiences exist
 
-    const nextSectionId = nextBtn.getAttribute("action-section");
-    if (nextSectionId) {
-      showSection(nextSectionId); // Show the next section
+    const company = document.getElementById("experience-company").value.trim();
+    const role = document.getElementById("experience-role").value.trim();
+    const startDate = document.getElementById("experience-start").value.trim();
+    const hasInput = company || role || startDate; // Check if input fields have data
+    // if experienceState is "no" and no input is given, just move to next section
+    if (experienceState === "no") {
+      moveToNextSection();
+      return;
+    }
+
+    // ✅ Case 1: Experiences exist & inputs are empty → Move to next section
+    if (experienceState === "yes" && hasSavedExperiences && !hasInput) {
+      moveToNextSection();
+      return;
+    }
+
+    // ✅ Case 2: No experiences saved but inputs are filled → Save & Move
+    if (experienceState === "yes" && !hasSavedExperiences && hasInput) {
+      saveExperienceEntry();
+      moveToNextSection();
+      return;
+    }
+
+    // ✅ Case 3: No experiences exist & inputs are empty → Show alert & stop
+    if (!hasSavedExperiences && !hasInput) {
+      alert(
+        "Please add an experience or fill in at least one required field before proceeding."
+      );
+      return;
     }
   });
+
+  // Function to handle navigation to the next section
+  function moveToNextSection() {
+    const nextSectionId = nextBtn.getAttribute("action-section");
+    if (nextSectionId) {
+      showSection(nextSectionId);
+    }
+  }
 
   // ✅ Retrieve stored experience entries safely
   function getStoredExperienceData() {

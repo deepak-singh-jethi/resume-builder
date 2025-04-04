@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (activeItem) {
       activeItem.classList.add("active");
     }
+    // Update progress bar
+    handleProgressBar(sectionId);
   }
 
   // Attach event listeners

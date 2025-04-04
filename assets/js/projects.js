@@ -12,14 +12,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ✅ Handle "save and Next" button click
   nextButton.addEventListener("click", function () {
-    const projectState = localStorage.getItem("projectState");
-    if (projectState === "yes") saveProjectEntry(); // Save the project entry
+    const projectState = localStorage.getItem("projectState"); // "yes" or "no"
+    const projectData = JSON.parse(localStorage.getItem("projectData")) || []; // Existing projects array
+    const hasSavedProjects = projectData.length > 0; // Check if projects exist
 
-    const nextSectionId = nextButton.getAttribute("action-section");
-    if (nextSectionId) {
-      showSection(nextSectionId); // Show the next section
+    const title = document.getElementById("project-title").value.trim();
+    const description = document
+      .getElementById("project-description")
+      .value.trim();
+    const achievements = document
+      .getElementById("project-achievements")
+      .value.trim();
+    const hasInput = title || description || achievements; // Check if any field has input
+    // if projectState is "no" and no input is given, just move to next section
+    if (projectState === "no") {
+      moveToNextSection();
+      return;
+    }
+
+    // ✅ Case 1: Projects exist & inputs are empty → Move to next section
+    if (projectState === "yes" && hasSavedProjects && !hasInput) {
+      moveToNextSection();
+      return;
+    }
+
+    // ✅ Case 2: No projects saved but inputs are filled → Save & Move
+    if (projectState === "yes" && !hasSavedProjects && hasInput) {
+      saveProjectEntry();
+      moveToNextSection();
+      return;
+    }
+
+    // ✅ Case 3: No projects exist & inputs are empty → Show alert & stop
+    if (!hasSavedProjects && !hasInput) {
+      alert(
+        "Please add a project or fill in at least one field before proceeding."
+      );
+      return;
     }
   });
+
+  // Function to handle navigation to the next section
+  function moveToNextSection() {
+    const nextSectionId = nextButton.getAttribute("action-section");
+    if (nextSectionId) {
+      showSection(nextSectionId);
+    }
+  }
 
   // ✅ Retrieve stored project entries safely
   function getStoredProjectData() {

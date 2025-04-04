@@ -1,6 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
   const nextButton = document.getElementById("next-btn-certifications");
   const prevButton = document.getElementById("prev-btn-certifications");
+
+  const certificateModal = document.getElementById("certificate-modal"); // Modal container
+  const openCertificateModalBtn = document.getElementById(
+    "open-certificate-modal"
+  );
+  const closeCertificateModalBtn = document.getElementById(
+    "close-certificate-modal"
+  ); // Close modal button
+  const certificateModalList = document.getElementById(
+    "certificate-modal-list"
+  ); // Table to display certificates
+  const saveCertificateBtn = document.getElementById("save-certificate"); // Save button
+
+  // ✅ Ensure Modal is Hidden on Load
+  certificateModal.style.display = "none";
+
   // ✅ Handle "Previous" button navigation
   prevButton.addEventListener("click", function () {
     const prevSectionId = prevButton.getAttribute("action-section");
@@ -10,12 +26,49 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   // ✅ Handle "save and Next" button navigation
   nextButton.addEventListener("click", function () {
-    saveCertificateEntry(); // Save the certificate entry
-    const nextSectionId = nextButton.getAttribute("action-section");
-    if (nextSectionId) {
-      showSection(nextSectionId); // Show the next section
+    const certificateState = localStorage.getItem("certificateState"); // "yes" or "no"
+    const certificateData =
+      JSON.parse(localStorage.getItem("certificateData")) || []; // Get stored certificates
+    const hasSavedCertificates = certificateData.length > 0; // Check if certificates exist
+
+    const details = document.getElementById("certificate-details").value.trim();
+    const hasInput = details.length > 0; // Check if input is entered
+
+    // if certificateState is "no" and no input is given, just move to next section
+    if (certificateState === "no") {
+      moveToNextSection();
+      return;
+    }
+
+    // ✅ Case 1: Certificates exist & inputs are empty → Move to next section
+    if (certificateState === "yes" && hasSavedCertificates && !hasInput) {
+      moveToNextSection();
+      return;
+    }
+
+    // ✅ Case 2: No certificates saved but inputs are filled → Save & Move
+    if (certificateState === "yes" && !hasSavedCertificates && hasInput) {
+      saveCertificateEntry();
+      moveToNextSection();
+      return;
+    }
+
+    // ✅ Case 3: No certificates exist & inputs are empty → Show alert & stop
+    if (!hasSavedCertificates && !hasInput) {
+      alert(
+        "Please add a certification or fill in at least one field before proceeding."
+      );
+      return;
     }
   });
+
+  // Function to handle navigation to the next section
+  function moveToNextSection() {
+    const nextSectionId = nextButton.getAttribute("action-section");
+    if (nextSectionId) {
+      showSection(nextSectionId);
+    }
+  }
 
   // ✅ Retrieve stored certificate entries safely
   function getStoredCertificateData() {
@@ -28,22 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   let certificateEntries = getStoredCertificateData();
-
-  // ✅ Modal Elements
-  const certificateModal = document.getElementById("certificate-modal"); // Modal container
-  const openCertificateModalBtn = document.getElementById(
-    "open-certificate-modal"
-  ); // Open modal button
-  const closeCertificateModalBtn = document.getElementById(
-    "close-certificate-modal"
-  ); // Close modal button
-  const certificateModalList = document.getElementById(
-    "certificate-modal-list"
-  ); // Table to display certificates
-  const saveCertificateBtn = document.getElementById("save-certificate"); // Save button
-
-  // ✅ Ensure Modal is Hidden on Load
-  certificateModal.style.display = "none";
 
   // ✅ Open Modal on Click (Displays the certification list)
   openCertificateModalBtn.addEventListener("click", function () {

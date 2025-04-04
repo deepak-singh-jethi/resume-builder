@@ -1,9 +1,53 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // ✅ Retrieve last visited section (or default to "contact")
-  const defaultSection = localStorage.getItem("currentSection") || "contact";
-  showSection(defaultSection);
+  const previewResumeBtn = document.getElementById("preview-resume-btn");
+  const certificateModal = document.getElementById("certificate-modal");
+  console.log(certificateModal);
+
+  //close all modals on load
+  certificateModal.style.display = "none"; // Hide modal on load
+
+  previewResumeBtn.addEventListener("click", function (event) {
+    window.location.href = "resume-preview.html";
+  });
+  handleProgressBar();
 });
 
+// ********* //
+// ** function to handle progress bar ** //
+// ********** //
+
+function handleProgressBar(sectionId = "contact") {
+  const progressBar = document.getElementById("progressBar");
+  const progressStep = document.getElementById("progressStep");
+
+  console.log(sectionId);
+
+  // ! note: for any change in the sidebar, update this array
+  const formSections = [
+    "contact",
+    "summary",
+    "education",
+    "experience",
+    "projects",
+    "certifications",
+    "skills",
+    "hobbies",
+    "personal-info",
+  ];
+  // check the index of sectionId in the array
+  let currentStep = formSections.indexOf(sectionId) + 1; // +1 to convert to 1-based index
+
+  // Add more sections if needed
+  const totalSteps = formSections.length;
+
+  let progressPercentage = (currentStep / totalSteps) * 100;
+  progressBar.style.width = `${progressPercentage}%`;
+  progressStep.textContent = `${currentStep}/${totalSteps}`;
+}
+
+// ********* //
+// ** function to show the selected section ** //
+// ********** //
 function showSection(sectionId) {
   sectionId = sectionId || "contact"; // Default to "contact" if no ID is provided
 
@@ -20,6 +64,7 @@ function showSection(sectionId) {
     );
   });
 
-  // ✅ Save current section to localStorage
-  localStorage.setItem("currentSection", sectionId);
+  console.log(sectionId);
+
+  handleProgressBar(sectionId); // 🔥 Update progress bar
 }

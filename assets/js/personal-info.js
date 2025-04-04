@@ -6,15 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const fatherName = document.getElementById("father");
   const spouseName = document.getElementById("spouse");
   const motherName = document.getElementById("mother");
-  const nextButton = document.getElementById("next-btn");
-
-  const nextButtonSection = nextButton.getAttribute("data-section");
-  console.log(nextButtonSection);
+  const saveButtonAndPreview = document.getElementById(
+    "next-btn-personal-info"
+  );
 
   // ✅ Retrieve stored personal info or initialize an empty object
-  const storedData = JSON.parse(localStorage.getItem("personalData")) || {};
-
-  let personalInfo = storedData || {
+  let personalInfo = JSON.parse(localStorage.getItem("personalData")) || {
     dob: "",
     gender: "",
     maritalStatus: "",
@@ -26,10 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function autofillFields() {
     // ✅ Ensure dob has a valid format
-    dob.value = personalInfo.dob
-      ? personalInfo.dob
-      : new Date().toISOString().split("T")[0];
-
+    dob.value = personalInfo.dob || "";
     religion.value = personalInfo.religion || "";
     maritalStatus.value = personalInfo.maritalStatus || "";
     gender.value = personalInfo.gender || "";
@@ -41,44 +35,45 @@ document.addEventListener("DOMContentLoaded", function () {
   autofillFields();
 
   // ✅ Save form data on next button click
-  nextButton.addEventListener("click", function () {
-    if (nextButtonSection === "personal-info") {
-      console.log("Saving personal info...");
-      const newPersonalInfo = {
-        dob: dob.value || new Date().toISOString().split("T")[0], // Ensure valid date
-        religion: religion.value,
-        gender: gender.value,
-        maritalStatus: maritalStatus.value,
-        father: fatherName.value,
-        spouse: spouseName.value,
-        mother: motherName.value,
-      };
-      personalInfo = newPersonalInfo;
-      localStorage.setItem("personalData", JSON.stringify(personalInfo)); // ✅ Fixed variable name
-    }
+  saveButtonAndPreview.addEventListener("click", function () {
+    const newPersonalInfo = {
+      dob: dob.value || "", // Ensure valid date
+      religion: religion.value,
+      gender: gender.value,
+      maritalStatus: maritalStatus.value,
+      father: fatherName.value,
+      spouse: spouseName.value,
+      mother: motherName.value,
+    };
+
+    // ✅ Save updated personal info in localStorage
+    localStorage.setItem("personalData", JSON.stringify(newPersonalInfo));
+    // ✅ Navigate to resume-preview.html
+    window.location.href = "resume-preview.html";
   });
 
-  function setupToggle(sectionId, toggleId, inputId, defaultText) {
+  // ✅ Function to toggle optional fields
+  function setupToggle(toggleId, inputId, defaultText) {
     const toggleLabel = document.getElementById(toggleId);
     const inputField = document.getElementById(inputId);
+
+    if (!toggleLabel || !inputField) return; // Ensure elements exist
 
     toggleLabel.addEventListener("click", function () {
       const isHidden = inputField.classList.contains("hidden");
 
       if (isHidden) {
         inputField.classList.remove("hidden");
-        inputField.classList.add("visible");
         toggleLabel.textContent = `- ${defaultText}`;
       } else {
-        inputField.classList.remove("visible");
         inputField.classList.add("hidden");
         toggleLabel.textContent = `+ ${defaultText} (optional)`;
       }
     });
   }
 
-  // Initialize toggles for optional fields
-  setupToggle("father-section", "father-toggle", "father-input", "Father Name");
-  setupToggle("spouse-section", "spouse-toggle", "spouse-input", "Spouse Name");
-  setupToggle("mother-section", "mother-toggle", "mother-input", "Mother Name");
+  // ✅ Initialize toggles for optional fields
+  setupToggle("father-toggle", "father", "Father Name");
+  setupToggle("spouse-toggle", "spouse", "Spouse Name");
+  setupToggle("mother-toggle", "mother", "Mother Name");
 });

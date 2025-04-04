@@ -200,7 +200,7 @@
               </div>
 
               <!-- ! 2- Professional Summary Section -->
-              <div class="form-section" id="summary">
+              <div class="form-section" id="summary" style="display: none">
                 <h2>Professional Summary</h2>
 
                 <!-- Summary Textarea -->
@@ -235,7 +235,7 @@
                 </div>
 
                 <!-- Summary Suggestions Modal -->
-                <div id="summary-modal" class="modal">
+                <div id="summary-modal" class="modal" style="display: none">
                   <div class="modal-content">
                     <span class="close-btn">&times;</span>
                     <h3>Select a Suggested Summary</h3>
@@ -247,7 +247,7 @@
               </div>
 
               <!-- ! 3- Education Information Section -->
-              <div class="form-section" id="education">
+              <div class="form-section" id="education" style="display: none">
                 <h2>Educational Information</h2>
 
                 <!-- 📌 Education Form -->
@@ -354,7 +354,7 @@
               </div>
 
               <!--  ! 3b  Education Entries Modal -->
-              <div id="education-modal" class="modal">
+              <div id="education-modal" class="modal" style="display: none">
                 <div class="modal-content">
                   <span class="close-btn" id="close-education-modal"
                     >&times;</span
@@ -381,7 +381,7 @@
               </div>
 
               <!--! 4- Experience Section -->
-              <div class="form-section" id="experience">
+              <div class="form-section" id="experience" style="display: none">
                 <!-- !option to open Experience  or not -->
                 <div class="form-option-container">
                   <h2 class="form-question">Do you have any experience?</h2>
@@ -509,7 +509,7 @@
               </div>
 
               <!-- ! 4b Experience Entries Modal -->
-              <div id="experience-modal" class="modal">
+              <div id="experience-modal" class="modal" style="display: none">
                 <div class="modal-content">
                   <span class="close-btn" id="close-experience-modal"
                     >&times;</span
@@ -535,7 +535,7 @@
               </div>
 
               <!--! 5- Projects Section -->
-              <div class="form-section" id="projects">
+              <div class="form-section" id="projects" style="display: none">
                 <!-- !option to open Experience  or not -->
                 <div class="form-option-container">
                   <h2 class="form-question">Do you have any projects?</h2>
@@ -617,7 +617,7 @@
               </div>
 
               <!-- ! 5b Projects Entries Modal -->
-              <div id="project-modal" class="modal">
+              <div id="project-modal" class="modal" style="display: none">
                 <div class="modal-content">
                   <span class="close-btn" id="close-project-modal"
                     >&times;</span
@@ -639,7 +639,10 @@
               </div>
 
               <!-- ! 6- Certification Information Section -->
-              <div class="form-section" id="certifications">
+              <div
+                class="form-section"
+                id="certifications"
+                style="display: none">
                 <!-- !option to open certification  or not -->
                 <div class="form-option-container">
                   <h2 class="form-question">Do you have any Certification?</h2>
@@ -712,7 +715,7 @@
                 </div>
               </div>
               <!-- ! 7- certificate  Entries Modal -->
-              <div id="certificate-modal" class="modal">
+              <div id="certificate-modal" class="modal" style="display: none">
                 <div class="modal-content">
                   <span class="close-btn" id="close-certificate-modal"
                     >&times;</span
@@ -733,7 +736,10 @@
               </div>
 
               <!-- ! 8- Skills Section -->
-              <div class="form-section skills-form" id="skills">
+              <div
+                class="form-section skills-form"
+                id="skills"
+                style="display: none">
                 <h2>Skills</h2>
                 <input
                   type="text"
@@ -760,7 +766,10 @@
               </div>
 
               <!-- ! 9- Hobbies Section -->
-              <div class="form-section hobbies-form" id="hobbies">
+              <div
+                class="form-section hobbies-form"
+                id="hobbies"
+                style="display: none">
                 <h2>Hobbies</h2>
                 <input
                   type="text"
@@ -771,6 +780,7 @@
                   id="hobbies-suggestions"
                   class="suggestions-dropdown"></div>
 
+                <div id="hobbies-list" class="hobbies-list"></div>
                 <div class="form-navigation">
                   <button
                     type="button"
@@ -785,10 +795,12 @@
                     Save & Next
                   </button>
                 </div>
-                <div id="hobbies-list" class="hobbies-list"></div>
               </div>
               <!-- ! 10 - personal info Section -->
-              <div class="form-section hobbies-form" id="personal-info">
+              <div
+                class="form-section hobbies-form"
+                id="personal-info"
+                style="display: none">
                 <h2>Personal Information</h2>
 
                 <!-- Date of Birth & Gender -->
@@ -886,9 +898,8 @@
                   <button
                     type="button"
                     id="next-btn-personal-info"
-                    action-section=""
-                    disabled>
-                    Save & Next
+                    action-section="">
+                    Save & Preview
                   </button>
                 </div>
               </div>
@@ -917,7 +928,7 @@
     <script src="assets/js/certificate.js"></script>
     <script src="assets/js/skils.js"></script>
     <script src="assets/js/hobbies.js"></script>
-    <!-- <script src="assets/js/personal-info.js"></script> -->
+    <script src="assets/js/personal-info.js"></script>
     <script src="assets/js/radio-button-optional-form.js"></script>
     <script src="assets/js/sidebarNavigation.js"></script>
   </body>
