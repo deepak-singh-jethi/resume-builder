@@ -35,7 +35,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const hasInput = details.length > 0; // Check if input is entered
 
     // if certificateState is "no" and no input is given, just move to next section
-    if (certificateState === "no") {
+    if (
+      certificateState === "no" ||
+      certificateState === null ||
+      certificateState === undefined
+    ) {
       moveToNextSection();
       return;
     }

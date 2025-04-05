@@ -25,7 +25,11 @@ document.addEventListener("DOMContentLoaded", function () {
       .value.trim();
     const hasInput = title || description || achievements; // Check if any field has input
     // if projectState is "no" and no input is given, just move to next section
-    if (projectState === "no") {
+    if (
+      projectState === "no" ||
+      projectState === null ||
+      projectState === undefined
+    ) {
       moveToNextSection();
       return;
     }

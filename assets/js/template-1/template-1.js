@@ -135,10 +135,19 @@ function loadMainContent() {
       .map(
         (edu) => `
         <div class="template-1-main-details-div">
-          <h3>${edu.degree} in ${edu.specialization} <span class="template-1-date-range">(${edu.startYear} - ${edu.endYear}) </span></h3>
-          <p>${edu.institution}, ${edu.location}</p>
-          <p><strong>${edu.scoreType}:</strong> ${edu.score}</p>
-        </div>
+  <h3>${edu.degree} in ${edu.specialization} 
+    <span class="template-1-date-range">(${edu.startYear} - ${
+          edu.endYear
+        })</span>
+  </h3>
+  <p>${edu.institution}, ${edu.location} 
+    <span class="template-1-date-range">
+      (${edu.score}${
+          edu.scoreType === "Percentage" ? "%" : ` ${edu.scoreType}`
+        })
+    </span>
+  </p>
+</div>
       `
       )
       .join("");

@@ -22,7 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const startDate = document.getElementById("experience-start").value.trim();
     const hasInput = company || role || startDate; // Check if input fields have data
     // if experienceState is "no" and no input is given, just move to next section
-    if (experienceState === "no") {
+    if (
+      experienceState === "no" ||
+      experienceState === null ||
+      experienceState === undefined
+    ) {
       moveToNextSection();
       return;
     }
