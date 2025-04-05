@@ -93,6 +93,7 @@ body {
   flex: 1;
   padding: 40px;
   padding-top: 20px;
+  padding-bottom: 0px;
   background-color: var(--template-1-bg);
 }
 
