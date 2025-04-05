@@ -120,11 +120,7 @@ function loadMainContent() {
       .map(
         (exp) => `
         <div class="template-1-main-details-div">
-          <h3>${exp.role} at ${exp.company}</h3>
-          <div class="template-1-date-range">${formatDate(exp.startDate)} - ${
-          exp.endDate
-        }</div>
-          <p><strong>Industry:</strong> ${exp.industry}</p>
+          <h3>${exp.role} at ${exp.company} <span class="template-1-date-range">(${exp.startDate} - ${exp.endDate}) </span></h3>
           <p>${exp.description}</p>
         </div>
       `

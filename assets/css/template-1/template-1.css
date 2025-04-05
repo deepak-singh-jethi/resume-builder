@@ -29,6 +29,7 @@ body {
   overflow: hidden;
   box-sizing: border-box;
   padding-left: 260px;
+  align-items: stretch;
 }
 
 /* === Resume Sidebar === */
@@ -40,6 +41,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  height: auto;
   align-self: stretch; /* ✅ This makes it match parent height */
 }
 
