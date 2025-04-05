@@ -108,11 +108,11 @@ function loadMainContent() {
   const projects = JSON.parse(localStorage.getItem("projectData") || "[]");
 
   // === Summary ===
-  if (summary) {
-    mainContent.appendChild(
-      createSection("Professional Summary", `<p>${summary}</p>`)
-    );
-  }
+  // if (summary) {
+  //   mainContent.appendChild(
+  //     createSection("Professional Summary", `<p>${summary}</p>`)
+  //   );
+  // }
 
   // === Experience ===
   if (experience.length > 0) {
