@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const newEntry = {
       title: document.getElementById("project-title").value.trim(),
       description: document.getElementById("project-description").value.trim(),
-      technologies: document
+      achievements: document
         .getElementById("project-achievements")
         .value.trim(),
     };

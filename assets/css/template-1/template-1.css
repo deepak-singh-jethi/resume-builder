@@ -24,14 +24,11 @@ body {
 .template-1-resume {
   display: flex;
   width: 100%;
-  height: 100vh;
-  /* before downloading remove height: 100vh; so that resume can take entire height   after download give it again*/
+  min-height: 100vh; /* Use min-height instead of height for better fit */
   background-color: var(--template-1-bg);
-  overflow: auto;
+  overflow: hidden;
   box-sizing: border-box;
-  /* border: 5px solid gray; */
   padding-left: 260px;
-  /* before downloading remove this padding  after download give it again*/
 }
 
 /* === Resume Sidebar === */
@@ -42,7 +39,8 @@ body {
   border-right: 1px solid var(--template-1-border);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 2px;
+  align-self: stretch; /* ✅ This makes it match parent height */
 }
 
 .template-1-sidebar h2 {
@@ -64,7 +62,7 @@ body {
 .template-1-sidebar li {
   font-size: 14px;
   color: var(--template-1-secondary);
-  margin-bottom: 6px;
+  margin-block: 2px;
   line-height: 1.5;
 }
 
@@ -96,7 +94,7 @@ body {
 }
 
 .template-1-main-section {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .template-1-main-section h2 {

@@ -105,8 +105,7 @@ function loadMainContent() {
   const certifications = JSON.parse(
     localStorage.getItem("certificationsData") || "[]"
   );
-  const hobbies = JSON.parse(localStorage.getItem("hobbiesData") || "[]");
-  const skills = JSON.parse(localStorage.getItem("skillsData") || "[]");
+  const projects = JSON.parse(localStorage.getItem("projectData") || "[]");
 
   // === Summary ===
   if (summary) {
@@ -120,15 +119,15 @@ function loadMainContent() {
     const expHTML = experience
       .map(
         (exp) => `
-      <div class = "template-1-main-details-div">
-        <h3>${exp.role} at ${exp.company}</h3>
-        <div class="template-1-date-range">${formatDate(exp.startDate)} - ${
+        <div class="template-1-main-details-div">
+          <h3>${exp.role} at ${exp.company}</h3>
+          <div class="template-1-date-range">${formatDate(exp.startDate)} - ${
           exp.endDate
         }</div>
-        <p><strong>Industry:</strong> ${exp.industry}</p>
-        <p>${exp.description}</p>
-      </div>
-    `
+          <p><strong>Industry:</strong> ${exp.industry}</p>
+          <p>${exp.description}</p>
+        </div>
+      `
       )
       .join("");
     mainContent.appendChild(createSection("Experience", expHTML));
@@ -139,13 +138,12 @@ function loadMainContent() {
     const eduHTML = education
       .map(
         (edu) => `
-      <div class = "template-1-main-details-div">
-        <h3>${edu.degree} in ${edu.specialization}</h3>
-        <div class="template-1-date-range">${edu.startYear} - ${edu.endYear}</div>
-        <p>${edu.institution}, ${edu.location}</p>
-        <p><strong>${edu.scoreType}:</strong> ${edu.score}</p>
-      </div>
-    `
+        <div class="template-1-main-details-div">
+          <h3>${edu.degree} in ${edu.specialization} <span class="template-1-date-range">(${edu.startYear} - ${edu.endYear}) </span></h3>
+          <p>${edu.institution}, ${edu.location}</p>
+          <p><strong>${edu.scoreType}:</strong> ${edu.score}</p>
+        </div>
+      `
       )
       .join("");
     mainContent.appendChild(createSection("Education", eduHTML));
@@ -155,15 +153,32 @@ function loadMainContent() {
   if (certifications.length > 0) {
     const certHTML =
       "<ul class='template-1-bullet-list'>" +
-      certifications
-        .map(
-          (cert) => `
-      <li>${cert.details}</li>
-    `
-        )
-        .join("") +
+      certifications.map((cert) => `<li>${cert.details}</li>`).join("") +
       "</ul>";
     mainContent.appendChild(createSection("Certifications", certHTML));
+  }
+
+  // === Projects ===
+  if (projects.length > 0) {
+    const projectHTML = projects
+      .map(
+        (proj) => `
+        <div class="template-1-main-details-div">
+  <h3>${proj.title}</h3>
+  <p>${proj.description}</p>
+  ${
+    proj.achievements
+      ? `<p class="template-1-project-achievements">${proj.achievements
+          .replace(/\n/g, ", ")
+          .trim()}</p>`
+      : ""
+  }
+</div>
+
+      `
+      )
+      .join("");
+    mainContent.appendChild(createSection("Projects", projectHTML));
   }
 }
 
