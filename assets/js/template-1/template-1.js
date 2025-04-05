@@ -1,110 +1,230 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Retrieve all necessary data from localStorage
+function renderSidebar() {
+  const sidebar = document.getElementById("template-1-sidebar");
+
   const contactData = JSON.parse(localStorage.getItem("contactData")) || {};
-  const summaryData =
-    localStorage.getItem("summaryData") || "No summary available.";
   const skillsData = JSON.parse(localStorage.getItem("skillsData")) || [];
   const hobbiesData = JSON.parse(localStorage.getItem("hobbiesData")) || [];
-  const educationData = JSON.parse(localStorage.getItem("educationData")) || [];
-  const experienceData =
-    JSON.parse(localStorage.getItem("experienceData")) || [];
-  const certificationsData =
-    JSON.parse(localStorage.getItem("certificateData")) || [];
   const personalData = JSON.parse(localStorage.getItem("personalData")) || {};
+  const summaryData = localStorage.getItem("summaryData") || "";
 
-  console.log({
-    contactData,
-    summaryData,
-    skillsData,
-    hobbiesData,
-    educationData,
-    experienceData,
-    certificationsData,
-    personalData,
-  });
+  const fullName = contactData.fullName || "Your Name";
 
-  // If no essential contact data exists, alert and stop execution
-  if (!contactData.fullName) {
-    alert("No resume data found!");
-    return;
-  }
+  const createSection = (title, content) => {
+    if (!content || (Array.isArray(content) && content.length === 0)) return "";
+    return `
+      <div class="template-1-section">
+        <h2 class="template-1-heading">${title}</h2>
+        ${content}
+      </div>
+    `;
+  };
 
-  // Fill Contact Info
-  document.getElementById("name").textContent =
-    contactData.fullName || "Your Name";
-  document.getElementById("email").textContent =
-    contactData.email || "Email Not Provided";
-  document.getElementById("phone").textContent =
-    contactData.phone || "Phone Not Provided";
-  document.getElementById("location").textContent = `${
-    contactData.city || ""
-  }, ${contactData.country || ""}`.trim();
-  document.getElementById("summary").textContent = summaryData;
+  const renderLinks = () => {
+    const links = ["linkedin", "github", "website"];
+    let linkHTML = "";
 
-  // Fill Skills
-  const skillsList = document.getElementById("skills-list");
-  skillsData.forEach((skill) => {
-    let li = document.createElement("li");
-    li.textContent = skill;
-    skillsList.appendChild(li);
-  });
-
-  // Fill Hobbies
-  const hobbiesList = document.getElementById("hobbies-list");
-  hobbiesData.forEach((hobby) => {
-    let li = document.createElement("li");
-    li.textContent = hobby;
-    hobbiesList.appendChild(li);
-  });
-
-  // Fill Education
-  const educationList = document.getElementById("education-list");
-  if (educationData.length > 0) {
-    educationData.forEach((edu) => {
-      let div = document.createElement("div");
-      div.innerHTML = `
-        <h4>${edu.degree || "Degree Not Provided"} in ${
-        edu.specialization || "Specialization Not Provided"
-      }</h4>
-        <p>${edu.institution || "Institution Not Provided"} (${
-        edu.startYear || "Start Year"
-      } - ${edu.endYear || "End Year"})</p>
-        <p>${edu.scoreType || "Score Type"}: ${edu.score || "N/A"}</p>
-      `;
-      educationList.appendChild(div);
+    links.forEach((key) => {
+      if (contactData[key]) {
+        const label = key.charAt(0).toUpperCase() + key.slice(1);
+        linkHTML += `<p>${label}: ${contactData[key]}</p>`;
+      }
     });
-  } else {
-    document.querySelector(".template-1-education").style.display = "none";
+
+    return linkHTML ? createSection("Links", linkHTML) : "";
+  };
+
+  const sidebarHTML = `
+    <div class="template-1-profile">
+      <h1 class="template-1-name">${fullName}</h1>
+      ${summaryData ? `<p class="template-1-role">${summaryData}</p>` : ""}
+    </div>
+
+    ${createSection(
+      "Contact",
+      `
+      ${contactData.email ? `<p>Email: ${contactData.email}</p>` : ""}
+      ${contactData.phone ? `<p>Phone: ${contactData.phone}</p>` : ""}
+      ${
+        contactData.city || contactData.country
+          ? `<p>Address: ${contactData.city || ""}, ${
+              contactData.country || ""
+            } , ${contactData.pinCode || ""}</p>`
+          : ""
+      }
+    
+    `
+    )}
+
+    ${renderLinks()}
+
+    ${createSection(
+      "Skills",
+      `
+      <ul class="template-1-list">
+        ${skillsData.map((skill) => `<li>${skill}</li>`).join("")}
+      </ul>
+    `
+    )}
+
+    ${createSection(
+      "Hobbies",
+      `
+      <ul class="template-1-list">
+        ${hobbiesData.map((hobby) => `<li>${hobby}</li>`).join("")}
+      </ul>
+    `
+    )}
+
+    ${createSection(
+      "Personal",
+      `
+      ${personalData.dob ? `<p>DOB: ${personalData.dob}</p>` : ""}
+      ${personalData.gender ? `<p>Gender: ${personalData.gender}</p>` : ""}
+      ${
+        personalData.religion ? `<p>Religion: ${personalData.religion}</p>` : ""
+      }
+      ${
+        personalData.maritalStatus
+          ? `<p>Marital Status: ${personalData.maritalStatus}</p>`
+          : ""
+      }
+    `
+    )}
+  `;
+
+  sidebar.innerHTML = sidebarHTML;
+}
+
+function loadMainContent() {
+  const mainContent = document.getElementById("template-1-main-content");
+  mainContent.innerHTML = "";
+
+  const summary = localStorage.getItem("summaryData");
+  const experience = JSON.parse(localStorage.getItem("experienceData") || "[]");
+  const education = JSON.parse(localStorage.getItem("educationData") || "[]");
+  const certifications = JSON.parse(
+    localStorage.getItem("certificationsData") || "[]"
+  );
+  const hobbies = JSON.parse(localStorage.getItem("hobbiesData") || "[]");
+  const skills = JSON.parse(localStorage.getItem("skillsData") || "[]");
+
+  // === Summary ===
+  if (summary) {
+    mainContent.appendChild(
+      createSection("Professional Summary", `<p>${summary}</p>`)
+    );
   }
 
-  // Fill Experience
-  const experienceList = document.getElementById("experience-list");
-  if (experienceData.length > 0) {
-    experienceData.forEach((exp) => {
-      let div = document.createElement("div");
-      div.innerHTML = `
-        <h4>${exp.role || "Role Not Provided"} at ${
-        exp.company || "Company Not Provided"
-      }</h4>
-        <p>${exp.startDate || "Start Date"} - ${exp.endDate || "End Date"}</p>
-        <p>${exp.location || "Location Not Provided"}</p>
-        <p>${exp.description || "No description available."}</p>
-      `;
-      experienceList.appendChild(div);
-    });
-  } else {
-    document.querySelector(".template-1-experience").style.display = "none";
+  // === Experience ===
+  if (experience.length > 0) {
+    const expHTML = experience
+      .map(
+        (exp) => `
+      <div class = "template-1-main-details-div">
+        <h3>${exp.role} at ${exp.company}</h3>
+        <div class="template-1-date-range">${formatDate(exp.startDate)} - ${
+          exp.endDate
+        }</div>
+        <p><strong>Industry:</strong> ${exp.industry}</p>
+        <p>${exp.description}</p>
+      </div>
+    `
+      )
+      .join("");
+    mainContent.appendChild(createSection("Experience", expHTML));
   }
 
-  // Fill Certifications
-  const certList = document.getElementById("certifications-list");
-  if (certificationsData.length > 0) {
-    certificationsData.forEach((cert) => {
-      let li = document.createElement("li");
-      li.textContent = cert.details || "No Certification Details";
-      certList.appendChild(li);
-    });
-  } else {
-    document.querySelector(".template-1-certifications").style.display = "none";
+  // === Education ===
+  if (education.length > 0) {
+    const eduHTML = education
+      .map(
+        (edu) => `
+      <div class = "template-1-main-details-div">
+        <h3>${edu.degree} in ${edu.specialization}</h3>
+        <div class="template-1-date-range">${edu.startYear} - ${edu.endYear}</div>
+        <p>${edu.institution}, ${edu.location}</p>
+        <p><strong>${edu.scoreType}:</strong> ${edu.score}</p>
+      </div>
+    `
+      )
+      .join("");
+    mainContent.appendChild(createSection("Education", eduHTML));
   }
+
+  // === Certifications ===
+  if (certifications.length > 0) {
+    const certHTML =
+      "<ul class='template-1-bullet-list'>" +
+      certifications
+        .map(
+          (cert) => `
+      <li>${cert.details}</li>
+    `
+        )
+        .join("") +
+      "</ul>";
+    mainContent.appendChild(createSection("Certifications", certHTML));
+  }
+}
+
+// === Helper Functions ===
+function createSection(title, contentHTML) {
+  const section = document.createElement("div");
+  section.className = "template-1-main-section";
+  section.innerHTML = `<h2>${title}</h2>${contentHTML}`;
+  return section;
+}
+
+function formatDate(dateStr) {
+  if (dateStr === "Present") return "Present";
+  const date = new Date(dateStr);
+  return date.toLocaleDateString("en-US", { year: "numeric", month: "short" });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  loadMainContent();
+  renderSidebar();
+
+  document
+    .querySelector('[data-section="download"]')
+    .addEventListener("click", () => {
+      const resumeElement = document.querySelector(".template-1-resume");
+
+      // Store the original styles
+      const originalHeight = resumeElement.style.height;
+      const originalPaddingLeft = resumeElement.style.paddingLeft;
+
+      // Remove height and padding-left before generating the PDF
+      resumeElement.style.height = "auto";
+      resumeElement.style.paddingLeft = "0";
+
+      const opt = {
+        margin: 0,
+        filename: "resume.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          scrollY: 0,
+        },
+        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+      };
+
+      // Generate and save the PDF
+      html2pdf()
+        .set(opt)
+        .from(resumeElement)
+        .save()
+        .then(() => {
+          // Restore the original styles after download
+          resumeElement.style.height = originalHeight;
+          resumeElement.style.paddingLeft = originalPaddingLeft;
+        })
+        .catch((err) => {
+          console.error("Download failed:", err);
+          // Restore the original styles even if the download fails
+          resumeElement.style.height = originalHeight;
+          resumeElement.style.paddingLeft = originalPaddingLeft;
+        });
+    });
 });

@@ -18,6 +18,7 @@
       rel="stylesheet" />
   </head>
   <body>
+    <!-- dont change this is website side bar -->
     <div class="sidebar">
       <h2>Resume Builder</h2>
       <ul id="sidebar-menu">
@@ -41,55 +42,16 @@
           Change template
         </li>
       </ul>
-
-      <!-- ✅ Preview Button -->
     </div>
-    <div class="template-1-container">
-      <aside class="template-1-sidebar">
-        <div class="template-1-profile">
-          <h2 id="name"></h2>
-          <p id="role">Software Developer</p>
-        </div>
-        <div class="template-1-contact">
-          <h3>Contact</h3>
-          <p id="email"></p>
-          <p id="phone"></p>
-          <p id="location"></p>
-        </div>
-        <div class="template-1-skills">
-          <h3>Skills</h3>
-          <ul id="skills-list"></ul>
-        </div>
-        <div class="template-1-hobbies">
-          <h3>Hobbies</h3>
-          <ul id="hobbies-list"></ul>
-        </div>
-      </aside>
+    <div class="template-1-resume">
+      <!-- Sidebar Container -->
+      <div class="template-1-sidebar" id="template-1-sidebar"></div>
 
-      <main class="template-1-content">
-        <section class="template-1-summary">
-          <h3>Profile</h3>
-          <p id="summary"></p>
-        </section>
-
-        <section class="template-1-experience">
-          <h3>Experience</h3>
-          <div id="experience-list"></div>
-        </section>
-
-        <section class="template-1-education">
-          <h3>Education</h3>
-          <div id="education-list"></div>
-        </section>
-
-        <section class="template-1-certifications">
-          <h3>Certifications</h3>
-          <ul id="certifications-list"></ul>
-        </section>
-      </main>
+      <div class="template-1-main-content" id="template-1-main-content"></div>
     </div>
 
     <script src="assets/js/preview.js"></script>
     <script src="assets/js/template-1/template-1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   </body>
 </html>

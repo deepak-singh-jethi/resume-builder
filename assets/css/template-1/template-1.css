@@ -1,69 +1,160 @@
+:root {
+  --template-1-bg: #ffffff;
+  --template-1-light-bg: #f3f4f6;
+
+  --template-1-primary: #1f2937;
+  --template-1-secondary: #374151;
+  --template-1-muted: #9ca3af;
+
+  --template-1-accent: #3b82f6;
+  --template-1-accent-dark: #2563eb;
+  --template-1-accent-light: #e0f2fe;
+
+  --template-1-border: #e5e7eb;
+  --template-1-radius: 8px;
+}
+
 body {
-  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
-  background: #f4f4f4;
-  color: #333;
+  font-family: "Segoe UI", sans-serif;
 }
 
-.template-1-container {
+/* === Resume Wrapper === */
+.template-1-resume {
   display: flex;
-  max-width: 900px;
-  margin: 20px auto;
-  background: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100vh;
+  /* before downloading remove height: 100vh; so that resume can take entire height   after download give it again*/
+  background-color: var(--template-1-bg);
+  overflow: auto;
+  box-sizing: border-box;
+  /* border: 5px solid gray; */
+  padding-left: 260px;
+  /* before downloading remove this padding  after download give it again*/
 }
 
+/* === Resume Sidebar === */
 .template-1-sidebar {
-  background: #2c3e50;
-  color: white;
-  padding: 20px;
-  width: 30%;
+  width: 270px;
+  background-color: var(--template-1-light-bg);
+  padding: 32px 24px;
+  border-right: 1px solid var(--template-1-border);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.template-1-sidebar h2 {
+  font-size: 22px;
+  color: var(--template-1-accent-dark);
+  border-bottom: 2px solid var(--template-1-accent);
+  margin-bottom: 12px;
 }
 
 .template-1-sidebar h3 {
-  border-bottom: 2px solid #16a085;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
+  font-size: 16px;
+  color: var(--template-1-primary);
+  margin-bottom: 8px;
+  border-left: 3px solid var(--template-1-accent);
+  padding-left: 8px;
 }
 
-.template-1-profile {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.template-1-profile h2 {
-  margin: 0;
-  font-size: 22px;
-}
-
-.template-1-contact p,
-.template-1-skills ul,
-.template-1-hobbies ul {
+.template-1-sidebar p,
+.template-1-sidebar li {
   font-size: 14px;
-  margin: 5px 0;
+  color: var(--template-1-secondary);
+  margin-bottom: 6px;
+  line-height: 1.5;
 }
 
-.template-1-content {
-  padding: 20px;
-  width: 70%;
+.template-1-sidebar ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
 }
 
-.template-1-content section {
-  margin-bottom: 20px;
+.template-1-sidebar ul li::before {
+  content: "•";
+  color: var(--template-1-accent);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
 }
 
-.template-1-content h3 {
-  border-bottom: 2px solid #16a085;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
+.template-1-sidebar .template-1-meta {
+  font-size: 13px;
+  color: var(--template-1-muted);
 }
 
-ul {
-  padding: 0;
-  list-style-type: none;
+/* === Resume Main Section === */
+.template-1-main-content {
+  flex: 1;
+  padding: 40px;
+  background-color: var(--template-1-bg);
 }
 
-li {
-  margin-bottom: 5px;
+.template-1-main-section {
+  margin-bottom: 40px;
+}
+
+.template-1-main-section h2 {
+  font-size: 20px;
+  color: var(--template-1-accent-dark);
+  border-bottom: 2px solid var(--template-1-accent);
+  padding-bottom: 4px;
+  margin-bottom: 16px;
+}
+.template-1-main-details-div {
+  border-bottom: 2px solid rgba(159, 159, 159, 0.3);
+  padding-top: 6px;
+}
+
+.template-1-main-section h3 {
+  font-size: 16px;
+  margin: 0 0 6px;
+  color: var(--template-1-primary);
+}
+
+.template-1-main-section p {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: var(--template-1-secondary);
+}
+
+.template-1-date-range {
+  font-size: 13px;
+  color: var(--template-1-muted);
+  margin-bottom: 6px;
+}
+
+.template-1-bullet-list {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.template-1-bullet-list li {
+  font-size: 14px;
+  color: var(--template-1-secondary);
+  margin-bottom: 4px;
+}
+
+/* === Responsive Enhancements === */
+@media (max-width: 768px) {
+  .template-1-resume {
+    flex-direction: column;
+    padding-left: 0;
+    padding-left: 150px;
+  }
+
+  .template-1-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--template-1-border);
+  }
+
+  .template-1-main-content {
+    padding: 20px;
+  }
 }

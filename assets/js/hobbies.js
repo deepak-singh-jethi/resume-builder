@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const hobbiesSuggestions = document.getElementById("hobbies-suggestions");
   const prevBtn = document.getElementById("prev-btn-hobbies");
   const nextBtn = document.getElementById("next-btn-hobbies");
+  // const deleteBtn = document.getElementById("delete-btn")
 
   // ✅ Handle Previous button navigation
   prevBtn.addEventListener("click", function () {
@@ -238,10 +239,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function removeHobby(hobby) {
+    console.log();
+
     hobbiesList = hobbiesList.filter((item) => item !== hobby);
-    myData.hobbies = [...hobbiesList];
     localStorage.setItem("hobbiesData", JSON.stringify(hobbiesList));
-    localStorage.setItem("resumeData", JSON.stringify(myData));
     renderHobbies();
   }
 
