@@ -1,53 +1,69 @@
 document.addEventListener("DOMContentLoaded", function () {
   const skillsInput = document.getElementById("skills-input");
-  const skillsList = document.getElementById("skills-list");
+  const skillsListEl = document.getElementById("skills-list");
   const skillsSuggestions = document.getElementById("skills-suggestions");
   const nextButton = document.getElementById("next-btn-skills");
   const prevButton = document.getElementById("prev-btn-skills");
 
   let skillList = JSON.parse(localStorage.getItem("skillsData")) || [];
 
-  const skillSuggestionsData = ["Java", "javaScript"]; // will add more
-  // ✅ Handle "Previous" button navigation
+  const skillSuggestionsData = [
+    "JavaScript",
+    "Python",
+    "Java",
+    "C++",
+    "HTML",
+    "CSS",
+    "React",
+    "Node.js",
+    "SQL",
+    "MongoDB",
+  ];
 
+  // Navigation: Go to previous section
   prevButton.addEventListener("click", function () {
     const prevSectionId = prevButton.getAttribute("action-section");
-    if (prevSectionId) {
-      showSection(prevSectionId); // Show the previous section
-    }
+    if (prevSectionId) showSection(prevSectionId);
   });
 
-  // ✅ Handle "save and Next" button navigation
+  // Navigation: Validate skills before moving to next section
   nextButton.addEventListener("click", function () {
     const nextSectionId = nextButton.getAttribute("action-section");
-
-    const skillData = JSON.parse(localStorage.getItem("skillsData")) || []; // Get stored skills
-    const hasSavedSkills = skillData.length > 0; // Check if skills exist
-
-    // ✅ Case 1: Skills exist & inputs are empty → Move to next section
-    if (!hasSavedSkills) {
-      window.alert(
-        "Please add a skill or fill in at least one field before proceeding."
+    if (skillList.length === 0) {
+      Swal.fire(
+        "No Skills Added",
+        "Please add at least one skill before continuing.",
+        "warning"
       );
       return;
     }
-    // ✅ Case 2: Skills exist & inputs are filled → Move to next section
-    if (hasSavedSkills) {
-      showSection(nextSectionId); // Show the next section
-      return;
-    }
+    showSection(nextSectionId);
   });
 
-  // Debounce function to optimize search input
+  // Debounced skill input for suggestions
   let debounceTimer;
   skillsInput.addEventListener("input", function () {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
-      filterSkills(skillsInput.value);
+      filterSkills(skillsInput.value.trim());
     }, 300);
   });
 
-  // Function to filter skill suggestions
+  // Handle Enter key for custom skill entry
+  skillsInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const skillName = skillsInput.value.trim();
+      if (
+        skillName &&
+        !skillList.some((s) => s.name.toLowerCase() === skillName.toLowerCase())
+      ) {
+        addSkill(skillName);
+      }
+    }
+  });
+
+  // Filter and show suggestions
   function filterSkills(query) {
     skillsSuggestions.innerHTML = "";
     if (!query) {
@@ -55,61 +71,100 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    const filteredSuggestions = skillSuggestionsData.filter(
+    const filtered = skillSuggestionsData.filter(
       (skill) =>
         skill.toLowerCase().includes(query.toLowerCase()) &&
-        !skillList.includes(skill)
+        !skillList.some((s) => s.name.toLowerCase() === skill.toLowerCase())
     );
 
-    filteredSuggestions.forEach((skill) => {
+    filtered.forEach((skill) => {
       const div = document.createElement("div");
       div.textContent = skill;
+      div.classList.add("suggestion-item");
       div.addEventListener("click", () => addSkill(skill));
       skillsSuggestions.appendChild(div);
     });
 
-    skillsSuggestions.style.display = filteredSuggestions.length
-      ? "block"
-      : "none";
+    skillsSuggestions.style.display = filtered.length ? "block" : "none";
   }
 
-  // Function to add skill
-  function addSkill(skill) {
-    if (!skillList.includes(skill)) {
-      skillList.push(skill);
-      localStorage.setItem("skillsData", JSON.stringify(skillList));
-      renderSkills();
-    }
-    skillsInput.value = "";
-    skillsSuggestions.style.display = "none";
-  }
+  // Show modal to select skill level
+  function addSkill(skillName) {
+    if (skillList.some((s) => s.name.toLowerCase() === skillName.toLowerCase()))
+      return;
 
-  // Function to render skills list
-  function renderSkills() {
-    skillsList.innerHTML = "";
-    skillList.forEach((skill) => {
-      const skillTag = document.createElement("div");
-      skillTag.classList.add("skill-tag");
-      skillTag.textContent = skill;
-
-      // Create delete button with Material Icon
-      const deleteBtn = document.createElement("span");
-      deleteBtn.classList.add("material-icons", "delete-btn");
-      deleteBtn.textContent = "delete"; // Material icon for delete
-      deleteBtn.addEventListener("click", () => removeSkill(skill));
-
-      skillTag.appendChild(deleteBtn);
-      skillsList.appendChild(skillTag);
+    Swal.fire({
+      title: `What's your proficiency in "${skillName}"?`,
+      text: "Choose the most appropriate level:",
+      input: "radio",
+      inputOptions: {
+        Beginner: "Beginner",
+        Intermediate: "Intermediate",
+        Expert: "Expert",
+        skip: "Skip",
+      },
+      inputValidator: (value) => {
+        if (!value) return "Please select a skill level.";
+      },
+      confirmButtonText: "Add Skill",
+      showCancelButton: true,
+      customClass: {
+        popup: "swal-skill-popup",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        skillList.push({ name: skillName, level: result.value });
+        localStorage.setItem("skillsData", JSON.stringify(skillList));
+        renderSkills();
+        skillsInput.value = "";
+        skillsSuggestions.style.display = "none";
+      }
     });
   }
 
-  // Function to remove skill
-  function removeSkill(skill) {
-    skillList = skillList.filter((item) => item !== skill); // Remove selected skill from the list
-    localStorage.setItem("skillsData", JSON.stringify(skillList)); // Update localStorage
-    renderSkills(); // Re-render the skills list
+  // Display all selected skills
+  function renderSkills() {
+    skillsListEl.innerHTML = "";
+    skillList.forEach(({ name, level }) => {
+      const skillTag = document.createElement("div");
+      skillTag.classList.add("skill-tag");
+
+      const displayText = level === "skip" ? name : `${name} (${level})`;
+      skillTag.textContent = displayText;
+
+      const deleteBtn = document.createElement("span");
+      deleteBtn.classList.add("material-icons", "delete-btn");
+      deleteBtn.textContent = "delete";
+      deleteBtn.title = "Remove skill";
+      deleteBtn.addEventListener("click", () => removeSkill(name));
+
+      skillTag.appendChild(deleteBtn);
+      skillsListEl.appendChild(skillTag);
+    });
   }
 
-  // Initial rendering of skills from localStorage
+  // Remove a skill
+
+  function removeSkill(skillName) {
+    Swal.fire({
+      title: `Remove "${skillName}"?`,
+      text: "Are you sure you want to delete this skill?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, remove it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        skillList = skillList.filter((s) => s.name !== skillName);
+        localStorage.setItem("skillsData", JSON.stringify(skillList));
+        renderSkills();
+        Swal.fire("Deleted!", `"${skillName}" has been removed.`, "success");
+      }
+    });
+  }
+
+  // Initial render
   renderSkills();
 });

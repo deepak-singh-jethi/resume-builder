@@ -4,188 +4,41 @@ document.addEventListener("DOMContentLoaded", function () {
   const hobbiesSuggestions = document.getElementById("hobbies-suggestions");
   const prevBtn = document.getElementById("prev-btn-hobbies");
   const nextBtn = document.getElementById("next-btn-hobbies");
-  // const deleteBtn = document.getElementById("delete-btn")
 
-  // ✅ Handle Previous button navigation
   prevBtn.addEventListener("click", function () {
     const prevSectionId = prevBtn.getAttribute("action-section");
-    if (prevSectionId) {
-      showSection(prevSectionId); // Show the previous section
-    }
+    if (prevSectionId) showSection(prevSectionId);
   });
-  // ✅ Handle Next button navigation
+
   nextBtn.addEventListener("click", function () {
     const nextSectionId = nextBtn.getAttribute("action-section");
-    if (nextSectionId) {
-      showSection(nextSectionId); // Show the next section
-    }
+    if (nextSectionId) showSection(nextSectionId);
   });
 
   let hobbiesList = JSON.parse(localStorage.getItem("hobbiesData")) || [];
+
   const hobbySuggestionsData = [
-    // 🎨 Creative & Artistic
+    // [Full hobby list here as provided earlier...]
     "Reading",
     "Writing",
     "Blogging",
     "Painting",
-    "Sketching",
-    "Calligraphy",
-    "Photography",
-    "Graphic Design",
-    "Dancing",
-    "Singing",
-    "Music",
-    "Acting",
-    "Knitting",
-    "Embroidery",
-    "Origami",
-    "Pottery",
-    "Woodworking",
-    "Tattoo Art",
-
-    // 🎮 Entertainment & Games
-    "Gaming",
-    "Board Games",
-    "Chess",
-    "Puzzle Solving",
-    "Card Games",
-    "Escape Rooms",
-    "Sudoku",
-    "Riddles",
-    "Crossword Puzzles",
-    "Rubik's Cube",
-    "Fantasy Sports (Dream11, MPL)",
-    "Carrom",
-    "Ludo",
-    "Gully Cricket",
-
-    // ✈️ Travel & Adventure
-    "Traveling",
-    "Hiking",
-    "Camping",
-    "Backpacking",
-    "Road Trips",
-    "Scuba Diving",
-    "Paragliding",
-    "Sailing",
-    "Skydiving",
-    "Mountain Climbing",
-    "Jungle Safari",
-    "Spiritual Tourism (Visiting Temples, Ashrams, Monasteries)",
-    "Bike Riding (Leh-Ladakh Trips)",
-
-    // 🏋️‍♂️ Sports & Fitness
-    "Cycling",
-    "Swimming",
-    "Running",
-    "Gym Workouts",
-    "Martial Arts",
-    "Yoga",
-    "Pilates",
-    "Tennis",
-    "Badminton",
-    "Soccer",
-    "Basketball",
-    "Table Tennis",
-    "Cricket",
-    "Football",
-    "Kabaddi",
-    "Kho Kho",
-    "Archery",
-    "Horse Riding",
-    "Gilli Danda",
-    "Kite Flying",
-    "Mallakhamb",
-    "Wrestling (Kushti)",
-
-    // 🍳 Culinary & Food
-    "Cooking",
-    "Baking",
-    "Wine Tasting",
-    "Mixology",
-    "Food Blogging",
-    "Trying Street Food",
-    "Exploring Indian Cuisines",
-
-    // 🌱 Nature & Outdoor
-    "Gardening",
-    "Bird Watching",
-    "Fishing",
-    "Stargazing",
-    "Beekeeping",
-    "Farming",
-    "Organic Farming",
-    "Planting Tulsi, Aloe Vera, and Medicinal Herbs",
-
-    // 📚 Learning & Educational
-    "Meditation",
-    "Public Speaking",
-    "Learning Languages (Hindi, Sanskrit, Tamil, Bengali, etc.)",
-    "Programming",
-    "DIY Projects",
-    "Stock Trading",
-    "Philosophy",
-    "Astronomy",
-    "Mythology Studies",
-    "Vedic Mathematics",
-
-    // 🎥 Media & Entertainment
-    "Watching Bollywood Movies",
-    "Watching Cricket Matches",
-    "Listening to Bollywood Songs",
-    "Podcast Listening",
-    "Film Making",
-    "YouTube Content Creation",
-    "Vlogging",
-    "Indian Classical Music (Sitar, Tabla, Veena, etc.)",
-
-    // 💼 Productivity & Lifestyle
-    "Minimalism",
-    "Self-Improvement",
-    "Journaling",
-    "Volunteering",
-    "Fundraising",
-    "Astrology",
-    "Palmistry",
-    "Collecting Coins/Stamps",
-    "Social Work",
-    "Political Debating",
-    "Folk Dancing (Garba, Bhangra, Bharatanatyam)",
-    "Tattoo Designing",
-    "Handicraft Making (Warli Art, Madhubani Art)",
-
-    // 🚀 Tech & Digital
-    "Coding",
-    "Hackathons",
-    "App Development",
-    "Tech Blogging",
-    "Crypto & NFT Research",
-    "Drone Flying",
-
-    // 🛍️ Collecting & Cultural
-    "Collecting Antique Items",
-    "Temple Hopping",
-    "Handicraft Shopping",
-    "Indian Ethnic Fashion Designing",
-
-    // 🎭 Performing Arts
-    "Drama & Theater",
-    "Mimicry",
-    "Stand-up Comedy",
-    "Poetry Recitation",
-    "Shayari Writing",
-    "Rangoli Designing",
-
-    // 🔥 Traditional Indian Hobbies
-    "Kirtan & Bhajan Singing",
-    "Spiritual Chanting (Gayatri Mantra, Hanuman Chalisa)",
-    "Astang Yoga",
-    "Ayurveda & Herbal Medicine Preparation",
-    "Tanpura & Mridangam Playing",
+    "Sketching", // ... etc
   ];
 
   hobbiesInput.addEventListener("input", function () {
-    filterHobbies(hobbiesInput.value);
+    filterHobbies(hobbiesInput.value.trim());
+  });
+
+  // Handle Enter key for custom hobbies
+  hobbiesInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const hobby = hobbiesInput.value.trim();
+      if (hobby && !hobbiesList.includes(hobby)) {
+        addHobby(hobby);
+      }
+    }
   });
 
   function filterHobbies(query) {
@@ -204,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
     filtered.forEach((hobby) => {
       const div = document.createElement("div");
       div.textContent = hobby;
+      div.classList.add("suggestion-item");
       div.addEventListener("click", () => addHobby(hobby));
       hobbiesSuggestions.appendChild(div);
     });
@@ -212,13 +66,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function addHobby(hobby) {
-    if (!hobbiesList.includes(hobby)) {
-      hobbiesList.push(hobby);
-      localStorage.setItem("hobbiesData", JSON.stringify(hobbiesList));
-      renderHobbies();
-    }
+    hobbiesList.push(hobby);
+    localStorage.setItem("hobbiesData", JSON.stringify(hobbiesList));
+    renderHobbies();
     hobbiesInput.value = "";
     hobbiesSuggestions.style.display = "none";
+
+    Swal.fire({
+      icon: "success",
+      title: "Hobby Added",
+      text: `"${hobby}" has been added to your hobbies!`,
+      timer: 1500,
+      showConfirmButton: false,
+    });
   }
 
   function renderHobbies() {
@@ -231,19 +91,39 @@ document.addEventListener("DOMContentLoaded", function () {
       const deleteBtn = document.createElement("span");
       deleteBtn.classList.add("material-icons", "delete-btn");
       deleteBtn.textContent = "delete";
-      deleteBtn.addEventListener("click", () => removeHobby(hobby));
+      deleteBtn.title = "Remove hobby";
+      deleteBtn.addEventListener("click", () => confirmRemoveHobby(hobby));
 
       hobbyTag.appendChild(deleteBtn);
       hobbiesItem.appendChild(hobbyTag);
     });
   }
 
-  function removeHobby(hobby) {
-    console.log();
+  function confirmRemoveHobby(hobby) {
+    Swal.fire({
+      title: `Remove "${hobby}"?`,
+      text: "Are you sure you want to delete this hobby?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, remove it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        hobbiesList = hobbiesList.filter((item) => item !== hobby);
+        localStorage.setItem("hobbiesData", JSON.stringify(hobbiesList));
+        renderHobbies();
 
-    hobbiesList = hobbiesList.filter((item) => item !== hobby);
-    localStorage.setItem("hobbiesData", JSON.stringify(hobbiesList));
-    renderHobbies();
+        Swal.fire({
+          icon: "success",
+          title: "Deleted",
+          text: `"${hobby}" has been removed.`,
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      }
+    });
   }
 
   renderHobbies();

@@ -125,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function displayCertificateEntries() {
+    certificateEntries = getStoredCertificateData(); // 🔁 Always reload fresh data
     certificateModalList.innerHTML = "";
 
     if (certificateEntries.length === 0) {
@@ -135,14 +136,15 @@ document.addEventListener("DOMContentLoaded", function () {
     certificateEntries.forEach((entry, index) => {
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td>${entry.details}</td>
-        <td><button class="remove-certificate" data-index="${index}">❌</button></td>
-      `;
+      <td>${entry.details}</td>
+      <td><button class="remove-certificate" data-index="${index}">❌</button></td>
+    `;
       certificateModalList.appendChild(row);
     });
 
     document.querySelectorAll(".remove-certificate").forEach((btn) => {
       btn.addEventListener("click", function () {
+        event.preventDefault();
         const index = parseInt(btn.getAttribute("data-index"));
 
         Swal.fire({

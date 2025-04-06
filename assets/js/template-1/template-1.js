@@ -60,9 +60,12 @@ function renderSidebar() {
     ${createSection(
       "Skills",
       `
-      <ul class="template-1-list">
-        ${skillsData.map((skill) => `<li>${skill}</li>`).join("")}
-      </ul>
+     <ul class="template-1-list">
+  ${skillsData
+    .filter((skill) => skill.level !== "skip")
+    .map((skill) => `<li>${skill.name} - ${skill.level}</li>`)
+    .join("")}
+</ul>
     `
     )}
 

@@ -1,87 +1,138 @@
-/* General styling for skills section */
+/* General form section styling */
 .skills-form,
 .hobbies-form {
-  margin: 20px;
-  padding: 20px;
-  background: #f4f4f4;
-  border-radius: 10px;
+  margin: 20px auto;
+  padding: 25px 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 700px;
 }
 
+/* Input box styling */
 #skills-input,
 #hobbies-input {
   width: 100%;
-  height: 40px;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  height: 42px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s;
 }
 
+#skills-input:focus,
+#hobbies-input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* Suggestions dropdown styling */
 .suggestions-dropdown {
-  position: relative;
-  background: white;
+  position: absolute;
   width: 100%;
-  border: 1px solid #ccc;
-  max-height: 150px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-top: none;
+  max-height: 180px;
   overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 0 0 8px 8px;
   display: none;
-  z-index: 10;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .suggestions-dropdown div {
-  padding: 8px;
+  padding: 10px 15px;
+  font-size: 15px;
   cursor: pointer;
+  border-bottom: 1px solid #f3f4f6;
+  transition: background 0.2s;
+}
+
+.suggestions-dropdown div:last-child {
+  border-bottom: none;
 }
 
 .suggestions-dropdown div:hover {
-  background-color: #f0f0f0;
+  background-color: #f9fafb;
 }
 
+/* Skill list styling */
 .skills-list,
 .hobbies-list {
-  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
 }
 
+/* Skill/hobby tag chip */
 .skill-tag,
 .hobby-tag {
   display: flex;
-  width: fit-content;
-  justify-content: center;
   align-items: center;
-  background-color: var(--background-color);
-  color: var(--sidebar-hover);
-  padding: 5px 10px;
-  border-radius: 15px;
-  margin: 5px;
-  cursor: pointer;
-  border: #ccc 1px solid;
+  background-color: #f3f4f6;
+  color: #374151;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
 }
 
 .skill-tag:hover,
 .hobby-tag:hover {
+  background-color: #e0e7ff;
+  color: #1e3a8a;
   scale: 1.05;
 }
 
-.skill-tag,
-.hobby-tag i {
-  margin-left: 8px;
-  cursor: pointer;
-}
-
-/* Smooth transition for skills */
-.skill-tag,
-.hobby-tag {
-  transition: all 0.3s ease;
-}
-
+/* Delete icon inside tag */
+.skill-tag i,
+.hobby-tag i,
 .delete-btn {
-  cursor: pointer;
   margin-left: 10px;
-  color: var(--cancel-btn-bg);
   font-size: 18px;
+  color: #ef4444;
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
 .delete-btn:hover {
-  color: #ff0000;
+  color: #b91c1c;
 }
+
+/* Skill section title */
+.skills-form h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #1f2937;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 5px;
+}
+
+/* Navigation buttons */
+.form-navigation {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .form-navigation button {
+  background-color: #4f46e5;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-navigation button:hover {
+  background-color: #4338ca;
+} */

@@ -65,8 +65,11 @@ document.addEventListener("DOMContentLoaded", function () {
       educationModalList.appendChild(row);
     });
 
+    // Delete functionality
     document.querySelectorAll(".remove-entry").forEach((btn) => {
-      btn.addEventListener("click", function () {
+      btn.addEventListener("click", function (event) {
+        event.preventDefault(); // ✅ Prevent default button behavior (like form submission)
+
         const index = parseInt(btn.getAttribute("data-index"));
 
         Swal.fire({
@@ -101,44 +104,51 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function saveEducationEntry() {
-    const newEntry = {
-      degree: document.getElementById("education-degree").value.trim(),
-      specialization: document.getElementById("education-subject").value.trim(),
-      institution: document
-        .getElementById("education-institution")
-        .value.trim(),
-      startYear: document.getElementById("education-start").value,
-      endYear: document.getElementById("education-end").value || "Present",
-      scoreType: document.getElementById("education-score-type").value,
-      score: document.getElementById("education-score").value,
-      location: document.getElementById("education-location").value.trim(),
-    };
+    const degree = document.getElementById("education-degree").value.trim();
+    const specialization = document
+      .getElementById("education-subject")
+      .value.trim();
+    const institution = document
+      .getElementById("education-institution")
+      .value.trim();
+    const startYear = document.getElementById("education-start").value.trim();
+    const endYear =
+      document.getElementById("education-end").value.trim() || "Present";
+    const scoreType = document.getElementById("education-score-type").value;
+    const score = document.getElementById("education-score").value.trim();
+    const location = document.getElementById("education-location").value.trim();
 
-    if (
-      !newEntry.degree ||
-      !newEntry.institution ||
-      !newEntry.startYear ||
-      !newEntry.score
-    ) {
+    if (!degree || !institution || !startYear || !score) {
       Swal.fire({
         icon: "warning",
         title: "Incomplete Fields",
         text: "Please fill Degree, Institution, Start Year, and Score.",
       });
-      return;
+      return false;
     }
 
-    if (!isValidScore(newEntry.score, newEntry.scoreType)) {
+    if (!isValidScore(score, scoreType)) {
       Swal.fire({
         icon: "error",
         title: "Invalid Score",
         text:
-          newEntry.scoreType === "CGPA"
+          scoreType === "CGPA"
             ? "CGPA must be between 0 and 10."
             : "Percentage must be between 0% and 100%.",
       });
-      return;
+      return false;
     }
+
+    const newEntry = {
+      degree,
+      specialization,
+      institution,
+      startYear,
+      endYear,
+      scoreType,
+      score: parseFloat(score),
+      location,
+    };
 
     educationData.push(newEntry);
     localStorage.setItem("educationData", JSON.stringify(educationData));
@@ -154,6 +164,8 @@ document.addEventListener("DOMContentLoaded", function () {
       timer: 1500,
       showConfirmButton: false,
     });
+
+    return true;
   }
 
   // Modal open/close
@@ -179,34 +191,28 @@ document.addEventListener("DOMContentLoaded", function () {
     const hasSavedEducations = educationData.length > 0;
 
     const hasInput =
-      document.getElementById("education-degree").value.trim() &&
-      document.getElementById("education-institution").value.trim() &&
-      document.getElementById("education-start").value.trim() &&
+      document.getElementById("education-degree").value.trim() ||
+      document.getElementById("education-institution").value.trim() ||
+      document.getElementById("education-start").value.trim() ||
       document.getElementById("education-score").value.trim();
 
-    console.log({ hasInput }, { hasSavedEducations });
-
-    // ✅ Case 1: Some education entries are already saved & no input fields filled → Safe to move
     if (hasSavedEducations && !hasInput) {
       moveToNextSection();
       return;
     }
 
-    // ✅ Case 2: No saved entries, but some input is present → Save current input and move
     if (!hasSavedEducations && hasInput) {
-      saveEducationEntry();
-      moveToNextSection();
+      const saved = saveEducationEntry();
+      if (saved) moveToNextSection();
       return;
     }
 
-    // ✅ Case 3: Saved entries exist, but also some new inputs present → Save & move
     if (hasSavedEducations && hasInput) {
-      saveEducationEntry();
-      moveToNextSection();
+      const saved = saveEducationEntry();
+      if (saved) moveToNextSection();
       return;
     }
 
-    // ❌ Case 4: No saved entries & no input → Show warning
     Swal.fire(
       "Missing Education",
       "Please add at least one education entry or fill in a field.",

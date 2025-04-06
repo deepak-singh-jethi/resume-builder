@@ -91,42 +91,31 @@
                     <input
                       type="text"
                       id="full-name"
-                      placeholder="Enter your full name"
-                      required />
+                      placeholder="Enter your full name" />
                   </div>
                   <div class="input-group">
                     <label for="phone">Phone</label>
                     <input
                       type="tel"
                       id="phone"
-                      placeholder="+1 234 567 8900"
-                      required />
+                      placeholder="+1 234 567 8900" />
                   </div>
                 </div>
                 <div class="form-row form-margin">
                   <div class="input-group">
                     <label for="city-name">City</label>
-                    <input
-                      type="text"
-                      id="city-name"
-                      placeholder="City name"
-                      required />
+                    <input type="text" id="city-name" placeholder="City name" />
                   </div>
                   <div class="input-group">
                     <label for="phone">Country</label>
                     <input
                       type="text"
                       id="country-name"
-                      placeholder="Country name"
-                      required />
+                      placeholder="Country name" />
                   </div>
                   <div class="input-group">
                     <label for="phone">Pin-Code</label>
-                    <input
-                      type="number"
-                      id="pin-code"
-                      placeholder="Pin-Code"
-                      required />
+                    <input type="number" id="pin-code" placeholder="Pin-Code" />
                   </div>
                 </div>
 
@@ -136,8 +125,7 @@
                   <input
                     type="email"
                     id="email"
-                    placeholder="example@email.com"
-                    required />
+                    placeholder="example@email.com" />
                 </div>
 
                 <!-- Social Profiles Section (LinkedIn, GitHub, Website) -->
@@ -452,7 +440,7 @@
                   <div class="form-row">
                     <div class="input-group">
                       <label>Start Date:</label>
-                      <input type="date" id="experience-start" required />
+                      <input type="date" id="experience-start" />
                     </div>
                     <div class="input-group">
                       <label>End Date:</label>
@@ -737,11 +725,13 @@
                 id="skills"
                 style="display: none">
                 <h2>Skills</h2>
+
                 <input
                   type="text"
                   id="skills-input"
                   class="form-margin"
                   placeholder="E.g., JavaScript, React, Python" />
+
                 <div id="skills-suggestions" class="suggestions-dropdown"></div>
                 <div id="skills-list" class="skills-list"></div>
 
@@ -806,12 +796,11 @@
                     <input
                       type="date"
                       id="dob"
-                      placeholder="Enter your date of birth"
-                      required />
+                      placeholder="Enter your date of birth" />
                   </div>
                   <div class="input-group">
                     <label for="gender">Gender</label>
-                    <select id="gender" required>
+                    <select id="gender">
                       <option value="" disabled selected>Select Gender</option>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
@@ -824,7 +813,7 @@
                 <div class="form-row form-margin">
                   <div class="input-group">
                     <label for="marital-status">Marital Status</label>
-                    <select id="marital-status" required>
+                    <select id="marital-status">
                       <option value="" disabled selected>
                         Select Marital Status
                       </option>
@@ -838,52 +827,28 @@
                     <input
                       type="text"
                       id="religion"
-                      placeholder="Enter your religion"
-                      required />
+                      placeholder="Enter your religion" />
+                  </div>
+                </div>
+                <div class="form-row form-margin">
+                  <div class="input-group">
+                    <label for="language-input">Languages Known</label>
+                    <div style="display: flex; gap: 10px">
+                      <input
+                        type="text"
+                        id="language-input"
+                        placeholder="e.g., English, Hindi" />
+                      <button
+                        type="button"
+                        id="add-language-btn"
+                        class="save-entry">
+                        Add Language
+                      </button>
+                    </div>
+                    <div id="language-list" class="tag-container"></div>
                   </div>
                 </div>
 
-                <!-- Optional Personal Data -->
-                <!-- Father Name -->
-                <div class="toggle-section input-group" id="father-section">
-                  <label class="toggle-label" id="father-toggle"
-                    >+ Father Name (optional)</label
-                  >
-                  <div class="hidden" id="father-input">
-                    <input
-                      type="text"
-                      id="father"
-                      placeholder="Enter your father's name" />
-                  </div>
-                </div>
-                <hr />
-
-                <!-- Spouse Name -->
-                <div class="toggle-section input-group" id="spouse-section">
-                  <label class="toggle-label" id="spouse-toggle"
-                    >+ Spouse Name (optional)</label
-                  >
-                  <div class="hidden" id="spouse-input">
-                    <input
-                      type="text"
-                      id="spouse"
-                      placeholder="Enter spouse's name" />
-                  </div>
-                </div>
-                <hr />
-
-                <!-- Mother Name -->
-                <div class="toggle-section input-group" id="mother-section">
-                  <label class="toggle-label" id="mother-toggle"
-                    >+ Mother Name (optional)</label
-                  >
-                  <div class="hidden" id="mother-input">
-                    <input
-                      type="text"
-                      id="mother"
-                      placeholder="Enter mother's name" />
-                  </div>
-                </div>
                 <div class="form-navigation">
                   <button
                     type="button"

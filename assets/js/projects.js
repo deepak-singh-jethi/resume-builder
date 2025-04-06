@@ -142,7 +142,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     document.querySelectorAll(".remove-project").forEach((btn) => {
-      btn.addEventListener("click", function () {
+      btn.addEventListener("click", function (event) {
+        event.preventDefault(); // ✅ Prevent page refresh
+
         const index = parseInt(btn.getAttribute("data-index"));
 
         Swal.fire({

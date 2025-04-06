@@ -199,6 +199,31 @@ input[type="url"]:focus {
   outline: 2px solid #007bff;
 }
 
+/* language section  */
+.tag-container {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.language-tag {
+  background: #eef;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.language-tag .remove-btn {
+  background: transparent;
+  border: none;
+  color: #c00;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 /* Mobile */
 @media (max-width: 600px) {
   .toggle-label {
