@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const saveButtonAndPreview = document.getElementById(
     "next-btn-personal-info"
   );
+  const prevBtn = document.getElementById("prev-btn-personal-info");
+
+  console.log(prevBtn);
 
   const languageInput = document.getElementById("language-input");
   const addLanguageBtn = document.getElementById("add-language-btn");
@@ -101,6 +104,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  prevBtn.addEventListener("click", function () {
+    console.log("yes");
+
+    const prevSectionId = prevBtn.getAttribute("action-section");
+    if (prevSectionId) showSection(prevSectionId);
+  });
+
   saveButtonAndPreview.addEventListener("click", function () {
     const errors = [];
 
@@ -143,7 +153,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     localStorage.setItem("personalData", JSON.stringify(personalInfo));
 
-    // Show success SweetAlert with option
     Swal.fire({
       title: "Great! Personal Info Saved ✅",
       text: "Would you like to continue to the preview or review your details again?",
@@ -154,6 +163,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }).then((result) => {
       if (result.isConfirmed) {
         window.location.href = "resume-preview.html";
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        showSection("contact");
       }
     });
   });
