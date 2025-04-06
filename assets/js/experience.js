@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.target === experienceModal) experienceModal.style.display = "none";
   });
 
-  function saveExperienceEntry() {
+  function saveExperienceEntry(callback = null) {
     const company = document.getElementById("experience-company").value.trim();
     const role = document.getElementById("experience-role").value.trim();
     const startDate = document.getElementById("experience-start").value.trim();
@@ -79,8 +79,10 @@ document.addEventListener("DOMContentLoaded", function () {
       icon: "success",
       title: "Saved!",
       text: "Experience added successfully.",
-      timer: 1500,
+      timer: 1200,
       showConfirmButton: false,
+    }).then(() => {
+      if (callback) callback(); // ✅ Only move to next after confirmation
     });
   }
 
@@ -164,33 +166,49 @@ document.addEventListener("DOMContentLoaded", function () {
     const experienceState = localStorage.getItem("experienceState");
     const hasSavedExperiences = experienceEntries.length > 0;
 
-    const hasInput =
-      document.getElementById("experience-company").value.trim() ||
-      document.getElementById("experience-role").value.trim() ||
-      document.getElementById("experience-start").value.trim();
+    const company = document.getElementById("experience-company").value.trim();
+    const role = document.getElementById("experience-role").value.trim();
+    const startDate = document.getElementById("experience-start").value.trim();
+    const description = document
+      .getElementById("experience-responsibility")
+      .value.trim();
+
+    const hasInput = company || role || startDate || description;
 
     if (!experienceState || experienceState === "no") {
       moveToNextSection();
       return;
     }
 
-    if (experienceState === "yes" && hasSavedExperiences && !hasInput) {
-      moveToNextSection();
-      return;
-    }
-
-    if (experienceState === "yes" && !hasSavedExperiences && hasInput) {
-      saveExperienceEntry();
-      moveToNextSection();
-      return;
-    }
-
-    if (!hasSavedExperiences && !hasInput) {
+    // Case 1: Experience = yes, no entries, no input → BLOCK
+    if (experienceState === "yes" && !hasSavedExperiences && !hasInput) {
       Swal.fire(
         "Missing Experience",
-        "Add at least one experience or fill a field.",
+        "Please add at least one experience or fill in the required fields.",
         "warning"
       );
+      return;
+    }
+
+    // Case 2: Experience = yes, no entries, valid input → SAVE and move
+    if (experienceState === "yes" && !hasSavedExperiences && hasInput) {
+      saveExperienceEntry(() => {
+        moveToNextSection();
+      });
+      return;
+    }
+
+    // ✅ Case 3: Experience = yes, entries exist, valid input → SAVE and move
+    if (experienceState === "yes" && hasSavedExperiences && hasInput) {
+      saveExperienceEntry(() => {
+        moveToNextSection();
+      });
+      return;
+    }
+
+    // Case 4: Experience = yes, entries exist, no input → MOVE
+    if (experienceState === "yes" && hasSavedExperiences && !hasInput) {
+      moveToNextSection();
       return;
     }
   });

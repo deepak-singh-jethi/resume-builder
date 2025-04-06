@@ -133,10 +133,15 @@ document.addEventListener("DOMContentLoaded", function () {
       skillTag.textContent = displayText;
 
       const deleteBtn = document.createElement("span");
-      deleteBtn.classList.add("material-icons", "delete-btn");
+      deleteBtn.classList.add("material-icons", "delete-btn-skill");
       deleteBtn.textContent = "delete";
       deleteBtn.title = "Remove skill";
-      deleteBtn.addEventListener("click", () => removeSkill(name));
+      deleteBtn.setAttribute("data-skill", name);
+
+      deleteBtn.addEventListener("click", function () {
+        const skillNameToRemove = this.getAttribute("data-skill");
+        removeSkill(skillNameToRemove);
+      });
 
       skillTag.appendChild(deleteBtn);
       skillsListEl.appendChild(skillTag);
@@ -144,7 +149,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Remove a skill
-
   function removeSkill(skillName) {
     Swal.fire({
       title: `Remove "${skillName}"?`,
@@ -157,10 +161,17 @@ document.addEventListener("DOMContentLoaded", function () {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        skillList = skillList.filter((s) => s.name !== skillName);
+        skillList = skillList.filter((s) => s.name !== skillName); // ✅ Correct logic
         localStorage.setItem("skillsData", JSON.stringify(skillList));
         renderSkills();
-        Swal.fire("Deleted!", `"${skillName}" has been removed.`, "success");
+
+        Swal.fire({
+          icon: "success",
+          title: "Deleted!",
+          text: `"${skillName}" has been removed.`,
+          timer: 1200,
+          showConfirmButton: false,
+        });
       }
     });
   }

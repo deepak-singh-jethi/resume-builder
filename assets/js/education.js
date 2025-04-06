@@ -60,13 +60,13 @@ document.addEventListener("DOMContentLoaded", function () {
         <td>${entry.score} ${
         entry.scoreType === "Percentage" ? "%" : entry.scoreType
       }</td>
-        <td><button class="remove-entry" data-index="${index}">❌</button></td>
+        <td><button class="remove-edu" data-index="${index}">❌</button></td>
       `;
       educationModalList.appendChild(row);
     });
 
     // Delete functionality
-    document.querySelectorAll(".remove-entry").forEach((btn) => {
+    document.querySelectorAll(".remove-edu").forEach((btn) => {
       btn.addEventListener("click", function (event) {
         event.preventDefault(); // ✅ Prevent default button behavior (like form submission)
 

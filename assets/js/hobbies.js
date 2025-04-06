@@ -5,6 +5,31 @@ document.addEventListener("DOMContentLoaded", function () {
   const prevBtn = document.getElementById("prev-btn-hobbies");
   const nextBtn = document.getElementById("next-btn-hobbies");
 
+  let hobbiesList = JSON.parse(localStorage.getItem("hobbiesData")) || [];
+
+  const hobbySuggestionsData = [
+    "Reading",
+    "Writing",
+    "Blogging",
+    "Painting",
+    "Sketching",
+    "Photography",
+    "Traveling",
+    "Cooking",
+    "Gardening",
+    "Cycling",
+    "Hiking",
+    "Gaming",
+    "Dancing",
+    "Music",
+    "Singing",
+    "Fishing",
+    "Knitting",
+    "Yoga",
+    "Meditation",
+    "Calligraphy",
+  ];
+
   prevBtn.addEventListener("click", function () {
     const prevSectionId = prevBtn.getAttribute("action-section");
     if (prevSectionId) showSection(prevSectionId);
@@ -12,30 +37,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
   nextBtn.addEventListener("click", function () {
     const nextSectionId = nextBtn.getAttribute("action-section");
+    if (hobbiesList.length === 0) {
+      Swal.fire(
+        "No Hobbies Added",
+        "Please add at least one hobby.",
+        "warning"
+      );
+      return;
+    }
     if (nextSectionId) showSection(nextSectionId);
   });
-
-  let hobbiesList = JSON.parse(localStorage.getItem("hobbiesData")) || [];
-
-  const hobbySuggestionsData = [
-    // [Full hobby list here as provided earlier...]
-    "Reading",
-    "Writing",
-    "Blogging",
-    "Painting",
-    "Sketching", // ... etc
-  ];
 
   hobbiesInput.addEventListener("input", function () {
     filterHobbies(hobbiesInput.value.trim());
   });
 
-  // Handle Enter key for custom hobbies
   hobbiesInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
       e.preventDefault();
       const hobby = hobbiesInput.value.trim();
-      if (hobby && !hobbiesList.includes(hobby)) {
+      if (
+        hobby &&
+        !hobbiesList.some((h) => h.toLowerCase() === hobby.toLowerCase())
+      ) {
         addHobby(hobby);
       }
     }
@@ -51,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const filtered = hobbySuggestionsData.filter(
       (hobby) =>
         hobby.toLowerCase().includes(query.toLowerCase()) &&
-        !hobbiesList.includes(hobby)
+        !hobbiesList.some((h) => h.toLowerCase() === hobby.toLowerCase())
     );
 
     filtered.forEach((hobby) => {
@@ -89,10 +113,15 @@ document.addEventListener("DOMContentLoaded", function () {
       hobbyTag.textContent = hobby;
 
       const deleteBtn = document.createElement("span");
-      deleteBtn.classList.add("material-icons", "delete-btn");
+      deleteBtn.classList.add("material-icons", "delete-btn-hobby");
       deleteBtn.textContent = "delete";
       deleteBtn.title = "Remove hobby";
-      deleteBtn.addEventListener("click", () => confirmRemoveHobby(hobby));
+      deleteBtn.setAttribute("data-hobby", hobby);
+
+      deleteBtn.addEventListener("click", function () {
+        const hobbyToRemove = this.getAttribute("data-hobby");
+        confirmRemoveHobby(hobbyToRemove);
+      });
 
       hobbyTag.appendChild(deleteBtn);
       hobbiesItem.appendChild(hobbyTag);
@@ -107,11 +136,12 @@ document.addEventListener("DOMContentLoaded", function () {
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, remove it!",
-      cancelButtonText: "Cancel",
+      confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        hobbiesList = hobbiesList.filter((item) => item !== hobby);
+        hobbiesList = hobbiesList.filter(
+          (item) => item.toLowerCase() !== hobby.toLowerCase()
+        );
         localStorage.setItem("hobbiesData", JSON.stringify(hobbiesList));
         renderHobbies();
 

@@ -9,9 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   nextButton.addEventListener("click", function () {
     const projectState = localStorage.getItem("projectState");
-    const projectData = JSON.parse(localStorage.getItem("projectData")) || [];
-    const hasSavedProjects = projectData.length > 0;
-
     const title = document.getElementById("project-title").value.trim();
     const description = document
       .getElementById("project-description")
@@ -20,29 +17,33 @@ document.addEventListener("DOMContentLoaded", function () {
       .getElementById("project-achievements")
       .value.trim();
     const hasInput = title || description || achievements;
+    const hasSavedProjects = projectEntries.length > 0;
 
-    if (!projectState || projectState === "no") {
-      moveToNextSection();
-      return;
-    }
-
-    if (projectState === "yes" && hasSavedProjects && !hasInput) {
-      moveToNextSection();
-      return;
-    }
-
-    if (projectState === "yes" && !hasSavedProjects && hasInput) {
-      saveProjectEntry();
+    if (projectState === "no" || !projectState) {
       moveToNextSection();
       return;
     }
 
     if (!hasSavedProjects && !hasInput) {
+      // Case 1: No saved entries, no input
       Swal.fire({
         title: "Missing Project",
         text: "Please add a project or fill in at least one field before proceeding.",
         icon: "warning",
       });
+      return;
+    }
+
+    // Case 2 & 3: Valid input (regardless of saved or not)
+    if (hasInput) {
+      saveProjectEntry();
+      moveToNextSection();
+      return;
+    }
+
+    // Case 4: Saved entries exist, no new input
+    if (hasSavedProjects && !hasInput) {
+      moveToNextSection();
       return;
     }
   });

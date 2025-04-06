@@ -94,7 +94,9 @@
 /* Delete icon inside tag */
 .skill-tag i,
 .hobby-tag i,
-.delete-btn {
+.delete-btn-skill,
+.delete-btn-hobby,
+.delete-btn-lang {
   margin-left: 10px;
   font-size: 18px;
   color: #ef4444;
@@ -102,7 +104,9 @@
   transition: color 0.2s;
 }
 
-.delete-btn:hover {
+.delete-btn-skill:hover,
+.delete-btn-hobby:hover,
+.delete-btn-lang:hover {
   color: #b91c1c;
 }
 

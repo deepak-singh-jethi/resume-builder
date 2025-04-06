@@ -40,19 +40,19 @@ document.addEventListener("DOMContentLoaded", function () {
       div.className = "skill-tag";
       div.innerHTML = `
         ${lang.name} (${lang.level})
-        <span class="material-icons delete-btn" title="Remove language" data-index="${index}">delete</span>
+        <span class="material-icons delete-btn-lang" title="Remove language" data-index="${index}">delete</span>
       `;
       languageList.appendChild(div);
     });
 
-    const deleteButtons = document.querySelectorAll(".delete-btn");
+    const deleteButtons = document.querySelectorAll(".delete-btn-lang");
     deleteButtons.forEach((btn) => {
       btn.addEventListener("click", function () {
         const index = this.getAttribute("data-index");
 
         Swal.fire({
           title: "Remove Language?",
-          text: `Are you sure you want to remove "${personalInfo.languages[index].name}"?`,
+          text: `Are you sure you want to remove`,
           icon: "warning",
           showCancelButton: true,
           confirmButtonText: "Yes, remove it",

@@ -29,9 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
       JSON.parse(localStorage.getItem("certificateData")) || [];
     const hasSavedCertificates = certificateData.length > 0;
 
-    const details = document.getElementById("certificate-details").value.trim();
+    const detailsInput = document.getElementById("certificate-details");
+    const details = detailsInput.value.trim();
     const hasInput = details.length > 0;
 
+    // Case: user selected "no" for certifications
     if (
       certificateState === "no" ||
       certificateState === null ||
@@ -41,17 +43,29 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    // Case: user selected "yes", has previous entries, no new input
     if (certificateState === "yes" && hasSavedCertificates && !hasInput) {
       moveToNextSection();
       return;
     }
 
+    // Case: user selected "yes", no previous entries, valid input
     if (certificateState === "yes" && !hasSavedCertificates && hasInput) {
-      saveCertificateEntry();
-      moveToNextSection();
+      saveCertificateEntry(() => {
+        moveToNextSection();
+      });
       return;
     }
 
+    // ✅ Case: user selected "yes", has previous entries, and valid input (MISSING CASE)
+    if (certificateState === "yes" && hasSavedCertificates && hasInput) {
+      saveCertificateEntry(() => {
+        moveToNextSection();
+      });
+      return;
+    }
+
+    // Case: no saved certificates, no input — block
     if (!hasSavedCertificates && !hasInput) {
       Swal.fire({
         title: "Missing Certification",
@@ -95,12 +109,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  function saveCertificateEntry() {
-    const newEntry = {
-      details: document.getElementById("certificate-details").value.trim(),
-    };
+  function saveCertificateEntry(callback = null) {
+    const details = document.getElementById("certificate-details").value.trim();
 
-    if (!newEntry.details) {
+    if (!details) {
       Swal.fire({
         title: "Missing Field",
         text: "Please enter the certification details.",
@@ -108,6 +120,8 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       return;
     }
+
+    const newEntry = { details };
 
     certificateEntries.push(newEntry);
     localStorage.setItem("certificateData", JSON.stringify(certificateEntries));
@@ -119,8 +133,12 @@ document.addEventListener("DOMContentLoaded", function () {
       icon: "success",
       title: "Saved!",
       text: "Certificate added successfully.",
-      timer: 1500,
+      timer: 1200,
       showConfirmButton: false,
+    }).then(() => {
+      if (typeof callback === "function") {
+        callback(); // ✅ safely call only if it's actually a function
+      }
     });
   }
 

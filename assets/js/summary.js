@@ -48,7 +48,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const summaryTextValue = summaryTextarea.value.trim();
 
     if (summaryTextValue === "") {
-      alert("Please fill in the summary text.");
+      Swal.fire({
+        icon: "warning",
+        title: "Summary is empty",
+        text: "Please fill in the summary before continuing.",
+      });
       return;
     }
 
