@@ -2,39 +2,36 @@ document.addEventListener("DOMContentLoaded", function () {
   const nextButton = document.getElementById("next-btn-certifications");
   const prevButton = document.getElementById("prev-btn-certifications");
 
-  const certificateModal = document.getElementById("certificate-modal"); // Modal container
+  const certificateModal = document.getElementById("certificate-modal");
   const openCertificateModalBtn = document.getElementById(
     "open-certificate-modal"
   );
   const closeCertificateModalBtn = document.getElementById(
     "close-certificate-modal"
-  ); // Close modal button
+  );
   const certificateModalList = document.getElementById(
     "certificate-modal-list"
-  ); // Table to display certificates
-  const saveCertificateBtn = document.getElementById("save-certificate"); // Save button
+  );
+  const saveCertificateBtn = document.getElementById("save-certificate");
 
-  // ✅ Ensure Modal is Hidden on Load
   certificateModal.style.display = "none";
 
-  // ✅ Handle "Previous" button navigation
   prevButton.addEventListener("click", function () {
     const prevSectionId = prevButton.getAttribute("action-section");
     if (prevSectionId) {
-      showSection(prevSectionId); // Show the previous section
+      showSection(prevSectionId);
     }
   });
-  // ✅ Handle "save and Next" button navigation
+
   nextButton.addEventListener("click", function () {
-    const certificateState = localStorage.getItem("certificateState"); // "yes" or "no"
+    const certificateState = localStorage.getItem("certificateState");
     const certificateData =
-      JSON.parse(localStorage.getItem("certificateData")) || []; // Get stored certificates
-    const hasSavedCertificates = certificateData.length > 0; // Check if certificates exist
+      JSON.parse(localStorage.getItem("certificateData")) || [];
+    const hasSavedCertificates = certificateData.length > 0;
 
     const details = document.getElementById("certificate-details").value.trim();
-    const hasInput = details.length > 0; // Check if input is entered
+    const hasInput = details.length > 0;
 
-    // if certificateState is "no" or null/undefined (no data) and no input is given, just move to next section
     if (
       certificateState === "no" ||
       certificateState === null ||
@@ -44,29 +41,27 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // ✅ Case 1: Certificates exist & inputs are empty → Move to next section
     if (certificateState === "yes" && hasSavedCertificates && !hasInput) {
       moveToNextSection();
       return;
     }
 
-    // ✅ Case 2: No certificates saved but inputs are filled → Save & Move
     if (certificateState === "yes" && !hasSavedCertificates && hasInput) {
       saveCertificateEntry();
       moveToNextSection();
       return;
     }
 
-    // ✅ Case 3: No certificates exist & inputs are empty → Show alert & stop
     if (!hasSavedCertificates && !hasInput) {
-      alert(
-        "Please add a certification or fill in at least one field before proceeding."
-      );
+      Swal.fire({
+        title: "Missing Certification",
+        text: "Please add a certification or fill in at least one field before proceeding.",
+        icon: "warning",
+      });
       return;
     }
   });
 
-  // Function to handle navigation to the next section
   function moveToNextSection() {
     const nextSectionId = nextButton.getAttribute("action-section");
     if (nextSectionId) {
@@ -74,7 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // ✅ Retrieve stored certificate entries safely
   function getStoredCertificateData() {
     try {
       return JSON.parse(localStorage.getItem("certificateData")) || [];
@@ -86,57 +80,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let certificateEntries = getStoredCertificateData();
 
-  // ✅ Open Modal on Click (Displays the certification list)
   openCertificateModalBtn.addEventListener("click", function () {
-    certificateModal.style.display = "flex"; // Show modal
-    displayCertificateEntries(); // Load existing certificates
+    certificateModal.style.display = "flex";
+    displayCertificateEntries();
   });
 
-  // ✅ Close Modal on "X" Click
   closeCertificateModalBtn.addEventListener("click", function () {
     certificateModal.style.display = "none";
   });
 
-  // ✅ Close Modal When Clicking Outside of It
   window.addEventListener("click", function (event) {
     if (event.target === certificateModal) {
       certificateModal.style.display = "none";
     }
   });
 
-  // ✅ Function to Save Certificate Entry
   function saveCertificateEntry() {
     const newEntry = {
       details: document.getElementById("certificate-details").value.trim(),
     };
 
-    // ✅ Validation: Ensure required fields are filled
     if (!newEntry.details) {
-      alert("Please enter the certification details.");
+      Swal.fire({
+        title: "Missing Field",
+        text: "Please enter the certification details.",
+        icon: "warning",
+      });
       return;
     }
 
-    // ✅ Save Entry in Global Array & Local Storage
     certificateEntries.push(newEntry);
     localStorage.setItem("certificateData", JSON.stringify(certificateEntries));
-    updateViewCertificatesButton(); // Update button text
-
-    // ✅ Update UI
+    updateViewCertificatesButton();
     displayCertificateEntries();
-    clearCertificateForm(); // Clear the form after saving
+    clearCertificateForm();
+
+    Swal.fire({
+      icon: "success",
+      title: "Saved!",
+      text: "Certificate added successfully.",
+      timer: 1500,
+      showConfirmButton: false,
+    });
   }
 
-  // ✅ Function to Display Certificate Entries in Modal Table
   function displayCertificateEntries() {
-    certificateModalList.innerHTML = ""; // Clear previous list
+    certificateModalList.innerHTML = "";
 
-    // ✅ If no entries exist, display a message
     if (certificateEntries.length === 0) {
       certificateModalList.innerHTML = `<tr><td colspan="2">No certifications added yet.</td></tr>`;
       return;
     }
 
-    // ✅ Populate Table with Entries
     certificateEntries.forEach((entry, index) => {
       const row = document.createElement("tr");
       row.innerHTML = `
@@ -146,34 +141,49 @@ document.addEventListener("DOMContentLoaded", function () {
       certificateModalList.appendChild(row);
     });
 
-    // ✅ Attach Event Listeners to Remove Buttons
     document.querySelectorAll(".remove-certificate").forEach((btn) => {
       btn.addEventListener("click", function () {
-        const index = parseInt(btn.getAttribute("data-index")); // Get entry index
-        certificateEntries.splice(index, 1); // Remove entry from array
-        localStorage.setItem(
-          "certificateData",
-          JSON.stringify(certificateEntries)
-        ); // Update localStorage
-        displayCertificateEntries(); // Refresh list
-        updateViewCertificatesButton(); // Update button text
+        const index = parseInt(btn.getAttribute("data-index"));
+
+        Swal.fire({
+          title: "Are you sure?",
+          text: "Do you want to delete this certificate?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            certificateEntries.splice(index, 1);
+            localStorage.setItem(
+              "certificateData",
+              JSON.stringify(certificateEntries)
+            );
+            displayCertificateEntries();
+            updateViewCertificatesButton();
+
+            Swal.fire({
+              icon: "success",
+              title: "Deleted!",
+              text: "Certificate entry has been removed.",
+              timer: 1500,
+              showConfirmButton: false,
+            });
+          }
+        });
       });
     });
   }
 
-  // ✅ Function to Clear Form Fields
   function clearCertificateForm() {
     document.getElementById("certificate-details").value = "";
   }
 
-  // ✅ Function to Update View Certificates Button
   function updateViewCertificatesButton() {
     openCertificateModalBtn.innerText = `View (${certificateEntries.length}) Certifications`;
   }
 
-  // ✅ Initialize UI with stored data
   updateViewCertificatesButton();
-
-  // ✅ Attach Event Listener to Save Button
   saveCertificateBtn.addEventListener("click", saveCertificateEntry);
 });

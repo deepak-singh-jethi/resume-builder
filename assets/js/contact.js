@@ -37,15 +37,70 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   autofillFields();
 
+  // ✅ Validation Helpers
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  function isValidPhone(phone) {
+    const phoneDigits = phone.replace(/[^\d]/g, "");
+    return phoneDigits.length >= 10 && phoneDigits.length <= 15;
+  }
+
   // ✅ Save form data on "Next" button click
   nextButton.addEventListener("click", function () {
+    const fullName = name.value.trim();
+    const emailVal = email.value.trim();
+    const phoneVal = phone.value.trim();
+    const cityVal = city.value.trim();
+    const countryVal = country.value.trim();
+    const pinCodeVal = pinCode.value.trim();
+
+    // ✅ Validation for required fields
+    if (
+      !fullName ||
+      !phoneVal ||
+      !cityVal ||
+      !countryVal ||
+      !pinCodeVal ||
+      !emailVal
+    ) {
+      Swal.fire({
+        icon: "warning",
+        title: "Required Fields Missing",
+        text: "Please fill in all required fields: Full Name, Phone, City, Country, Pin-Code, and Email.",
+      });
+      return;
+    }
+
+    // ✅ Validate email format
+    if (!isValidEmail(emailVal)) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid Email Format",
+        text: "Please enter a valid email address (e.g., john@example.com).",
+      });
+      return;
+    }
+
+    // ✅ Validate phone format
+    if (!isValidPhone(phoneVal)) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid Phone Number",
+        text: "Phone number should contain 10 to 15 digits. You may use +, spaces, or dashes.",
+      });
+      return;
+    }
+
     const newContactInfo = {
-      fullName: name.value.trim(),
-      email: email.value.trim(),
-      phone: phone.value.trim(),
-      city: city.value.trim(),
-      country: country.value.trim(),
-      pinCode: pinCode.value.trim(),
+      fullName,
+      email: emailVal,
+      phone: phoneVal,
+      city: cityVal,
+      country: countryVal,
+      pinCode: pinCodeVal,
       linkedin: linkedin.value.trim(),
       github: github.value.trim(),
       website: website.value.trim(),

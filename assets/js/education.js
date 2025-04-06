@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Select modal-related DOM elements
   const educationModal = document.getElementById("education-modal");
   const openEducationModalBtn = document.getElementById("open-education-modal");
   const closeEducationModalBtn = document.getElementById(
@@ -10,126 +9,42 @@ document.addEventListener("DOMContentLoaded", function () {
   const prevButton = document.getElementById("prev-btn-education");
   const nextButton = document.getElementById("next-btn-education");
 
-  // ✅ Handle "save and Next" button click
-  nextButton.addEventListener("click", function () {
-    const educationState = localStorage.getItem("educationState");
-    if (educationState === "yes") saveEducationEntry(); // Save the education entry
-
-    const nextSectionId = nextButton.getAttribute("action-section");
-
-    if (nextSectionId) {
-      showSection(nextSectionId);
-    }
-  });
-  // ✅ Handle "Previous" button click
-
-  prevButton.addEventListener("click", function () {
-    const prevSectionId = prevButton.getAttribute("action-section");
-    if (prevSectionId) {
-      showSection(prevSectionId);
-    }
-  });
-
-  // ✅ Safe function to get stored education data
-
-  function getStoredEducationData() {
-    try {
-      return JSON.parse(localStorage.getItem("educationData")) || [];
-    } catch (error) {
-      console.error("Invalid JSON in localStorage:", error);
-      return [];
-    }
-  }
-
-  let educationData = getStoredEducationData(); // Load existing data
-
-  // Hide modal initially
   educationModal.style.display = "none";
 
-  // ✅ Save education entry
-  function saveEducationEntry() {
-    const newEntry = {
-      degree: document.getElementById("education-degree").value.trim(),
-      specialization: document.getElementById("education-subject").value.trim(),
-      institution: document
-        .getElementById("education-institution")
-        .value.trim(),
-      startYear: document.getElementById("education-start").value,
-      endYear: document.getElementById("education-end").value || "Present",
-      scoreType: document.getElementById("education-score-type").value,
-      score: document.getElementById("education-score").value,
-      location: document.getElementById("education-location").value.trim(),
-    };
+  let educationData = JSON.parse(localStorage.getItem("educationData")) || [];
 
-    // Validate required fields
-    if (
-      !newEntry.degree ||
-      !newEntry.institution ||
-      !newEntry.startYear ||
-      !newEntry.score
-    ) {
-      alert("Please fill all required fields.");
-      return;
-    }
-
-    // Validate score range
-    if (!isValidScore(newEntry.score, newEntry.scoreType)) {
-      alert(
-        newEntry.scoreType === "CGPA"
-          ? "CGPA must be between 0 and 10."
-          : "Percentage must be between 0% and 100%."
-      );
-      return;
-    }
-
-    console.log("New Education Entry:", newEntry);
-
-    // ✅ Add new entry and update localStorage
-    educationData.push(newEntry);
-    localStorage.setItem("educationData", JSON.stringify(educationData));
-
-    updateViewEntriesButton();
-    displayEducationEntries();
-    clearEducationForm();
-  }
-
-  // ✅ Validate score
-  function isValidScore(score, scoreType) {
-    if (scoreType === "CGPA") return score >= 0 && score <= 10;
-    if (scoreType === "Percentage") return score >= 0 && score <= 100;
-    return false;
-  }
-
-  // ✅ Open the education modal
-  openEducationModalBtn.addEventListener("click", function () {
-    toggleModal(educationModal, true);
-    displayEducationEntries();
-  });
-
-  // ✅ Close modal logic
-  closeEducationModalBtn.addEventListener("click", function () {
-    toggleModal(educationModal, false);
-  });
-  window.addEventListener("click", function (event) {
-    if (event.target === educationModal) {
-      toggleModal(educationModal, false);
-    }
-  });
-
-  // ✅ Save education entry on button click
-  saveEducationBtn.addEventListener("click", saveEducationEntry);
-
-  // ✅ Toggle modal visibility
   function toggleModal(modal, show) {
     modal.style.display = show ? "flex" : "none";
   }
 
-  // ✅ Display stored education entries
+  function isValidScore(score, scoreType) {
+    const numeric = parseFloat(score);
+    if (isNaN(numeric)) return false;
+    if (scoreType === "CGPA") return numeric >= 0 && numeric <= 10;
+    if (scoreType === "Percentage") return numeric >= 0 && numeric <= 100;
+    return false;
+  }
+
+  function clearEducationForm() {
+    document.getElementById("education-degree").value = "";
+    document.getElementById("education-subject").value = "";
+    document.getElementById("education-institution").value = "";
+    document.getElementById("education-start").value = "";
+    document.getElementById("education-end").value = "";
+    document.getElementById("education-score-type").value = "CGPA";
+    document.getElementById("education-score").value = "";
+    document.getElementById("education-location").value = "";
+  }
+
+  function updateViewEntriesButton() {
+    openEducationModalBtn.innerText = `View (${educationData.length}) Entries`;
+  }
+
   function displayEducationEntries() {
-    educationModalList.innerHTML = ""; // Clear previous entries
+    educationModalList.innerHTML = "";
 
     if (educationData.length === 0) {
-      educationModalList.innerHTML = `<tr><td colspan="7">No education records found.</td></tr>`;
+      educationModalList.innerHTML = `<tr><td colspan="8">No education records found.</td></tr>`;
       return;
     }
 
@@ -150,38 +65,165 @@ document.addEventListener("DOMContentLoaded", function () {
       educationModalList.appendChild(row);
     });
 
-    // ✅ Attach event listeners to delete buttons
     document.querySelectorAll(".remove-entry").forEach((btn) => {
       btn.addEventListener("click", function () {
         const index = parseInt(btn.getAttribute("data-index"));
-        educationData.splice(index, 1);
 
-        // ✅ Update localStorage with modified data
-        localStorage.setItem("educationData", JSON.stringify(educationData));
-        updateViewEntriesButton();
-        displayEducationEntries();
+        Swal.fire({
+          title: "Are you sure?",
+          text: "Do you want to delete this education entry?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            educationData.splice(index, 1);
+            localStorage.setItem(
+              "educationData",
+              JSON.stringify(educationData)
+            );
+            displayEducationEntries();
+            updateViewEntriesButton();
+
+            Swal.fire({
+              icon: "success",
+              title: "Deleted!",
+              text: "Education entry has been removed.",
+              timer: 1500,
+              showConfirmButton: false,
+            });
+          }
+        });
       });
     });
   }
 
-  // ✅ Clear input fields
-  function clearEducationForm() {
-    document.getElementById("education-degree").value = "";
-    document.getElementById("education-subject").value = "";
-    document.getElementById("education-institution").value = "";
-    document.getElementById("education-start").value = "";
-    document.getElementById("education-end").value = "";
-    document.getElementById("education-score-type").value = "CGPA";
-    document.getElementById("education-score").value = "";
-    document.getElementById("education-location").value = "";
+  function saveEducationEntry() {
+    const newEntry = {
+      degree: document.getElementById("education-degree").value.trim(),
+      specialization: document.getElementById("education-subject").value.trim(),
+      institution: document
+        .getElementById("education-institution")
+        .value.trim(),
+      startYear: document.getElementById("education-start").value,
+      endYear: document.getElementById("education-end").value || "Present",
+      scoreType: document.getElementById("education-score-type").value,
+      score: document.getElementById("education-score").value,
+      location: document.getElementById("education-location").value.trim(),
+    };
+
+    if (
+      !newEntry.degree ||
+      !newEntry.institution ||
+      !newEntry.startYear ||
+      !newEntry.score
+    ) {
+      Swal.fire({
+        icon: "warning",
+        title: "Incomplete Fields",
+        text: "Please fill Degree, Institution, Start Year, and Score.",
+      });
+      return;
+    }
+
+    if (!isValidScore(newEntry.score, newEntry.scoreType)) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid Score",
+        text:
+          newEntry.scoreType === "CGPA"
+            ? "CGPA must be between 0 and 10."
+            : "Percentage must be between 0% and 100%.",
+      });
+      return;
+    }
+
+    educationData.push(newEntry);
+    localStorage.setItem("educationData", JSON.stringify(educationData));
+
+    clearEducationForm();
+    displayEducationEntries();
+    updateViewEntriesButton();
+
+    Swal.fire({
+      icon: "success",
+      title: "Saved!",
+      text: "Education entry has been added.",
+      timer: 1500,
+      showConfirmButton: false,
+    });
   }
 
-  // ✅ Update "View Entries" button text
-  function updateViewEntriesButton() {
-    openEducationModalBtn.innerText = `View (${educationData.length}) Entries`;
+  // Modal open/close
+  openEducationModalBtn.addEventListener("click", function () {
+    toggleModal(educationModal, true);
+    displayEducationEntries();
+  });
+
+  closeEducationModalBtn.addEventListener("click", function () {
+    toggleModal(educationModal, false);
+  });
+
+  window.addEventListener("click", function (event) {
+    if (event.target === educationModal) {
+      toggleModal(educationModal, false);
+    }
+  });
+
+  saveEducationBtn.addEventListener("click", saveEducationEntry);
+
+  // Navigation logic
+  nextButton.addEventListener("click", function () {
+    const hasSavedEducations = educationData.length > 0;
+
+    const hasInput =
+      document.getElementById("education-degree").value.trim() &&
+      document.getElementById("education-institution").value.trim() &&
+      document.getElementById("education-start").value.trim() &&
+      document.getElementById("education-score").value.trim();
+
+    console.log({ hasInput }, { hasSavedEducations });
+
+    // ✅ Case 1: Some education entries are already saved & no input fields filled → Safe to move
+    if (hasSavedEducations && !hasInput) {
+      moveToNextSection();
+      return;
+    }
+
+    // ✅ Case 2: No saved entries, but some input is present → Save current input and move
+    if (!hasSavedEducations && hasInput) {
+      saveEducationEntry();
+      moveToNextSection();
+      return;
+    }
+
+    // ✅ Case 3: Saved entries exist, but also some new inputs present → Save & move
+    if (hasSavedEducations && hasInput) {
+      saveEducationEntry();
+      moveToNextSection();
+      return;
+    }
+
+    // ❌ Case 4: No saved entries & no input → Show warning
+    Swal.fire(
+      "Missing Education",
+      "Please add at least one education entry or fill in a field.",
+      "warning"
+    );
+  });
+
+  prevButton.addEventListener("click", function () {
+    const prevSectionId = prevButton.getAttribute("action-section");
+    if (prevSectionId) showSection(prevSectionId);
+  });
+
+  function moveToNextSection() {
+    const nextSectionId = nextButton.getAttribute("action-section");
+    if (nextSectionId) showSection(nextSectionId);
   }
 
-  // ✅ Initialize UI
   displayEducationEntries();
   updateViewEntriesButton();
 });
