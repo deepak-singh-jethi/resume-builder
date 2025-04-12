@@ -56,7 +56,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const skillName = skillsInput.value.trim();
       if (
         skillName &&
-        !skillList.some((s) => s.name.toLowerCase() === skillName.toLowerCase())
+        !skillList.some(
+          (s) => s.name && s.name.toLowerCase() === skill.toLowerCase()
+        )
       ) {
         addSkill(skillName);
       }

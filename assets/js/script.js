@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("burger-btn").addEventListener("click", function () {
+    document.querySelector(".sidebar").classList.toggle("open");
+  });
+
   const previewResumeBtn = document.getElementById("preview-resume-btn");
   const certificateModal = document.getElementById("certificate-modal");
   console.log(certificateModal);
@@ -6,9 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
   //close all modals on load
   certificateModal.style.display = "none"; // Hide modal on load
 
+  // redirect to preview
   previewResumeBtn.addEventListener("click", function (event) {
     window.location.href = "resume-preview.html";
   });
+
   handleProgressBar();
 });
 

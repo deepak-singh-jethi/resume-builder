@@ -33,6 +33,7 @@ body {
   position: relative;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   margin: 10px auto;
+  z-index: -10;
 }
 
 /* Progress Bar */
@@ -199,7 +200,7 @@ input[type="url"]:focus {
   outline: 2px solid #007bff;
 }
 
-/* language section  */
+/*  */
 .tag-container {
   margin-top: 10px;
   display: flex;
@@ -222,6 +223,84 @@ input[type="url"]:focus {
   color: #c00;
   font-weight: bold;
   cursor: pointer;
+}
+/* burger button */
+/* Style the burger button */
+.burger-btn {
+  display: none; /* Hide on large screens */
+  background: var(--sidebar-hover);
+  border: none;
+  font-size: 30px;
+  color: var(--button-bg);
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #2d3b55;
+  padding: 20px;
+  display: block; /* Sidebar is visible by default */
+}
+
+.sidebar .sidebar-item {
+  margin: 10px 0;
+  color: white;
+}
+
+.sidebar .sidebar-item.active {
+  font-weight: bold;
+}
+
+/* Media query for small devices */
+@media (max-width: 768px) {
+  /* Show the burger button on small screens */
+  .burger-btn {
+    display: block;
+    top: 0px;
+    left: 0px;
+    height: 40px;
+    width: 40px;
+  }
+  .progress-container {
+    width: 70%;
+  }
+
+  /* Hide the sidebar by default on small screens */
+  .sidebar {
+    transform: translateX(-250px);
+    transition: transform 0.3s ease-in-out;
+    width: 80%;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+    padding-inline: 2px;
+  }
+  .form-option-container {
+    padding: 10px;
+  }
+  .form-option-container h2 {
+    font-size: 15px !important;
+  }
+  .form-option label {
+    font-size: 14px;
+  }
 }
 
 /* Mobile */

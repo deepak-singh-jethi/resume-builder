@@ -169,12 +169,24 @@ textarea {
   .form-row {
     flex-direction: column;
   }
+  .char-counter {
+    margin-right: 3px;
+  }
 
   .form-section {
     padding: 20px;
     max-width: 95%;
   }
+  .form-section h2 {
+    font-size: 16px !important;
+  }
 
+  .large-text-area {
+    width: 95%;
+    height: 200px;
+    margin: 10px;
+    padding: 5px;
+  }
   .input-wrapper input,
   .input-wrapper textarea {
     font-size: 15px;

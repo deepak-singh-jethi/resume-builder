@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta name="viewport" content="width=1024" /> -->
+
     <title>Resume Builder</title>
     <link rel="stylesheet" href="assets/css/colors.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
@@ -23,6 +25,10 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons" />
   </head>
   <body>
+    <!-- Burger Button (for small devices) -->
+    <button id="burger-btn" class="burger-btn">
+      <i class="material-icons">menu</i>
+    </button>
     <!-- Sidebar -->
     <div class="sidebar">
       <h2>Resume Builder</h2>
@@ -201,12 +207,14 @@
                 <div class="char-counter" id="char-counter">0/300</div>
 
                 <!-- Suggestion Button -->
-                <button
-                  type="button"
-                  class="suggestion-btn"
-                  id="open-summary-modal">
-                  ✨ Get Suggestions
-                </button>
+                <div class="suggestion-div">
+                  <button
+                    type="button"
+                    class="suggestion-btn"
+                    id="open-summary-modal">
+                    ✨ Get Suggestions
+                  </button>
+                </div>
                 <div class="form-navigation">
                   <button
                     type="button"
