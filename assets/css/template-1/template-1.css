@@ -24,7 +24,7 @@ body {
 .template-1-resume {
   display: flex;
   width: 100%;
-  min-height: 100vh; /* Use min-height instead of height for better fit */
+  min-height: 100vh; 
   background-color: var(--template-1-bg);
   overflow: hidden;
   box-sizing: border-box;
