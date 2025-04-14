@@ -23,6 +23,15 @@
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+
+    <!-- Optional plugin for year-only dropdown -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css" />
   </head>
   <body>
     <!-- Burger Button (for small devices) -->
@@ -448,11 +457,19 @@
                   <div class="form-row">
                     <div class="input-group">
                       <label>Start Date:</label>
-                      <input type="date" id="experience-start" />
+                      <input
+                        type="date"
+                        id="experience-start"
+                        class="custom-datepicker"
+                        placeholder="start date" />
                     </div>
                     <div class="input-group">
                       <label>End Date:</label>
-                      <input type="date" id="experience-end" />
+                      <input
+                        type="date"
+                        id="experience-end"
+                        class="custom-datepicker"
+                        placeholder="end date" />
                     </div>
                   </div>
 
@@ -804,6 +821,7 @@
                     <input
                       type="date"
                       id="dob"
+                      class="custom-datepicker"
                       placeholder="Enter your date of birth" />
                   </div>
                   <div class="input-group">
@@ -889,7 +907,10 @@
     <script src="assets/js/hobbies.js"></script>
     <script src="assets/js/personal-info.js"></script>
     <script src="assets/js/radio-button-optional-form.js"></script>
+    <script src="assets/js/date-picker.js"></script>
     <script src="assets/js/sidebarNavigation.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
   </body>
 </html>
