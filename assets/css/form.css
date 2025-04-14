@@ -3,7 +3,7 @@
 /* 🎯 General Form Styling */
 .form-area {
   width: 100%;
-  background: var(--form-bg);
+  /* background: var(--form-bg); */
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
@@ -200,5 +200,8 @@ textarea {
 
   .form-navigation button {
     width: 100%;
+  }
+  .input-group label {
+    margin-top: 5px;
   }
 }
