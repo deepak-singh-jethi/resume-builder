@@ -142,6 +142,9 @@
     width: 100%;
     margin-bottom: 10px;
   }
+  .suggestion-btn {
+    margin-left: 0px !important;
+  }
 }
 
 /* Media query for smaller screens (Mobile) */
@@ -181,5 +184,9 @@
   .form-actions button {
     width: 100%;
     margin-bottom: 8px;
+  }
+  .form-actions button {
+    /* width: 40px;
+    margin-bottom: 10px; */
   }
 }
