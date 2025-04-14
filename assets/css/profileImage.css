@@ -1,0 +1,124 @@
+/* Base styles */
+.image-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-block: 40px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  align-items: center;
+}
+.image-input-container {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+#profile-img {
+  width: auto;
+  height: 180px;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-container {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.delete-btn:hover {
+  background-color: darkred;
+}
+
+.profile-container:hover .delete-btn {
+  display: block;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Small screens (mobile devices) */
+@media screen and (max-width: 600px) {
+  .image-area {
+    padding: 15px;
+    margin-block: 20px;
+  }
+
+  #profile-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .delete-btn {
+    top: 3px;
+    right: 3px;
+    font-size: 14px;
+    padding: 4px 6px;
+  }
+
+  .input-label {
+    font-size: 14px;
+  }
+  .image-input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .image-input-container > input {
+    margin-left: 40px;
+  }
+}
+
+/* Medium screens (tablets) */
+@media screen and (max-width: 768px) {
+  .image-area {
+    padding: 20px;
+  }
+
+  #profile-img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .delete-btn {
+    top: 5px;
+    right: 5px;
+    font-size: 16px;
+    padding: 5px 8px;
+  }
+
+  .input-label {
+    font-size: 15px;
+  }
+}

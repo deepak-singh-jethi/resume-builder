@@ -7,6 +7,7 @@
 
     <title>Resume Builder</title>
     <link rel="stylesheet" href="assets/css/colors.css" />
+    <link rel="stylesheet" href="assets/css/profileImage.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/sidebar.css" />
     <link rel="stylesheet" href="assets/css/form.css" />
@@ -93,7 +94,6 @@
               <!-- ! 1- contact info section-->
               <div class="form-section" id="contact">
                 <h2>Contact Information</h2>
-
                 <!-- Full Name & Phone -->
                 <div class="form-row form-margin">
                   <div class="input-group">
@@ -867,6 +867,25 @@
                       </button>
                     </div>
                     <div id="language-list" class="tag-container"></div>
+                  </div>
+                </div>
+                <div class="image-area">
+                  <div class="image-input-container">
+                    <label for="profile-picture" class="input-label"
+                      >Profile Picture</label
+                    >
+                    <input
+                      type="file"
+                      id="profile-picture"
+                      accept="image/*"
+                      placeholder="" />
+                  </div>
+
+                  <div class="profile-container">
+                    <img id="profile-img" src="" alt="Profile Picture" />
+                    <button id="delete-profile-img" class="delete-btn">
+                      <span class="material-icons">delete</span>
+                    </button>
                   </div>
                 </div>
 

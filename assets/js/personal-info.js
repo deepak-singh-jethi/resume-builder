@@ -7,12 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
     "next-btn-personal-info"
   );
   const prevBtn = document.getElementById("prev-btn-personal-info");
-
-  console.log(prevBtn);
-
   const languageInput = document.getElementById("language-input");
   const addLanguageBtn = document.getElementById("add-language-btn");
   const languageList = document.getElementById("language-list");
+  const profileInput = document.getElementById("profile-picture");
+  const profileImg = document.getElementById("profile-img");
+  const deleteProfileImg = document.getElementById("delete-profile-img");
 
   let personalInfo = JSON.parse(localStorage.getItem("personalData")) || {
     dob: "",
@@ -105,22 +105,18 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   prevBtn.addEventListener("click", function () {
-    console.log("yes");
-
     const prevSectionId = prevBtn.getAttribute("action-section");
     if (prevSectionId) showSection(prevSectionId);
   });
 
   saveButtonAndPreview.addEventListener("click", function () {
     const errors = [];
-
     const dobVal = dob.value.trim();
     const genderVal = gender.value;
     const maritalVal = maritalStatus.value;
     const religionVal = religion.value.trim();
     const langCount = personalInfo.languages.length;
 
-    // Validate Date of Birth
     if (!dobVal) {
       errors.push("• Date of Birth is required");
     } else {
@@ -145,7 +141,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Save the data
     personalInfo.dob = dobVal;
     personalInfo.religion = religionVal;
     personalInfo.gender = genderVal;
@@ -165,6 +160,63 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "resume-preview.html";
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         showSection("contact");
+      }
+    });
+  });
+
+  // Load stored image from localStorage (if any)
+  const storedProfile = localStorage.getItem("profileImage");
+  if (storedProfile) {
+    profileImg.src = storedProfile;
+    profileImg.style.display = "block";
+    deleteProfileImg.style.display = "block"; // Show the delete button
+  } else {
+    profileImg.style.display = "none";
+    deleteProfileImg.style.display = "none"; // Hide delete button if no image
+  }
+
+  profileInput.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (!file || !file.type.startsWith("image/")) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid File",
+        text: "Please upload a valid image file.",
+      });
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const base64Image = e.target.result;
+      profileImg.src = base64Image;
+      profileImg.style.display = "block";
+      deleteProfileImg.style.display = "block"; // Show the delete button
+      localStorage.setItem("profileImage", base64Image); // Save base64 to localStorage
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Delete the profile picture when the delete button is clicked
+  deleteProfileImg.addEventListener("click", function () {
+    Swal.fire({
+      icon: "warning",
+      title: "Delete Profile Picture",
+      text: "Are you sure you want to delete your profile picture?",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Clear the image from localStorage and UI
+        localStorage.removeItem("profileImage");
+        profileImg.src = "";
+        profileImg.style.display = "none";
+        deleteProfileImg.style.display = "none"; // Hide the delete button
+
+        // Reset the input so the user can upload a new image
+        profileInput.value = "";
       }
     });
   });
