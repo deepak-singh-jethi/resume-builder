@@ -261,6 +261,12 @@ input[type="url"]:focus {
 .sidebar .sidebar-item.active {
   font-weight: bold;
 }
+.flatpickr-year-select {
+  max-height: 150px; /* Height to display only 5 options */
+  overflow-y: auto; /* Enable scrolling if more options are present */
+  font-size: 14px; /* Adjust font size */
+  line-height: 1.5; /* Adjust line height for better readability */
+}
 
 /* Media query for small devices */
 @media (max-width: 768px) {

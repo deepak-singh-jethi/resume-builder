@@ -82,7 +82,10 @@ document.addEventListener("DOMContentLoaded", function () {
       timer: 1200,
       showConfirmButton: false,
     }).then(() => {
-      if (callback) callback(); // ✅ Only move to next after confirmation
+      if (typeof callback === "function") {
+        // Ensure callback is a function before calling it
+        callback(); // ✅ Only move to next after confirmation
+      }
     });
   }
 
