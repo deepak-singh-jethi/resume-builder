@@ -18,6 +18,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (activeItem) {
       activeItem.classList.add("active");
     }
+
+    // ✅ Close the sidebar after section selection
+    document.querySelector(".sidebar").classList.remove("open");
+
     // Update progress bar
     handleProgressBar(sectionId);
   }

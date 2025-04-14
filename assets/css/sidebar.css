@@ -65,7 +65,7 @@
   }
 
   .sidebar ul .sidebar-item {
-    justify-content: center;
+    justify-content: start;
   }
 
   .sidebar ul .sidebar-item span {
