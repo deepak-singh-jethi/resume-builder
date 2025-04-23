@@ -18,31 +18,38 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", sans-serif;
+  box-sizing: border-box;
 }
+
+/* all styles for template 1 */
 
 /* === Resume Wrapper === */
 .template-1-resume {
   display: flex;
   width: 100%;
-  min-height: 100vh; 
+  /* min-height: 100vh; */
+  height: auto;
   background-color: var(--template-1-bg);
   overflow: hidden;
-  box-sizing: border-box;
-  padding-left: 25%;
-  align-items: stretch;
+  justify-content: center;
 }
 
 /* === Resume Sidebar === */
 .template-1-sidebar {
   width: 270px;
   background-color: var(--template-1-light-bg);
-  padding: 12px 24px;
+  padding: 30px 20px;
   border-right: 1px solid var(--template-1-border);
   display: flex;
   flex-direction: column;
   gap: 2px;
+  margin-bottom: 20px;
   height: auto;
-  align-self: stretch; /* ✅ This makes it match parent height */
+  align-self: stretch;
+  /* height: 100%; */
+}
+.template-1-name {
+  font-size: 25px;
 }
 
 .template-1-sidebar h2 {
@@ -90,16 +97,11 @@ body {
 
 /* === Resume Main Section === */
 .template-1-main-content {
-  flex: 1;
-  padding: 40px;
-  padding-top: 20px;
-  padding-bottom: 0px;
+  padding: 30px 20px;
+  /* margin-bottom: 20px; */
   background-color: var(--template-1-bg);
-}
-
-.template-1-main-section {
-  margin-bottom: 20px;
-  width: 400px;
+  margin-right: 40px;
+  width: 470px;
 }
 
 .template-1-main-section h2 {
@@ -141,23 +143,4 @@ body {
   font-size: 14px;
   color: var(--template-1-secondary);
   margin-bottom: 4px;
-}
-
-/* === Responsive Enhancements === */
-@media (max-width: 768px) {
-  .template-1-resume {
-    flex-direction: column;
-    padding-left: 0;
-    padding-left: 150px;
-  }
-
-  .template-1-sidebar {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid var(--template-1-border);
-  }
-
-  .template-1-main-content {
-    padding: 20px;
-  }
 }

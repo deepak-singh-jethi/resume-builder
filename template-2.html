@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="viewport" content="width=1024" />
-    <title>Resume Builder</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/template-2/template-2.css" />
+    <!-- Note AI create template-2.css in place of template-1.css-->
     <link rel="stylesheet" href="assets/css/colors.css" />
     <!-- <link rel="stylesheet" href="assets/css/styles.css" /> -->
     <link rel="stylesheet" href="assets/css/template_sidebar.css" />
@@ -18,7 +19,6 @@
       rel="stylesheet" />
   </head>
   <body>
-    <!-- dont change this is website side bar -->
     <div class="template_top-menu-bar">
       <h2>Resume Builder</h2>
       <ul class="sidebar-menu">
@@ -26,30 +26,26 @@
           <i class="material-icons">assignment_return</i>
           Return to edit
         </li>
+        <li class="top-bar-item" data-section="download">
+          <i class="material-icons"> download </i>
+          Download
+        </li>
+        <li
+          class="top-bar-item"
+          data-section="change"
+          onclick="handleChangePreview()">
+          <i class="material-icons"> published_with_changes </i>
+          Change template
+        </li>
       </ul>
     </div>
-
-    <!-- show different templates here -->
-    <div id="resume-template-grid">
-      <div class="template-option">
-        <img src="assets/images/template-1-preview.png" alt="Template 1" />
-        <button
-          data-template="template-1.html"
-          onclick="goToTemplate(this.dataset.template)">
-          Use Template 1
-        </button>
-      </div>
-
-      <div class="template-option">
-        <img src="assets/images/template-2-preview.png" alt="Template 2" />
-        <button
-          data-template="template-2.html"
-          onclick="goToTemplate(this.dataset.template)">
-          Use Template 2
-        </button>
-      </div>
+    <!-- template-2 resume -->
+    <div class="template-2-resume">
+      <!-- make resume template here -->
     </div>
-
     <script src="assets/js/preview.js"></script>
+    <script src="assets/js/template-2/template-2.js"></script>
+    <!-- Note AI create template-2.js in place of template-2.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   </body>
 </html>

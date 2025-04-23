@@ -102,7 +102,6 @@ function loadMainContent() {
   const mainContent = document.getElementById("template-1-main-content");
   mainContent.innerHTML = "";
 
-  const summary = localStorage.getItem("summaryData");
   const experience = JSON.parse(localStorage.getItem("experienceData") || "[]");
   const education = JSON.parse(localStorage.getItem("educationData") || "[]");
   const certifications = JSON.parse(
@@ -110,22 +109,21 @@ function loadMainContent() {
   );
   const projects = JSON.parse(localStorage.getItem("projectData") || "[]");
 
-  // === Summary ===
-  // if (summary) {
-  //   mainContent.appendChild(
-  //     createSection("Professional Summary", `<p>${summary}</p>`)
-  //   );
-  // }
-
   // === Experience ===
   if (experience.length > 0) {
     const expHTML = experience
       .map(
         (exp) => `
-        <div class="template-1-main-details-div">
-          <h3>${exp.role} at ${exp.company} <span class="template-1-date-range">(${exp.startDate} - ${exp.endDate}) </span></h3>
-          <p>${exp.description}</p>
-        </div>
+       <div class="template-1-main-details-div">
+  <h3>
+    ${exp.role} at 
+    <span class="template-1-company-name">${exp.company}</span> 
+  </h3>
+  <h3><span class="template-1-date-range">(${formatDate(
+    exp.startDate
+  )} - ${formatDate(exp.endDate)})</span></h3>
+  <p>${exp.description}</p>
+</div>
       `
       )
       .join("");
@@ -213,14 +211,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("click", () => {
       const resumeElement = document.querySelector(".template-1-resume");
 
-      // Store the original styles
-      const originalHeight = resumeElement.style.height;
-      const originalPaddingLeft = resumeElement.style.paddingLeft;
-
-      // Remove height and padding-left before generating the PDF
-      resumeElement.style.height = "auto";
-      resumeElement.style.paddingLeft = "0";
-
       const opt = {
         margin: 0,
         filename: "resume.pdf",
@@ -234,20 +224,6 @@ document.addEventListener("DOMContentLoaded", function () {
       };
 
       // Generate and save the PDF
-      html2pdf()
-        .set(opt)
-        .from(resumeElement)
-        .save()
-        .then(() => {
-          // Restore the original styles after download
-          resumeElement.style.height = originalHeight;
-          resumeElement.style.paddingLeft = originalPaddingLeft;
-        })
-        .catch((err) => {
-          console.error("Download failed:", err);
-          // Restore the original styles even if the download fails
-          resumeElement.style.height = originalHeight;
-          resumeElement.style.paddingLeft = originalPaddingLeft;
-        });
+      html2pdf().set(opt).from(resumeElement).save();
     });
 });

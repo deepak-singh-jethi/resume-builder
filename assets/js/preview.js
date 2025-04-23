@@ -1,7 +1,12 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // get data from localStorage
-  const resumeData = localStorage.getItem("resumeData");
+// ✅ This makes it globally accessible
+function goToTemplate(templatePath) {
+  window.location.href = templatePath;
+}
+function handleChangePreview() {
+  window.location.href = "resume-preview.html";
+}
 
+document.addEventListener("DOMContentLoaded", function () {
   /* -------------------------------- */
   /* 🚀 return back to main page 🚀 */
   /* -------------------------------- */

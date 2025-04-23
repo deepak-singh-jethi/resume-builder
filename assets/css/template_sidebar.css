@@ -1,0 +1,22 @@
+.sidebar-menu {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.template_top-menu-bar > h2 {
+  text-align: center;
+}
+.top-bar-item {
+  background-color: var(--sidebar-active);
+  color: white !important;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease, color 0.3s ease;
+  font-size: 14px;
+  color: var(--sidebar-text);
+}
